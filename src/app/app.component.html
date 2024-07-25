@@ -1,0 +1,23 @@
+<div id="sidebar" class="fixed left-0 top-0 sidebar close-sidebar">
+  <div class="relative">
+    <button class="side-close-btn absolute text-white background-primary" (click)="handleSideOpenClose()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <ul class="m-0 p-0 mt-5 px-4 list-none">
+    <li type="button" (click)="openMenu('Badge')" class="font-medium relative my-2 py-1" routerLink="/badge" routerLinkActive="active">Badge</li>
+    <li type="button" (click)="openMenu('Data fact sheet')" class="font-medium relative my-2 py-1" routerLink="/das-factsheet-config" routerLinkActive="active">Data fact sheet</li>
+    <li type="button" (click)="openMenu('Data profile')" class="font-medium relative my-2 py-1" routerLink="/data-profile" routerLinkActive="active">Data profile</li>
+  </ul>
+</div>
+
+<!-- <div class="">
+  <button class="side-close-btn text-white background-primary">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</div> -->
+
+<div class="px-5 py-4">
+  <router-outlet></router-outlet>
+</div>
