@@ -31,6 +31,7 @@ import { HolidaycalendarPmiComponent } from './components/holidaycalendar-pmi/ho
 import { OperationalMetadataComponent } from './components/operational-metadata/operational-metadata.component';
 import { TargetMappingComponent } from './components/target-mapping/target-mapping.component';
 import { MetadataAttributesComponent } from './components/metadata-attributes/metadata-attributes.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MetadataAttributesComponent } from './components/metadata-attributes/me
     HolidaycalendarPmiComponent,
     OperationalMetadataComponent,
     TargetMappingComponent,
-    MetadataAttributesComponent
+    MetadataAttributesComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

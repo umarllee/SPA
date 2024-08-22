@@ -6,16 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SPA_application';
-
-  isOpenSide = true;
-  
-  handleSideOpenClose(){
-    this.isOpenSide ? document.getElementById('sidebar')?.classList.remove('close-sidebar') : document.getElementById('sidebar')?.classList.add('close-sidebar')
-    this.isOpenSide = !this.isOpenSide;
-  }
-  
-  openMenu(name: string){
-    localStorage.setItem('menuName', name)
-  }
+ 
 }
