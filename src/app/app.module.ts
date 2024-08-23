@@ -32,6 +32,27 @@ import { OperationalMetadataComponent } from './components/operational-metadata/
 import { TargetMappingComponent } from './components/target-mapping/target-mapping.component';
 import { MetadataAttributesComponent } from './components/metadata-attributes/metadata-attributes.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { NewItemComponent } from './components/pages/business-obj-definition/new-item/new-item.component';
+import { MatSelectModule } from '@angular/material/select';
+
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatTreeModule } from '@angular/material/tree';
+import { BusinessObjDefinitionComponent } from './components/pages/business-obj-definition/business-obj-definition.component';
 
 
 @NgModule({
@@ -59,7 +80,9 @@ import { LandingComponent } from './components/landing/landing.component';
     OperationalMetadataComponent,
     TargetMappingComponent,
     MetadataAttributesComponent,
-    LandingComponent
+    LandingComponent,
+    NewItemComponent,
+    BusinessObjDefinitionComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +94,33 @@ import { LandingComponent } from './components/landing/landing.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({callSetDisabledState: 'whenDisabledForLegacyCode'}),
+    MatMenuModule,
+    DragDropModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatCardModule,
+    MatTreeModule,
+    RouterModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

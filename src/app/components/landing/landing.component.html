@@ -194,43 +194,45 @@
         </div>
 
         <div class="col-md-8">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="field">
-                <label for="Name" title="Name" data-title="Name"></label>
-                <input formControlName="name" autocomplete="off" type="text" id="Name" name="Name" />
+          <form  [formGroup]="formGroup">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="field">
+                  <label for="Name" title="Name" data-title="Name"></label>
+                  <input formControlName="name" autocomplete="off" type="text" id="Name" name="Name" />
+                </div>
               </div>
-            </div>
-            <div class="col-md-4 ">
-              <div class="field">
-                <label for="Surname" title="Surname" data-title="Surname"></label>
-                <input formControlName="surname" autocomplete="off" type="text" id="Surname" name="Surname" />
+              <div class="col-md-4 ">
+                <div class="field">
+                  <label for="Surname" title="Surname" data-title="Surname"></label>
+                  <input formControlName="surname" autocomplete="off" type="text" id="Surname" name="Surname" />
+                </div>
               </div>
-            </div>
-            <div class="col-md-4 ">
-              <div class="field">
-                <label for="E-mail" title="E-mail" data-title="E-mail"></label>
-                <input formControlName="email" autocomplete="off" type="text" id="email" name="email" />
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="field">
-                <label for="Description" title="Description" data-title="Description"></label>
-                <textarea name="Description" style="height: 13vh;" formControlName="description"
-                  id="Description"></textarea>
+              <div class="col-md-4 ">
+                <div class="field">
+                  <label for="E-mail" title="E-mail" data-title="E-mail"></label>
+                  <input formControlName="email" autocomplete="off" type="text" id="email" name="email" />
+                </div>
               </div>
             </div>
 
-          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="field">
+                  <label for="Description" title="Description" data-title="Description"></label>
+                  <textarea name="Description" style="height: 13vh;" formControlName="description"
+                    id="Description"></textarea>
+                </div>
+              </div>
+
+            </div>
+          </form>
 
           <div class="row justify-content-end">
             <div class="col-3">
-                <button class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
-                    Send 
-                </button>
+              <button class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
+                Send
+              </button>
             </div>
           </div>
         </div>

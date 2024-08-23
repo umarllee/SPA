@@ -23,10 +23,12 @@ import { OperationalMetadataComponent } from './components/operational-metadata/
 import { MetadataAttributesComponent } from './components/metadata-attributes/metadata-attributes.component';
 import { TargetMappingComponent } from './components/target-mapping/target-mapping.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { BusinessObjDefinitionComponent } from './components/pages/business-obj-definition/business-obj-definition.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
+  { path: 'business', component: BusinessObjDefinitionComponent },
   {
     path: 'main', component: DashboardComponent, children: [
       { path: 'badge', component: BadgeComponent },
