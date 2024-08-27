@@ -1,20 +1,20 @@
-<div class="py-3">
+<div class="pt-3">
   <div class="px-3">
     <div class="row gap-y-2 relative align-items-center h-16">
       <div class="col-md-2 ">
-        <img class="logo-header" src="../../../assets/logo.png" alt="">
+        <img class="logo-header" src="../../../assets/Metadata.jpeg" alt="">
       </div>
 
       <div class="text-center col-md-8 link-style  ">
         <ul class="social-links justify-content-center row p-0 m-0">
           <li class="w-fit">
-            <span>
+            <span (click)="scroll(home)">
               Home
             </span>
           </li>
 
           <li class="w-fit">
-            <span>
+            <span (click)="scroll(about)">
               About
             </span>
           </li>
@@ -25,8 +25,8 @@
                     </span>
                 </li> -->
 
-          <li class="w-fit">
-            <span>
+          <li class="w-fit" >
+            <span (click)="scroll(rwfd)">
               Reviews & Feedbacks
             </span>
           </li>
@@ -38,7 +38,7 @@
                     </li> -->
 
           <li class="w-fit">
-            <span>
+            <span (click)="scroll(contact)">
               Contact
             </span>
           </li>
@@ -57,15 +57,16 @@
     </div>
   </div>
 
-  <div class="header-con">
+  <div class="header-con" #home>
     <img src="../../../assets/data.webp" style="width: 100%; height: 100%;" alt="">
   </div>
 
-  <div class=" mt-5">
+  <div class=" mt-5" #about>
     <div class="row align-items-center">
       <div class="col-md-5">
         <img src="../../../assets/dataicon.jpg" alt="">
       </div>
+
       <div class="col-md-7 px-5">
         <p class="about mb-1 text-xs text-danger font-bold tracking-wider ">
           INFORMATION ABOUT US
@@ -90,7 +91,7 @@
     </div>
   </div>
 
-  <div class=" mt-5">
+  <div class=" mt-5" #rwfd>
     <div class="row p-4 align-items-center bg-blue-600">
       <p class="about mb-1 text-uppercase text-center text-xs text-danger font-bold tracking-wider ">
         WATCH OUR FEEDBACKS
@@ -162,7 +163,7 @@
     </div>
   </div>
 
-  <div class=" mt-5">
+  <div class=" mt-5" #contact>
     <div class="row p-4 align-items-center">
       <p class="about mb-1 text-uppercase text-center text-xs text-danger font-bold tracking-wider ">
         Share your thoughts
@@ -239,4 +240,10 @@
 
       </div>
     </div>
+  </div>
+
+  <div class="mt-5 ">
+    <footer class="border-t py-3 bg-black text-white  font-medium text-center">
+      Copyright ©2022 All rights reserved | <span class="text-danger">Agarathi</span>  
+    </footer>
   </div>

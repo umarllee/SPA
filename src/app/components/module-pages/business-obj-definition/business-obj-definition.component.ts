@@ -4,6 +4,8 @@ import { map, Observable, startWith } from 'rxjs';
 import { NewItemComponent } from './new-item/new-item.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { filterAutocomplete } from 'src/app/utils/autocomplete';
+import { BusinessService } from 'src/app/services/business.service';
+import { swalSuccess } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-business-obj-definition',
@@ -22,31 +24,13 @@ export class BusinessObjDefinitionComponent {
   filteredOptionsbussFunc?: Observable<any[]>;
   filteredOptionsrole?: Observable<any[]>;
 
-  clients: any[] = [
-    {
-      key: 1,
-      value: 'Test'
-    },
-    {
-      key: 2,
-      value: 'Test 2'
-    },
-    {
-      key: 3,
-      value: 'Meta'
-    },
-  ];
   constructor(
     private fb: FormBuilder,
+    private businessService: BusinessService,
   ) {
 
     this.generateForm();
     this.filteredOptionsClient = this.FF['projectName'].valueChanges.pipe(
-      startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    );
-
-    this.filteredOptionsunitOwner = this.FF['unitOwner'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
@@ -61,78 +45,101 @@ export class BusinessObjDefinitionComponent {
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    this.filteredOptionsbussFunc = this.FF['bussFunc'].valueChanges.pipe(
+    this.filteredOptionsunitOwner = this.OF['business_unit_owner'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    this.filteredOptionsrole = this.FF['role'].valueChanges.pipe(
+    this.filteredOptionsbussFunc = this.OF['business_function'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsrole = this.OF['role'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
   }
-  
+
+  clients: any[] = [
+    {
+      key: 1,
+      value: 'Test'
+    },
+    {
+      key: 2,
+      value: 'Test 2'
+    },
+    {
+      key: 3,
+      value: 'Meta'
+    },
+  ];
+
+
   generateForm() {
     this.definitionFormGroup = this.fb.group({
       id: 0,
-      businessObjId: 'XXXBO-0001',
-      description: '',
+      business_object_id: 'XXXBO-0001',
+      business_object_description: '',
       projectId: 0,
       projectName: '',
-      objNameId: 0,
-      objName: '',
+      business_object_name: '',
       dataDomainId: 0,
       dataDomain: '',
+    })
 
-      unitOwnerId: 0,
-      unitOwner: '',
-
-      bussFuncId: 0,
-      bussFunc: '',
-
-      roleId: 0,
-      role: '',
-
-      implDetails: '',
-      
+    this.BOFormGroup = this.fb.group({
+      business_unit_owner: ['', [Validators.required]],
+      business_function: ['', [Validators.required]],
+      role: ['', [Validators.required]],
     })
   }
-  
+
+  BOFormGroup!: FormGroup;
   definitionFormGroup!: FormGroup;
   UpdateData: any;
   isFormValid = true;
 
   ngOnInit() {
-   
+
   }
 
   get FF(): { [key: string]: AbstractControl } {
     return this.definitionFormGroup.controls;
   }
 
-  handleSetAutocomplete(name: string, id: number) {
-    switch (name) {
-      case 'customerId':
-        this.FF['customerId'].setValue(id);
-        break;
-
-      default:
-        break;
-    }
+  get OF(): { [key: string]: AbstractControl } {
+    return this.BOFormGroup.controls;
   }
 
-  handleCustomerList(event: any) {
-    if (!this.FF['invoiceObjectTypeId'].value) return;
-    // this.commonService.getCustomers(event.target.value, this.FF['invoiceObjectTypeId'].value).subscribe({
-    //   next: res => {
-    //     this.clients = res.data;
-    //     this.filteredOptionsClient = this.FF['customerName'].valueChanges.pipe(
-    //       startWith(''),
-    //       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    //     );
-    //   },
-    //   error: err => console.log(err)
-    // });
+  handleSetAutocomplete(name: string, id: number) {
+    // switch (name) {
+    //   case 'customerId':
+    //     this.FF['customerId'].setValue(id);
+    //     break;
+
+    //   default:
+    //     break;
+    // }
+  }
+
+  isBOFormValid = true;
+  handleSave() {
+    if (this.BOFormGroup.valid) {
+      this.isBOFormValid = true;
+      this.businessService.saveBo_owner(this.BOFormGroup.value).subscribe({
+        next: res => {
+          swalSuccess("Saved successfully.")
+        },
+        error: err => console.log(err)
+      })
+    }
+
+    else {
+      this.isBOFormValid = false;
+    }
+
   }
 }

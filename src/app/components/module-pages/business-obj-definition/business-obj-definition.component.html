@@ -1,0 +1,144 @@
+<div class="p-3">
+    <form [formGroup]="definitionFormGroup">
+        <div class="row">
+            <h2 class="text-xl font-extrabold">
+                Business Object Definition
+            </h2>
+        </div>
+
+        <div class="">
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width field col-12">
+                        <label for="fullName" class="font-medium text-black ">Project name</label>
+                        <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                            formControlName="projectName" [matAutocomplete]="autoClient">
+                        <mat-autocomplete #autoClient="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptionsClient | async " [value]="option.value">
+                                {{option.value}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="field">
+                        <label for="fullName" class="font-medium text-black required-label">Business object id</label>
+                        <input formControlName="businessObjId" readonly autocomplete="off" type="text" id="Name"
+                            name="Name" />
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width field col-12">
+                        <label for="fullName" class="font-medium text-black required-label">Business object name</label>
+                        <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                            formControlName="objName" [matAutocomplete]="autoObjName">
+                        <mat-autocomplete #autoObjName="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptionsObjName | async " [value]="option.value">
+                                {{option.value}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width field col-12">
+                        <label for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
+                        <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                            formControlName="dataDomain" [matAutocomplete]="autoDomain">
+                        <mat-autocomplete #autoDomain="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptionsObjName | async " [value]="option.value">
+                                {{option.value}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="field">
+                        <label for="fullName" class="font-medium text-black required-label">Business object
+                            description</label>
+                        <textarea name="Description" formControlName="description" id="Description"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <form [formGroup]="BOFormGroup">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="example-full-width field col-12">
+                    <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
+                    <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                        formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
+                    <mat-autocomplete #autounitOwner="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptionsunitOwner | async " [value]="option.value">
+                            {{option.value}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <small class="error_text"
+                        *ngIf="(OF['business_unit_owner'].errors?.['required'] && !isBOFormValid) || (OF['business_unit_owner'].invalid && !isFormValid)">
+                        *Required field
+                    </small>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field class="example-full-width field col-12">
+                    <label for="fullName" class="font-medium text-black required-label">Business Function</label>
+                    <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                        formControlName="business_function" [matAutocomplete]="autobussFunc">
+                    <mat-autocomplete #autobussFunc="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptionsbussFunc | async " [value]="option.value">
+                            {{option.value}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <small class="error_text"
+                        *ngIf="(OF['business_function'].errors?.['required'] && !isBOFormValid) || (OF['business_function'].invalid && !isFormValid)">
+                        *Required field
+                    </small>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field class="example-full-width field col-12">
+                    <label for="fullName" class="font-medium text-black required-label">Role</label>
+                    <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="role"
+                        [matAutocomplete]="autorole">
+                    <mat-autocomplete #autorole="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptionsrole | async " [value]="option.value">
+                            {{option.value}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <small class="error_text"
+                        *ngIf="(OF['role'].errors?.['required'] && !isBOFormValid) || (OF['role'].invalid && !isFormValid)">
+                        *Required field
+                    </small>
+                </mat-form-field>
+            </div>
+
+            <!-- <div class="col-md-3">
+                    <div class="field">
+                        <label for="fullName" class="font-medium text-black ">Implementation details</label>
+                        <input formControlName="implDetails" autocomplete="off" type="text" id="Name" name="Name" />
+                    </div>
+                </div> -->
+        </div>
+
+    </form>
+
+    <div class="row justify-content-end mt-3">
+        <div class="col-md-3 ">
+            <div class="field">
+                <button (click)="handleSave()" class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

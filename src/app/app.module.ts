@@ -32,7 +32,7 @@ import { OperationalMetadataComponent } from './components/operational-metadata/
 import { TargetMappingComponent } from './components/target-mapping/target-mapping.component';
 import { MetadataAttributesComponent } from './components/metadata-attributes/metadata-attributes.component';
 import { LandingComponent } from './components/landing/landing.component';
-import { NewItemComponent } from './components/pages/business-obj-definition/new-item/new-item.component';
+import { NewItemComponent } from './components/module-pages/business-obj-definition/new-item/new-item.component';
 import { MatSelectModule } from '@angular/material/select';
 
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -52,7 +52,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatTreeModule } from '@angular/material/tree';
-import { BusinessObjDefinitionComponent } from './components/pages/business-obj-definition/business-obj-definition.component';
+import { BusinessObjDefinitionComponent } from './components/module-pages/business-obj-definition/business-obj-definition.component';
+import { ModulePagesModule } from './components/module-pages/module-pages.module';
 
 
 @NgModule({
@@ -82,7 +83,7 @@ import { BusinessObjDefinitionComponent } from './components/pages/business-obj-
     MetadataAttributesComponent,
     LandingComponent,
     NewItemComponent,
-    BusinessObjDefinitionComponent
+    BusinessObjDefinitionComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +122,7 @@ import { BusinessObjDefinitionComponent } from './components/pages/business-obj-
     MatTreeModule,
     RouterModule,
     MatAutocompleteModule,
+    ModulePagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

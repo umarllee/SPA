@@ -118,7 +118,7 @@ input:read-only {
 
 .field {
   position: relative;
-  margin: 12px 0;
+  margin: 7px 0;
   // padding: 0 10px;
   
   input,
@@ -183,4 +183,8 @@ input:read-only {
 
 .headerColumnNames{
   text-transform: capitalize;
+}
+
+.error_text{
+  color: red;
 }

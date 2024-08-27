@@ -37,4 +37,9 @@ export class LandingComponent {
   ngOnInit() {
     this.generateForm();
   }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
 }
