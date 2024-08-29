@@ -19,10 +19,24 @@ export class BusinessObjDefinitionComponent {
   filteredOptionsClient?: Observable<any[]>;
   filteredOptionsObjName?: Observable<any[]>;
   filteredOptionsdataDomain?: Observable<any[]>;
+  filteredOptionsautoasset_type?: Observable<any[]>;
+  filteredOptionssensitivity_classification?: Observable<any[]>;
+  filteredOptionssensitivity_reason?: Observable<any[]>;
 
   filteredOptionsunitOwner?: Observable<any[]>;
   filteredOptionsbussFunc?: Observable<any[]>;
   filteredOptionsrole?: Observable<any[]>;
+  
+  filteredOptionssource_system?: Observable<any[]>;
+  filteredOptionssource_system_country_code?: Observable<any[]>;
+  filteredOptionsreq_frequency_of_refresh?: Observable<any[]>;
+  filteredOptionsActive?: Observable<any[]>;
+  filteredOptionsdata_capture_mode?: Observable<any[]>;
+  filteredOptionssourcing_mode?: Observable<any[]>;
+  filteredOptiontrack_history?: Observable<any[]>;
+  filteredOptionshistory_type?: Observable<any[]>;
+  filteredOptionserror_treatment?: Observable<any[]>;
+  filteredOptionsebo_implementationxception_treatment?: Observable<any[]>;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +49,7 @@ export class BusinessObjDefinitionComponent {
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    this.filteredOptionsObjName = this.FF['objName'].valueChanges.pipe(
+    this.filteredOptionsObjName = this.FF['business_object_name'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
@@ -44,6 +58,23 @@ export class BusinessObjDefinitionComponent {
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
+
+    this.filteredOptionsautoasset_type = this.FF['business_object_asset_type'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+    this.filteredOptionssensitivity_classification = this.FF['business_object_sensitivity_classification'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+    this.filteredOptionssensitivity_reason = this.FF['business_object_sensitivity_reason'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+
+
+
 
     this.filteredOptionsunitOwner = this.OF['business_unit_owner'].valueChanges.pipe(
       startWith(''),
@@ -81,13 +112,18 @@ export class BusinessObjDefinitionComponent {
   generateForm() {
     this.definitionFormGroup = this.fb.group({
       id: 0,
-      business_object_id: 'XXXBO-0001',
-      business_object_description: '',
-      projectId: 0,
-      projectName: '',
-      business_object_name: '',
-      dataDomainId: 0,
+      
       dataDomain: '',
+      projectName: '',
+      business_object_id: ['XXXBO-0001', [Validators.required]],
+      business_object_name: ['', [Validators.required]],
+      business_object_description: ['', [Validators.required]],
+      business_object_asset_type: ['', [Validators.required]],
+      business_object_sensitivity_classification: ['', [Validators.required]],
+      business_object_sensitivity_reason: ['', [Validators.required]],
+      version: '',
+      date_created: '',
+      active: ''
     })
 
     this.BOFormGroup = this.fb.group({
