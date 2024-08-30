@@ -36,7 +36,11 @@ export class BusinessObjDefinitionComponent {
   filteredOptiontrack_history?: Observable<any[]>;
   filteredOptionshistory_type?: Observable<any[]>;
   filteredOptionserror_treatment?: Observable<any[]>;
-  filteredOptionsebo_implementationxception_treatment?: Observable<any[]>;
+  filteredOptionsexception_treatment?: Observable<any[]>;
+
+
+  filteredOptioncreated_updated_By?: Observable<any[]>;
+  filteredOptionsremarks?: Observable<any[]>;
 
   constructor(
     private fb: FormBuilder,
