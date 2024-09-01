@@ -42,4 +42,8 @@ export class LandingComponent {
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
+  goToLink(url: string){
+    window.open(url, "_blank");
+}
+
 }
