@@ -1,12 +1,12 @@
 <div class="pt-3">
   <div class="px-3">
     <div class="row gap-y-2 relative align-items-center h-16">
-      <div class="col-md-1 p-0">
-        <img class="col-12 logo-header" src="../../../assets/Metadata.jpeg" alt="">
+      <div class="col-md-2 p-0">
+        <img class="col-9 logo-header" src="../../../assets/Metadata.jpeg" alt="">
       </div>
 
-      <div class="text-center p-0 col-md-10 link-style  ">
-        <ul class="social-links justify-content-center row p-0 m-0">
+      <div class="text-center p-0 col-md-9 link-style  ">
+        <ul class="social-links row p-0 m-0">
           <li class="w-fit">
             <span (click)="scroll(home)">
               Home
@@ -27,19 +27,23 @@
           
           <li class="w-fit">
             <span (click)="scroll(businessMetadata)">
-              Business Metadata
+              Business Metadata <br>
+              Product
+            </span>
+          </li>
+
+
+          <li class="w-fit">
+            <span (click)="scroll(operationalMetadata)">
+              Operational Metadata <br>
+              Product
             </span>
           </li>
 
           <li class="w-fit">
             <span (click)="scroll(technicalMetadata)">
-              Technical Metadata
-            </span>
-          </li>
-
-          <li class="w-fit">
-            <span (click)="scroll(operationalMetadata)">
-              Operational Metadata
+              Technical Metadata <br>
+              Product
             </span>
           </li>
 
@@ -54,7 +58,7 @@
       <div class="col-md-1 p-0 h-16">
         <div
           class="addmember text-2xl h-16 tracking-wider font-bold text-sm text-white d-flex align-items-center justify-content-center text-uppercase col-12 link-style">
-          <i class="fa-regular fa-chart-mixed"></i>
+          <img width="30" style="filter: brightness(0) invert(1);" src="../../../assets/dictionary.png" alt="">
         </div>
       </div>
 
@@ -74,20 +78,20 @@
       </div>
 
       <div class="col-md-7 px-5">
-        <p class="about mb-1 text-xs text-danger font-bold tracking-wider ">
+        <!-- <p class="about mb-1 text-xs text-danger font-bold tracking-wider ">
           INFORMATION ABOUT US
-        </p>
+        </p> -->
 
         <h2 class="text-4xl font-extrabold text-uppercase">
-          Data Prabanjam is
+          About 
           <span class=" text-danger">
-            a startup
+            Us
           </span>
-          Project
+          <!-- Project -->
         </h2>
 
         <p class="context-about mt-4 text-gray-600 text-lg ">
-          Data Prabanjam is a startup. Founded by three veterans in the Data Domain with over 60-man years of
+          <span class="text-xl font-medium" >Data Prabanjam</span> is a startup. Founded by three veterans in the Data Domain with over 60-man years of
           experience, collectively. Between them they have experience in all facets of data management, starting two
           decades ago with MIS, DSS and ESS. Progressed through the Data Warehouse, Data Marts, Business intelligence
           era, got their hands dirty in the BIGDATA world. Last 10 years, a lot of focus has been on creating Data
@@ -103,7 +107,7 @@
       </div>
     </div>
 
-    <div class="row align-items-center">
+    <div class="row mt-3 align-items-center">
       <div class="col-md-7 ps-5">
         <p class="context-about ps-3 mt-2 text-gray-600 text-lg">
           We have an architecture driven methodology for building up a Data Management platform that is resilient and
@@ -133,18 +137,18 @@
   <div class=" mt-5" #rwfd>
     <div class="row align-items-center">
       <div class="col-md-5">
-        <img class="col-9 mx-auto" src="../../../assets/dtAgarati.png" alt="">
+        <img class="col-9 mx-auto" src="../../../assets/dictionary.png" alt="">
       </div>
 
       <div class="col-md-7 px-5">
-        <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
+        <!-- <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
           INFORMATION ABOUT Data Agarathi
-        </p>
+        </p> -->
 
         <h2 class="text-4xl font-extrabold text-uppercase">
           Agarathi is a
           <span class=" text-danger">
-            a Tamil
+             Tamil
           </span>
           word
         </h2>
@@ -184,9 +188,9 @@
     <div class="row align-items-center">
 
       <div class="col-md-7 px-5">
-        <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
+        <!-- <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
           Read about
-        </p>
+        </p> -->
 
         <h2 class="text-4xl font-extrabold text-uppercase">
           Business
@@ -205,21 +209,21 @@
       </div>
 
       <div class="col-md-5">
-        <img class="col-9 mx-auto" src="../../../assets/busMetadata.png" alt="">
+        <img class="col-11 mx-auto" src="../../../assets/busMetadata.png" alt="">
       </div>
     </div>
   </div>
 
   <div class=" mt-5 pt-4" #operationalMetadata>
     <div class="row align-items-center">
-      <div class="col-md-5">
-        <img class="col-9 mx-auto" src="../../../assets/oprMetadata.png" alt="">
+      <div class="col-md-5 ps-5">
+        <img class="col-12 mx-auto" src="../../../assets/oprMetadata.png" alt="">
       </div>
 
       <div class="col-md-7 px-5">
-        <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
+        <!-- <p class="about mb-1 text-xs text-danger text-uppercase font-bold tracking-wider ">
           Read about
-        </p>
+        </p> -->
 
         <h2 class="text-4xl font-extrabold text-uppercase">
           Operational
@@ -247,11 +251,11 @@
       <div class="row align-items-center">
   
         <div class="col-md-7 px-5">
-          <p class="about mb-1 text-center text-xs text-danger text-uppercase font-bold tracking-wider ">
+          <!-- <p class="about mb-1 text-center text-xs text-danger text-uppercase font-bold tracking-wider ">
             Read about
-          </p>
+          </p> -->
     
-          <h2 class="text-4xl text-center font-extrabold text-uppercase">
+          <h2 class="text-4xl font-extrabold text-uppercase">
             Technical
             <span class=" text-danger">
               Metadata
@@ -290,12 +294,17 @@
 
           <ul class="m-0 ms-2 mt-4 font-medium p-0">
             <li class="mt-2">
-              <i class="me-2 text-danger fa-solid fa-phone"></i>
-              +65 80426037
+              <a target="_blank" class="text-black text-decoration-none" href="https://wa.me/6580426037">
+                <!-- <i class="me-2 text-danger fa-solid fa-phone"></i> -->
+                <i class="me-2 text-danger fa-brands fa-whatsapp"></i>
+                +65 80426037
+              </a>
             </li>
             <li class="mt-2">
-              <i class="me-2 text-danger fa-solid fa-envelope"></i>
-              Info@dataprabanjam.sg
+              <a target="_blank" class="text-black text-decoration-none" href="mailto:Info@dataprabanjam.sg">
+                <i class="me-2 text-danger fa-solid fa-envelope"></i>
+                Info@dataprabanjam.sg
+              </a>
             </li>
             <li class="mt-2">
               <i class="me-2 text-danger fa-sharp fa-solid fa-globe"></i>
@@ -312,7 +321,7 @@
             </p>
 
             <h2 class="text-4xl text-uppercase font-extrabold">
-              Contact with us
+              Contact us
             </h2>
           </div>
 
