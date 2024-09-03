@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { filterAutocomplete } from 'src/app/utils/autocomplete';
 import { BusinessService } from 'src/app/services/business.service';
 import { swalSuccess } from 'src/app/utils/alert';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-business-obj-definition',
@@ -43,6 +44,7 @@ export class BusinessObjDefinitionComponent {
   filteredOptionsremarks?: Observable<any[]>;
 
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private businessService: BusinessService,
   ) {
@@ -77,9 +79,6 @@ export class BusinessObjDefinitionComponent {
     );
 
 
-
-
-
     this.filteredOptionsunitOwner = this.OF['business_unit_owner'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
@@ -112,7 +111,6 @@ export class BusinessObjDefinitionComponent {
     },
   ];
 
-
   generateForm() {
     this.definitionFormGroup = this.fb.group({
       id: 0,
@@ -130,15 +128,38 @@ export class BusinessObjDefinitionComponent {
       active: ''
     })
 
-    this.BOFormGroup = this.fb.group({
+    this.DataOwnerFormGroup = this.fb.group({
       business_unit_owner: ['', [Validators.required]],
       business_function: ['', [Validators.required]],
       role: ['', [Validators.required]],
     })
+    
+    this.SourceSystemFormGroup = this.fb.group({
+      source_system: ['', [Validators.required]],
+      source_system_country_code: ['', [Validators.required]],
+      req_frequency_of_refresh: ['', [Validators.required]],
+      active: ['', [Validators.required]],
+      data_capture_mode: ['', [Validators.required]],
+      sourcing_mode: ['', [Validators.required]],
+      track_history: ['', [Validators.required]],
+      history_type: ['', [Validators.required]],
+      error_treatment: ['', [Validators.required]],
+      exception_treatment: ['', [Validators.required]],
+    })
+
+    this.BusinessRulesFormGroup = this.fb.group({
+      created_updated_By: ['', [Validators.required]],
+      created_updated_ate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
+      remarks: ['', [Validators.required]],
+     
+    })
   }
 
-  BOFormGroup!: FormGroup;
+  DataOwnerFormGroup!: FormGroup;
   definitionFormGroup!: FormGroup;
+  SourceSystemFormGroup!: FormGroup;
+  BusinessRulesFormGroup!: FormGroup;
+
   UpdateData: any;
   isFormValid = true;
 
@@ -151,7 +172,11 @@ export class BusinessObjDefinitionComponent {
   }
 
   get OF(): { [key: string]: AbstractControl } {
-    return this.BOFormGroup.controls;
+    return this.DataOwnerFormGroup.controls;
+  }
+
+  get SSF(): { [key: string]: AbstractControl } {
+    return this.SourceSystemFormGroup.controls;
   }
 
   handleSetAutocomplete(name: string, id: number) {
@@ -165,11 +190,32 @@ export class BusinessObjDefinitionComponent {
     // }
   }
 
+  item_dialogRef?: MatDialogRef<NewItemComponent>;
+
+  addListValue(){
+    this.item_dialogRef = this.dialog.open(NewItemComponent,
+      {
+        // disableClose: true,
+        hasBackdrop: true,
+        width: '45%',
+        height: 'auto',
+        autoFocus: false,
+        data: {
+        
+        }
+      })
+ 
+    // this.item_dialogRef.afterClosed().subscribe({
+    //   next: res => {
+    //   }
+    // })
+  }
+
   isBOFormValid = true;
   handleSave() {
-    if (this.BOFormGroup.valid) {
+    if (this.DataOwnerFormGroup.valid) {
       this.isBOFormValid = true;
-      this.businessService.saveBo_owner(this.BOFormGroup.value).subscribe({
+      this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
         next: res => {
           swalSuccess("Saved successfully.")
         },

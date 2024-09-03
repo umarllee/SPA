@@ -24,7 +24,7 @@
               About Data Agarathi
             </span>
           </li>
-          
+
           <li class="w-fit">
             <span (click)="scroll(businessMetadata)">
               Business Metadata <br>
@@ -67,8 +67,14 @@
     </div>
   </div>
 
-  <div class="header-con" #home>
-    <img src="../../../assets/datas.png" class="mx-auto" style="width: 100%; height: 100%;" alt="">
+  <div class="header-con relative" #home>
+    <div class="body absolute" style="width: 100%; height: 100%;" id="particles-js"></div>
+    <!-- <div class="row align-items-center justify-content-center">
+      <p class="font-bold text-2xl">
+        Test
+      </p>
+    </div> -->
+    <!-- <img src="../../../assets/datas.png" class="mx-auto" style="width: 100%; height: 100%;" alt=""> -->
   </div>
 
   <div class=" mt-5 pt-5" #about>
@@ -83,7 +89,7 @@
         </p> -->
 
         <h2 class="text-4xl font-extrabold text-uppercase">
-          About 
+          About
           <span class=" text-danger">
             Us
           </span>
@@ -91,7 +97,8 @@
         </h2>
 
         <p class="context-about mt-4 text-gray-600 text-lg ">
-          <span class="text-xl font-medium" >Data Prabanjam</span> is a startup. Founded by three veterans in the Data Domain with over 60-man years of
+          <span class="text-xl font-medium">Data Prabanjam</span> is a startup. Founded by three veterans in the Data
+          Domain with over 60-man years of
           experience, collectively. Between them they have experience in all facets of data management, starting two
           decades ago with MIS, DSS and ESS. Progressed through the Data Warehouse, Data Marts, Business intelligence
           era, got their hands dirty in the BIGDATA world. Last 10 years, a lot of focus has been on creating Data
@@ -148,7 +155,7 @@
         <h2 class="text-4xl font-extrabold text-uppercase">
           Agarathi is a
           <span class=" text-danger">
-             Tamil
+            Tamil
           </span>
           word
         </h2>
@@ -248,132 +255,139 @@
   </div>
 
   <div class=" mt-5 pt-4" #technicalMetadata>
-      <div class="row align-items-center">
-  
-        <div class="col-md-7 px-5">
-          <!-- <p class="about mb-1 text-center text-xs text-danger text-uppercase font-bold tracking-wider ">
+    <div class="row align-items-center">
+
+      <div class="col-md-7 px-5">
+        <!-- <p class="about mb-1 text-center text-xs text-danger text-uppercase font-bold tracking-wider ">
             Read about
           </p> -->
-    
-          <h2 class="text-4xl font-extrabold text-uppercase">
-            Technical
-            <span class=" text-danger">
-              Metadata
-            </span>
-          </h2>
-    
-          <div class="context-about mt-4 text-gray-600 text-lg ">
-    
-            Traditionally, this metadata is better managed in most organisations. Database Schema, File specifications,
-            Message Pay Load definitions, API documentation are some of the examples of Technical Metadata. One key
-            differentiator that Data Agarathi provides is the integration between Business Metadata and Technical Metadata.
-            This enables technical events to be seen with a business lense. For example, instead of “JOB ID XXCCVV-001”
-            completed successfully, we can now say “Customer Master data has been loaded successfully”.
-    
-          </div>
-        </div>
-  
-        <div class="col-md-5">
-          <img class="col-7 mx-auto" src="../../../assets/techMet.png" alt="">
+
+        <h2 class="text-4xl font-extrabold text-uppercase">
+          Technical
+          <span class=" text-danger">
+            Metadata
+          </span>
+        </h2>
+
+        <div class="context-about mt-4 text-gray-600 text-lg ">
+
+          Traditionally, this metadata is better managed in most organisations. Database Schema, File specifications,
+          Message Pay Load definitions, API documentation are some of the examples of Technical Metadata. One key
+          differentiator that Data Agarathi provides is the integration between Business Metadata and Technical
+          Metadata.
+          This enables technical events to be seen with a business lense. For example, instead of “JOB ID XXCCVV-001”
+          completed successfully, we can now say “Customer Master data has been loaded successfully”.
+
         </div>
       </div>
-  
+
+      <div class="col-md-5">
+        <img class="col-7 mx-auto" src="../../../assets/techMet.png" alt="">
+      </div>
     </div>
+
   </div>
+</div>
 
 
 
-  <div class=" mt-5 pt-5" #contact>
-    <div class="row mt-4 p-4 align-items-center">
+<div class="mt-5 pt-3" #contact>
+  <div class="px-5">
+    <a class="context-about mt-4 text-decoration-none text-gray-600 text-lg " href="../../../assets/dictionary.png"
+      download>
+      Download <span class="font-semibold text-blue-500">Data Agarathi</span> fact sheet
+    </a>
+  </div>
+  <div class="row mt-4 p-4 align-items-center">
 
-      <div class="row mt-4 align-items-center">
-        <div class="col-md-4">
-          <h2>
-            Get in touch:
+    <div class="row mt-4 align-items-center">
+      <div class="col-md-4">
+        <h2>
+          Get in touch:
+        </h2>
+
+        <ul class="m-0 ms-2 mt-4 font-medium p-0">
+          <li class="mt-2">
+            <a target="_blank" class="text-black text-decoration-none" href="https://wa.me/6580426037">
+              <!-- <i class="me-2 text-danger fa-solid fa-phone"></i> -->
+              <i class="me-2 text-danger fa-brands fa-whatsapp"></i>
+              +65 80426037
+            </a>
+          </li>
+          <li class="mt-2">
+            <a target="_blank" class="text-black text-decoration-none" href="mailto:Info@dataprabanjam.sg">
+              <i class="me-2 text-danger fa-solid fa-envelope"></i>
+              Info@dataprabanjam.sg
+            </a>
+          </li>
+          <li class="mt-2">
+            <i class="me-2 text-danger fa-sharp fa-solid fa-globe"></i>
+            <a (click)="goToLink('http://www.dataprabanjam.sg')" class="cursor-pointer text-decoration-none text-black">
+              www.dataprabanjam.sg</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-8">
+        <div class="row">
+          <p class="about mb-1 text-uppercase text-xs text-danger font-bold tracking-wider ">
+            Share your thoughts
+          </p>
+
+          <h2 class="text-4xl text-uppercase font-extrabold">
+            Contact us
           </h2>
-
-          <ul class="m-0 ms-2 mt-4 font-medium p-0">
-            <li class="mt-2">
-              <a target="_blank" class="text-black text-decoration-none" href="https://wa.me/6580426037">
-                <!-- <i class="me-2 text-danger fa-solid fa-phone"></i> -->
-                <i class="me-2 text-danger fa-brands fa-whatsapp"></i>
-                +65 80426037
-              </a>
-            </li>
-            <li class="mt-2">
-              <a target="_blank" class="text-black text-decoration-none" href="mailto:Info@dataprabanjam.sg">
-                <i class="me-2 text-danger fa-solid fa-envelope"></i>
-                Info@dataprabanjam.sg
-              </a>
-            </li>
-            <li class="mt-2">
-              <i class="me-2 text-danger fa-sharp fa-solid fa-globe"></i>
-              <a (click)="goToLink('http://www.dataprabanjam.sg')"
-                class="cursor-pointer text-decoration-none text-black"> www.dataprabanjam.sg</a>
-            </li>
-          </ul>
         </div>
 
-        <div class="col-md-8">
+        <form [formGroup]="formGroup" class="mt-4">
           <div class="row">
-            <p class="about mb-1 text-uppercase text-xs text-danger font-bold tracking-wider ">
-              Share your thoughts
-            </p>
-
-            <h2 class="text-4xl text-uppercase font-extrabold">
-              Contact us
-            </h2>
+            <div class="col-md-4">
+              <div class="field">
+                <label for="Name" title="Name" data-title="Name"></label>
+                <input formControlName="name" autocomplete="off" type="text" id="Name" name="Name" />
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="field">
+                <label for="Surname" title="Surname" data-title="Surname"></label>
+                <input formControlName="surname" autocomplete="off" type="text" id="Surname" name="Surname" />
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="field">
+                <label for="E-mail" title="E-mail" data-title="E-mail"></label>
+                <input formControlName="email" autocomplete="off" type="text" id="email" name="email" />
+              </div>
+            </div>
           </div>
 
-          <form [formGroup]="formGroup" class="mt-4">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field">
-                  <label for="Name" title="Name" data-title="Name"></label>
-                  <input formControlName="name" autocomplete="off" type="text" id="Name" name="Name" />
-                </div>
-              </div>
-              <div class="col-md-4 ">
-                <div class="field">
-                  <label for="Surname" title="Surname" data-title="Surname"></label>
-                  <input formControlName="surname" autocomplete="off" type="text" id="Surname" name="Surname" />
-                </div>
-              </div>
-              <div class="col-md-4 ">
-                <div class="field">
-                  <label for="E-mail" title="E-mail" data-title="E-mail"></label>
-                  <input formControlName="email" autocomplete="off" type="text" id="email" name="email" />
-                </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="field">
+                <label for="Description" title="Description" data-title="Description"></label>
+                <textarea name="Description" style="height: 13vh;" formControlName="description"
+                  id="Description"></textarea>
               </div>
             </div>
 
-            <div class="row mt-3">
-              <div class="col-md-12">
-                <div class="field">
-                  <label for="Description" title="Description" data-title="Description"></label>
-                  <textarea name="Description" style="height: 13vh;" formControlName="description"
-                    id="Description"></textarea>
-                </div>
-              </div>
+          </div>
+        </form>
 
-            </div>
-          </form>
-
-          <div class="row mt-3 justify-content-end">
-            <div class="col-3">
-              <button class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
-                Send
-              </button>
-            </div>
+        <div class="row mt-3 justify-content-end">
+          <div class="col-3">
+            <button class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
+              Send
+            </button>
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
+</div>
 
-  <div class="mt-5 ">
-    <footer class="border-t py-3 bg-black text-white  font-medium text-center">
-      Copyright ©2022 All rights reserved | <span class="text-danger">Data Prabanjam</span>
-    </footer>
-  </div>
+<div class="mt-5 ">
+  <footer class="border-t py-3 bg-black text-white  font-medium text-center">
+    Copyright ©2022 All rights reserved | <span class="text-danger">Data Prabanjam</span>
+  </footer>
+</div>

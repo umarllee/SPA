@@ -8,8 +8,8 @@
 
     <div class="">
       <div class="row">
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 relative d-flex">
+          <mat-form-field class="example-full-width field  col-11">
             <label for="fullName" class="font-medium text-black ">Project name</label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="projectName"
               [matAutocomplete]="autoClient">
@@ -19,6 +19,10 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
         <div class="col-md-3">
@@ -28,8 +32,8 @@
           </div>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO name</label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_name" [matAutocomplete]="autoObjName">
@@ -39,6 +43,10 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
         <div class="col-md-3">
@@ -51,8 +59,8 @@
       </div>
 
       <div class="row">
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="dataDomain"
               [matAutocomplete]="autoDomain">
@@ -62,10 +70,14 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Asset Type </label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_asset_type" [matAutocomplete]="autoasset_type">
@@ -75,10 +87,14 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Calssification </label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_sensitivity_classification"
@@ -89,10 +105,14 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
-        <div class="col-md-3">
-          <mat-form-field class="example-full-width field col-12">
+        <div class="col-md-3 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Reason
             </label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput
@@ -103,6 +123,9 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
       </div>
     </div>
@@ -117,10 +140,10 @@
         </h2>
       </div>
 
-      <form [formGroup]="BOFormGroup">
+      <form [formGroup]="DataOwnerFormGroup">
         <div class="row">
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-12 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
@@ -134,12 +157,16 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
+
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-12 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Business Function</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_function" [matAutocomplete]="autobussFunc">
@@ -153,12 +180,15 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-12 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="role"
                 [matAutocomplete]="autorole">
@@ -172,6 +202,10 @@
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
       </form>
@@ -184,10 +218,10 @@
         </h2>
       </div>
 
-      <form [formGroup]="BOFormGroup">
+      <form [formGroup]="SourceSystemFormGroup">
         <div class="row">
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source System</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system" [matAutocomplete]="autosource_system">
@@ -197,14 +231,18 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['source_system'].errors?.['required'] && !isBOFormValid) || (OF['source_system'].invalid && !isFormValid)">
+                *ngIf="(SSF['source_system'].errors?.['required'] && !isBOFormValid) || (SSF['source_system'].invalid && !isFormValid)">
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
 
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source Sys. Country Code</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system_country_code" [matAutocomplete]="autosource_system_country_code">
@@ -214,16 +252,20 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['business_unit_owner'].errors?.['required'] && !isBOFormValid) || (OF['business_unit_owner'].invalid && !isFormValid)">
+                *ngIf="(SSF['source_system_country_code'].errors?.['required'] && !isBOFormValid) || (SSF['source_system_country_code'].invalid && !isFormValid)">
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Req Frequency of Refresh</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="req_frequency_of_refresh" [matAutocomplete]="autoreq_frequency_of_refresh">
@@ -233,17 +275,21 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['business_function'].errors?.['required'] && !isBOFormValid) || (OF['business_function'].invalid && !isFormValid)">
+                *ngIf="(SSF['business_function'].errors?.['required'] && !isBOFormValid) || (SSF['business_function'].invalid && !isFormValid)">
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
           
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Active (Y/N)</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
-                formControlName="req_frequency_of_refresh" [matAutocomplete]="autoActive">
+                formControlName="active" [matAutocomplete]="autoActive">
               <mat-autocomplete #autoActive="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsActive | async " [value]="option.value">
                   {{option.value}}
@@ -254,12 +300,16 @@
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Data Capture Mode</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="data_capture_mode"
                 [matAutocomplete]="autodata_capture_mode">
@@ -273,10 +323,14 @@
                 *Required field
               </small>
             </mat-form-field>
+
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
 
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Sourcing Mode</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="sourcing_mode"
                 [matAutocomplete]="autosourcing_mode">
@@ -290,13 +344,16 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
 
 
         <div class="row">
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Track History</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="track_history"
                 [matAutocomplete]="autotrack_history">
@@ -310,10 +367,13 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
 
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">History Type</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="history_type"
                 [matAutocomplete]="autohistory_type">
@@ -327,12 +387,15 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Error Treatment</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="error_treatment"
                 [matAutocomplete]="autoerror_treatment">
@@ -346,10 +409,13 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
 
-          <div class="col-md-6">
-            <mat-form-field class="example-full-width field col-12">
+          <div class="col-md-6 d-flex relative">
+            <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Exception Treatment</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="exception_treatment"
                 [matAutocomplete]="autoexception_Treatment">
@@ -363,14 +429,17 @@
                 *Required field
               </small>
             </mat-form-field>
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+              +
+            </button>
           </div>
         </div>
-
-
       </form>
     </div>
-  </div>
 
+  </div> 
+
+   
   <div class="row py-3">
     <div class="row p-0">
       <h2 class="text-xl font-extrabold">
@@ -378,51 +447,62 @@
       </h2>
     </div>
 
-    <div class="col-md-4">
-      <mat-form-field class="example-full-width field col-12">
-        <label for="fullName" class="font-medium text-black required-label">Created/Updated By</label>
-        <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="created_updated_By"
-          [matAutocomplete]="autocreated_updated_By">
-        <mat-autocomplete #autocreated_updated_By="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptioncreated_updated_By | async " [value]="option.value">
-            {{option.value}}
-          </mat-option>
-        </mat-autocomplete>
-        <small class="error_text"
-          *ngIf="(OF['data_capture_mode'].errors?.['required'] && !isBOFormValid) || (OF['data_capture_mode'].invalid && !isFormValid)">
-          *Required field
-        </small>
-      </mat-form-field>
-    </div>
+    <form [formGroup]="BusinessRulesFormGroup">
+      <div class="row">
+        <div class="col-md-4 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
+            <label for="fullName" class="font-medium text-black required-label">Created/Updated By</label>
+            <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="created_updated_By"
+              [matAutocomplete]="autocreated_updated_By">
+            <mat-autocomplete #autocreated_updated_By="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptioncreated_updated_By | async " [value]="option.value">
+                {{option.value}}
+              </mat-option>
+            </mat-autocomplete>
+            <small class="error_text"
+              *ngIf="(OF['data_capture_mode'].errors?.['required'] && !isBOFormValid) || (OF['data_capture_mode'].invalid && !isFormValid)">
+              *Required field
+            </small>
+          </mat-form-field>
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
+        </div>
+    
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width field col-11">
+            <label for="fullName" class="font-medium text-black required-label">Created/Updated Date</label>
+            <input type="date" id="customerId" name="customerId" class="col-12" formControlName="created_updated_ate ">
+          
+            <small class="error_text"
+              *ngIf="(OF['created_updated_ate'].errors?.['required'] && !isBOFormValid) || (OF['created_updated_ate'].invalid && !isFormValid)">
+              *Required field
+            </small>
+          </mat-form-field>
+        </div>
+    
+        <div class="col-md-4 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
+            <label for="fullName" class="font-medium text-black required-label">Remarks</label>
+            <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="remarks"
+              [matAutocomplete]="autoremarks">
+            <mat-autocomplete #autoremarks="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptionsremarks | async " [value]="option.value">
+                {{option.value}}
+              </mat-option>
+            </mat-autocomplete>
+            <small class="error_text"
+              *ngIf="(OF['remarks'].errors?.['required'] && !isBOFormValid) || (OF['remarks'].invalid && !isFormValid)">
+              *Required field
+            </small>
+          </mat-form-field>
 
-    <div class="col-md-4">
-      <mat-form-field class="example-full-width field col-12">
-        <label for="fullName" class="font-medium text-black required-label">Created/Updated Date</label>
-        <input type="date" id="customerId" name="customerId" class="col-12" formControlName="created_updated_ate ">
-      
-        <small class="error_text"
-          *ngIf="(OF['created_updated_ate'].errors?.['required'] && !isBOFormValid) || (OF['created_updated_ate'].invalid && !isFormValid)">
-          *Required field
-        </small>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-4">
-      <mat-form-field class="example-full-width field col-12">
-        <label for="fullName" class="font-medium text-black required-label">Remarks</label>
-        <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="remarks"
-          [matAutocomplete]="autoremarks">
-        <mat-autocomplete #autoremarks="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptionsremarks | async " [value]="option.value">
-            {{option.value}}
-          </mat-option>
-        </mat-autocomplete>
-        <small class="error_text"
-          *ngIf="(OF['remarks'].errors?.['required'] && !isBOFormValid) || (OF['remarks'].invalid && !isFormValid)">
-          *Required field
-        </small>
-      </mat-form-field>
-    </div>
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 
   <div class="row justify-content-end mt-4">
