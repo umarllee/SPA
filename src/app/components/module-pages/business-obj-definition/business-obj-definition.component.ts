@@ -40,8 +40,9 @@ export class BusinessObjDefinitionComponent {
   filteredOptionsexception_treatment?: Observable<any[]>;
 
 
-  filteredOptioncreated_updated_By?: Observable<any[]>;
   filteredOptionsremarks?: Observable<any[]>;
+  filteredOptionsRule?: Observable<any[]>;
+  filteredOptionsbusiness_Term?: Observable<any[]>;
 
   constructor(
     private dialog: MatDialog,
@@ -148,10 +149,13 @@ export class BusinessObjDefinitionComponent {
     })
 
     this.BusinessRulesFormGroup = this.fb.group({
-      created_updated_By: ['', [Validators.required]],
-      created_updated_ate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
-      remarks: ['', [Validators.required]],
-     
+      ruleId: ['', [Validators.required]],
+      rule: ['', [Validators.required]],
+    })
+
+    this.BusinessTermFormGroup = this.fb.group({
+      business_term_id: ['', [Validators.required]],
+      business_term: ['', [Validators.required]],
     })
   }
 
@@ -159,6 +163,7 @@ export class BusinessObjDefinitionComponent {
   definitionFormGroup!: FormGroup;
   SourceSystemFormGroup!: FormGroup;
   BusinessRulesFormGroup!: FormGroup;
+  BusinessTermFormGroup!: FormGroup;
 
   UpdateData: any;
   isFormValid = true;

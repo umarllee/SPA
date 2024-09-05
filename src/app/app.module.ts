@@ -54,7 +54,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTreeModule } from '@angular/material/tree';
 import { BusinessObjDefinitionComponent } from './components/module-pages/business-obj-definition/business-obj-definition.component';
 import { ModulePagesModule } from './components/module-pages/module-pages.module';
-import { NgParticlesModule } from 'ng-particles';
 
 
 @NgModule({
@@ -124,7 +123,6 @@ import { NgParticlesModule } from 'ng-particles';
     RouterModule,
     MatAutocompleteModule,
     ModulePagesModule,
-    NgParticlesModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
