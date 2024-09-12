@@ -102,6 +102,21 @@
     width: 100% !important;
 }
 
+::ng-deep .mdc-data-table__header-cell {
+   padding: 0 !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing,
+::ng-deep.mdc-text-field--outlined,
+::ng-deep.mdc-notched-outline__notch,
+::ng-deep.mdc-notched-outline__leading {
+    border: none !important;
+}
+
+.srcSystem-table .mat-mdc-table .mat-mdc-header-cell {
+    min-width: 200px !important;
+}
+
 .add-btn {
     width: 25px;
     height: 25px;

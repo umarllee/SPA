@@ -20,7 +20,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -44,7 +44,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -71,7 +71,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -88,7 +88,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -106,7 +106,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -123,7 +123,7 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -157,7 +157,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
 
@@ -180,14 +180,14 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 d-flex relative">
+        <div class="row align-items-center">
+          <div class="col-md-9 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="role"
@@ -203,10 +203,53 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-5 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
+
+          <div class="col-md-3 text-end pt-4">
+            <button (click)="handleAddOwner()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+              Add
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-2 px-2">
+          <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
+            style="border-radius: 6px; max-height: 255px;">
+            <table mat-table [dataSource]="dataSourceDtOwner" id="report">
+              <ng-container *ngFor="let column of displayedColumnsDtOwner.columnsTranslates; let j = index"
+                [matColumnDef]="column">
+                <th mat-header-cell *matHeaderCellDef>
+                  <div class="headerColumnNames">
+                    {{column}}
+                  </div>
+                </th>
+
+                <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+                  <span>
+                    {{element[displayedColumnsDtOwner.columns[j].replace(' ', '')]}}
+                  </span>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsDtOwner.columnsTranslates; sticky: true"></tr>
+              <tr *matNoDataRow>
+                <th colspan="9" class="text-center">
+                  <span>No rows found</span>
+                </th>
+              </tr>
+              <tr mat-row *matRowDef="let row;let i = index; columns: displayedColumnsDtOwner.columnsTranslates;"
+                class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActive(1, i)}"
+                (dblclick)="highlight(1,i, row.Id, row);">
+              </tr>
+            </table>
+          </div>
+          <mat-paginator class="mat-paginator-sticky" #commonPagDtOwner [pageSizeOptions]="[10, 15, 20]"
+            [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="onChangePageDtOwner($event)" showFirstLastButtons>
+          </mat-paginator>
         </div>
       </form>
     </div>
@@ -236,7 +279,7 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -258,7 +301,7 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -282,7 +325,7 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -303,7 +346,7 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -326,7 +369,7 @@
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -346,7 +389,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -369,7 +412,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -389,7 +432,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -411,7 +454,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -431,16 +474,52 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
         </div>
       </form>
+
+      <div class="row mt-2 px-2">
+        <div class="overflow-auto srcSystem-table line-container  border smallRow p-0"
+          style="border-radius: 6px; max-height: 255px;">
+          <table mat-table [dataSource]="dataSourceSrcSystem" id="report">
+            <ng-container *ngFor="let column of displayedColumnsSrcSystem.columnsTranslates; let j = index"
+              [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>
+                <div class="headerColumnNames">
+                  {{column}}
+                </div>
+              </th>
+
+              <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+                <span>
+                  {{element[displayedColumnsSrcSystem.columns[j].replace(' ', '')]}}
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsSrcSystem.columnsTranslates; sticky: true"></tr>
+            <tr *matNoDataRow>
+              <th colspan="9" class="text-center">
+                <span>No rows found</span>
+              </th>
+            </tr>
+            <tr mat-row *matRowDef="let row;let i = index; columns: displayedColumnsSrcSystem.columnsTranslates;"
+              class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActive(2, i)}"
+              (dblclick)="highlight(2, i, row.Id, row);">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator class="mat-paginator-sticky" #commonPagSrcSystem [pageSizeOptions]="[10, 15, 20]"
+          [length]="lengthSrcSystem" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="onChangePageSrcSystem($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
     </div>
 
   </div>
-
 
   <div class="row border-b border-dashed border-gray-400">
     <div class="col-md-6 py-3 border-gray-400 border-r border-dashed">
@@ -475,6 +554,43 @@
 
         </div>
       </form>
+
+      <div class="row mt-2 px-2">
+        <div class="overflow-auto srcSystem-table line-container  border smallRow p-0"
+          style="border-radius: 6px; max-height: 255px;">
+          <table mat-table [dataSource]="dataSourceBussnRule" id="report">
+            <ng-container *ngFor="let column of displayedColumnsBussnRule.columnsTranslates; let j = index"
+              [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>
+                <div class="headerColumnNames">
+                  {{column}}
+                </div>
+              </th>
+
+              <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+                <span>
+                  {{element[displayedColumnsBussnRule.columns[j].replace(' ', '')]}}
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsBussnRule.columnsTranslates; sticky: true"></tr>
+            <tr *matNoDataRow>
+              <th colspan="9" class="text-center">
+                <span>No rows found</span>
+              </th>
+            </tr>
+            <tr mat-row *matRowDef="let row;let i = index; columns: displayedColumnsBussnRule.columnsTranslates;"
+              class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveTerm(1, i)}"
+              (dblclick)="highlightTerm(1, i, row.Id, row);">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator class="mat-paginator-sticky" #commonPagBussnRule [pageSizeOptions]="[10, 15, 20]"
+          [length]="lengthBussnRule" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="onChangePageBussnRule($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
     </div>
 
     <div class="col-md-6 py-3">
@@ -510,21 +626,79 @@
 
         </div>
       </form>
+
+      <div class="row mt-2 px-2">
+        <div class="overflow-auto srcSystem-table line-container  border smallRow p-0"
+          style="border-radius: 6px; max-height: 255px;">
+          <table mat-table [dataSource]="dataSourceAltBusiness" id="report">
+            <ng-container *ngFor="let column of displayedColumnsAltBusiness.columnsTranslates; let j = index"
+              [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>
+                <div class="headerColumnNames">
+                  {{column}}
+                </div>
+              </th>
+
+              <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+                <span>
+                  {{element[displayedColumnsAltBusiness.columns[j].replace(' ', '')]}}
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsAltBusiness.columnsTranslates; sticky: true"></tr>
+            <tr *matNoDataRow>
+              <th colspan="9" class="text-center">
+                <span>No rows found</span>
+              </th>
+            </tr>
+            <tr mat-row *matRowDef="let row;let i = index; columns: displayedColumnsAltBusiness.columnsTranslates;"
+              class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveTerm(2, i)}"
+              (dblclick)="highlightTerm(2, i, row.Id, row);">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator class="mat-paginator-sticky" #commonPagAltBusiness [pageSizeOptions]="[10, 15, 20]"
+          [length]="lengthAltBusiness" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="onChangePageAltBusiness($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
     </div>
   </div>
 
   <div class="row py-3">
-
-    <form [formGroup]="BusinessRulesFormGroup">
+    <form [formGroup]="CreatedTermFormGroup">
       <div class="row">
-        <div class="col-md-4 mt-2 field">
-          <label for="fullName" class="font-medium text-black required-label">Created/Updated By</label>
-          <input type="text" id="customerId" name="customerId" class="col-12" formControlName="created_updated_By">
+        <div class="col-md-4 d-flex relative">
+          <mat-form-field class="example-full-width field col-11">
+            <label for="fullName" class="font-medium text-black required-label">Created/Updated By</label>
+            <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              formControlName="created_updated_By" [matAutocomplete]="autocreated_updated_By">
+            <mat-autocomplete #autocreated_updated_By="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptioncreated_updated_By | async " [value]="option.value">
+                {{option.value}}
+              </mat-option>
+            </mat-autocomplete>
+            <small class="error_text"
+              *ngIf="(CRF['created_updated_By'].errors?.['required'] && !isBOFormValid) || (CRF['created_updated_By'].invalid && !isFormValid)">
+              *Required field
+            </small>
+          </mat-form-field>
+          <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
+            +
+          </button>
         </div>
 
-        <div class="col-md-4 mt-2 field">
+        <div class="col-md-4">
+          <div class="field">
             <label for="fullName" class="font-medium text-black required-label">Created/Updated Date</label>
-            <input type="date" id="customerId" name="customerId" class="col-12" formControlName="created_updated_ate ">
+            <input type="date" id="customerId" name="customerId" class="col-12" formControlName="created_updated_ate">
+          </div>
+
+          <small class="error_text"
+            *ngIf="(CRF['created_updated_ate'].errors?.['required'] && !isBOFormValid) || (CRF['created_updated_ate'].invalid && !isFormValid)">
+            *Required field
+          </small>
         </div>
 
         <div class="col-md-4 d-flex relative">
@@ -537,6 +711,10 @@
                 {{option.value}}
               </mat-option>
             </mat-autocomplete>
+            <small class="error_text"
+              *ngIf="(CRF['remarks'].errors?.['required'] && !isBOFormValid) || (CRF['remarks'].invalid && !isFormValid)">
+              *Required field
+            </small>
           </mat-form-field>
 
           <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">

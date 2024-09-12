@@ -183,6 +183,15 @@ input:read-only {
 
 .headerColumnNames{
   text-transform: capitalize;
+  background-color: #e0e6ff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.selected-all>* {
+  background-color: rgba(154, 179, 155, 0.15) !important;
 }
 
 .error_text{
