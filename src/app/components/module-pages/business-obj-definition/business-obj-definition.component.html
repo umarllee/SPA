@@ -143,9 +143,10 @@
       <form [formGroup]="DataOwnerFormGroup">
         <div class="row">
           <div class="col-md-12 d-flex relative">
+          
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpOwner()" type="text" id="business_unit_owner" name="business_unit_owner" class="col-12" matInput
                 formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
               <mat-autocomplete #autounitOwner="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsunitOwner | async " [value]="option.value">
@@ -168,7 +169,7 @@
           <div class="col-md-12 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Business Function</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input  (keyup)="keyUpOwner()" type="text" id="business_function" name="business_function" class="col-12" matInput
                 formControlName="business_function" [matAutocomplete]="autobussFunc">
               <mat-autocomplete #autobussFunc="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsbussFunc | async " [value]="option.value">
@@ -190,7 +191,7 @@
           <div class="col-md-9 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="role"
+              <input (keyup)="keyUpOwner()" type="text" id="role" name="role" class="col-12" matInput formControlName="role"
                 [matAutocomplete]="autorole">
               <mat-autocomplete #autorole="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsrole | async " [value]="option.value">
@@ -208,9 +209,9 @@
             </button>
           </div>
 
-          <div class="col-md-3 text-end pt-4">
+          <div class="col-md-3 text-end pt-4" >
             <button (click)="handleAddOwner()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
-              Add
+               {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
             </button>
           </div>
         </div>
@@ -246,6 +247,7 @@
               </tr>
             </table>
           </div>
+
           <mat-paginator class="mat-paginator-sticky" #commonPagDtOwner [pageSizeOptions]="[10, 15, 20]"
             [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
             (page)="onChangePageDtOwner($event)" showFirstLastButtons>
@@ -658,6 +660,7 @@
             </tr>
           </table>
         </div>
+
         <mat-paginator class="mat-paginator-sticky" #commonPagAltBusiness [pageSizeOptions]="[10, 15, 20]"
           [length]="lengthAltBusiness" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
           (page)="onChangePageAltBusiness($event)" showFirstLastButtons>

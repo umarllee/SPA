@@ -110,7 +110,16 @@ export class BusinessObjDefinitionComponent {
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
+    this.keyUpOwner();
 
+
+  }
+
+  ngOnInit() {
+
+  }
+
+  keyUpOwner() {
     this.filteredOptionsunitOwner = this.OF['business_unit_owner'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
@@ -125,16 +134,11 @@ export class BusinessObjDefinitionComponent {
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
-
-  }
-
-  ngOnInit() {
-
   }
 
   //FORM CODES
 
-  generateDtOwnerForm(){
+  generateDtOwnerForm() {
     this.DataOwnerFormGroup = this.fb.group({
       business_unit_owner: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_unit_owner : '', [Validators.required]],
       business_function: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_function : '', [Validators.required]],
@@ -224,7 +228,6 @@ export class BusinessObjDefinitionComponent {
   }
 
   item_dialogRef?: MatDialogRef<NewItemComponent>;
-
   addListValue() {
     this.item_dialogRef = this.dialog.open(NewItemComponent,
       {
@@ -259,7 +262,6 @@ export class BusinessObjDefinitionComponent {
     else {
       this.isBOFormValid = false;
     }
-
   }
 
   //TABLE CODES
@@ -315,23 +317,19 @@ export class BusinessObjDefinitionComponent {
   }
 
   onChangePageSrcSystem(event: PageEvent) {
-
   }
 
   onChangePageBussnRule(event: PageEvent) {
-
   }
 
   onChangePageAltBusiness(event: PageEvent) {
-
   }
 
   isActive = (tableIndex: number, index: number) => { return (tableIndex == 1 ? this.activeRowDtOwner : this.activeRowSrcSystem) === index };
   isActiveTerm = (tableIndex: number, index: number) => { return (tableIndex == 1 ? this.activeRowBussnRule : this.activeRowAltBusiness) === index };
 
-
-  UpdateDataDtOwner:any;
-  UpdateDataSrsSystem:any;
+  UpdateDataDtOwner: any;
+  UpdateDataSrsSystem: any;
 
   highlight(tableIndex: number, index: number, id: number, row: any): void {
     if (tableIndex == 1) {
@@ -342,6 +340,8 @@ export class BusinessObjDefinitionComponent {
         this.generateDtOwnerForm();
       }
       else {
+        this.UpdateDataDtOwner = '';
+        this.generateDtOwnerForm();
         this.activeRowDtOwner = -1;
         this.highlightRowDataDtOwner = '';
       }
@@ -382,7 +382,6 @@ export class BusinessObjDefinitionComponent {
         this.highlightRowDataAltBusiness = '';
       }
     }
-
   }
 
   displayedColumnsDtOwner: any = {
@@ -393,7 +392,6 @@ export class BusinessObjDefinitionComponent {
     ],
     columnsTranslates: ['Business Unit Owner', 'Business Function', 'Role']
   };
-
 
   displayedColumnsSrcSystem: any = {
     columns: [
@@ -444,13 +442,19 @@ export class BusinessObjDefinitionComponent {
   @ViewChild('commonPagBussnRule') commonPaginatorBussnRule!: MatPaginator;
   @ViewChild('commonPagAltBusiness') commonPaginatorAltBusiness!: MatPaginator;
 
-
-
   //ADD DATA OWNER
+  handleAddOwner() {
+    this.highlightRowDataDtOwner ? (
+      this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
+      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+    ) : (
+      this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
+      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+    )
 
-  handleAddOwner(){
-    this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value);
-    this.dataSourceDtOwner.data = this.dataSourceDtOwner.data;
+    this.UpdateDataDtOwner = '';
     this.generateDtOwnerForm();
+    this.activeRowDtOwner = -1;
+    this.highlightRowDataDtOwner = '';
   }
 }
