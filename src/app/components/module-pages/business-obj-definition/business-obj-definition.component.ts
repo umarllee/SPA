@@ -211,8 +211,8 @@ export class BusinessObjDefinitionComponent {
   generateBusinessRulesFormGroup() {
     this.BusinessRulesFormGroup = this.fb.group({
       id: 0,
-      ruleId: ['', [Validators.required]],
-      rule: ['', [Validators.required]],
+      ruleId:  [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.ruleId : '', [Validators.required]],
+      rule: [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.rule : '', [Validators.required]],
     })
   }
 
@@ -226,24 +226,24 @@ export class BusinessObjDefinitionComponent {
 
   generateSourceSystemFormGroup() {
     this.SourceSystemFormGroup = this.fb.group({
-      source_system: ['', [Validators.required]],
-      source_system_country_code: ['', [Validators.required]],
-      req_frequency_of_refresh: ['', [Validators.required]],
-      active: ['', [Validators.required]],
-      data_capture_mode: ['', [Validators.required]],
-      sourcing_mode: ['', [Validators.required]],
-      track_history: ['', [Validators.required]],
-      history_type: ['', [Validators.required]],
-      error_treatment: ['', [Validators.required]],
-      exception_treatment: ['', [Validators.required]],
+      source_system:  [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.source_system : '', [Validators.required]],
+      source_system_country_code: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.source_system_country_code : '', [Validators.required]],
+      req_frequency_of_refresh: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.req_frequency_of_refresh : '', [Validators.required]],
+      active: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.active : '', [Validators.required]],
+      data_capture_mode: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.data_capture_mode : '', [Validators.required]],
+      sourcing_mode: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.sourcing_mode : '', [Validators.required]],
+      track_history: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.track_history : '', [Validators.required]],
+      history_type: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.history_type : '', [Validators.required]],
+      error_treatment: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.error_treatment : '', [Validators.required]],
+      exception_treatment: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.exception_treatment : '', [Validators.required]],
     })
   }
 
   generateBusinessTermFormGroup() {
     this.BusinessTermFormGroup = this.fb.group({
       id: 0,
-      business_term_id: ['', [Validators.required]],
-      business_term: ['', [Validators.required]],
+      business_term_id: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term_id : '', [Validators.required]],
+      business_term: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term : '', [Validators.required]],
     })
   }
 
@@ -372,15 +372,15 @@ export class BusinessObjDefinitionComponent {
 
   dataSourceBussnRule: MatTableDataSource<any> = new MatTableDataSource<any>([
     {
-      name: '1',
-      surname: 'test rule',
+      ruleId: '1',
+      rule: 'test rule',
     },
   ]);
 
   dataSourceAltBusiness: MatTableDataSource<any> = new MatTableDataSource<any>([
     {
-      name: '1',
-      surname: 'business term',
+      business_term_id: '1',
+      business_term: 'business term',
 
     },
   ]);
@@ -412,6 +412,8 @@ export class BusinessObjDefinitionComponent {
 
   UpdateDataDtOwner: any;
   UpdateDataSrsSystem: any;
+  UpdateDataBussnRule: any;
+  UpdateDataAlternateTerm: any;
 
   highlight(tableIndex: number, index: number, id: number, row: any): void {
     if (tableIndex == 1) {
@@ -433,10 +435,14 @@ export class BusinessObjDefinitionComponent {
       if (!this.isActive(2, index)) {
         row != this.highlightRowDataSrcSystem ? this.highlightRowDataSrcSystem = row : this.highlightRowDataSrcSystem = '';
         this.activeRowSrcSystem = index;
+        this.UpdateDataSrsSystem = row;
+        this.generateSourceSystemFormGroup();
       }
       else {
+        this.UpdateDataSrsSystem = '';
+        this.generateSourceSystemFormGroup();
         this.activeRowSrcSystem = -1;
-        this.highlightRowDataSrcSystem = '';
+        this.UpdateDataSrsSystem = '';
       }
     }
 
@@ -447,19 +453,27 @@ export class BusinessObjDefinitionComponent {
       if (!this.isActiveTerm(1, index)) {
         row != this.highlightRowDataBussnRule ? this.highlightRowDataBussnRule = row : this.highlightRowDataBussnRule = '';
         this.activeRowBussnRule = index;
+        this.UpdateDataBussnRule = row;
+        this.generateBusinessRulesFormGroup();
       }
       else {
+        this.UpdateDataBussnRule = '';
+        this.generateBusinessRulesFormGroup();
         this.activeRowBussnRule = -1;
         this.highlightRowDataBussnRule = '';
       }
     }
 
     if (tableIndex == 2) {
-      if (!this.isActive(2, index)) {
+      if (!this.isActiveTerm(2, index)) {
         row != this.highlightRowDataAltBusiness ? this.highlightRowDataAltBusiness = row : this.highlightRowDataAltBusiness = '';
         this.activeRowAltBusiness = index;
+        this.UpdateDataAlternateTerm = row;
+        this.generateBusinessTermFormGroup();
       }
       else {
+        this.UpdateDataAlternateTerm = '';
+        this.generateBusinessTermFormGroup();
         this.activeRowAltBusiness = -1;
         this.highlightRowDataAltBusiness = '';
       }
@@ -477,16 +491,16 @@ export class BusinessObjDefinitionComponent {
 
   displayedColumnsSrcSystem: any = {
     columns: [
-      'name',
-      'surname',
-      'testRole',
+      'source_system',
+      'source_system_country_code',
+      'req_frequency_of_refresh',
       'active',
-      'capmode',
-      'srcmode',
-      'trackHistory',
-      'historyType',
-      'errTreatment',
-      'exepTreatment',
+      'data_capture_mode',
+      'sourcing_mode',
+      'track_history',
+      'history_type',
+      'error_treatment',
+      'exception_treatment',
     ],
     columnsTranslates: [
       'Source System',
@@ -503,12 +517,12 @@ export class BusinessObjDefinitionComponent {
   };
 
   displayedColumnsBussnRule: any = {
-    columns: ['name', 'surname',],
+    columns: ['ruleId', 'rule',],
     columnsTranslates: ['Rule Id', 'Rule']
   };
 
   displayedColumnsAltBusiness: any = {
-    columns: ['name', 'surname',],
+    columns: ['business_term_id', 'business_term',],
     columnsTranslates: ['Business Term ID', 'Business Term']
   };
 
@@ -557,21 +571,83 @@ export class BusinessObjDefinitionComponent {
   }
 
   handleAddImpDetails() {
-    this.highlightRowDataDtOwner ? (
-      this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
-      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+    this.highlightRowDataSrcSystem ? (
+      this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
+      this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
     ) : (
-      this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
-      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+      this.dataSourceSrcSystem.data.push(this.SourceSystemFormGroup.value),
+      this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
     )
 
-    this.UpdateDataDtOwner = '';
-    this.generateDtOwnerForm();
-    this.activeRowDtOwner = -1;
-    this.highlightRowDataDtOwner = '';
+    this.UpdateDataSrsSystem = '';
+    this.generateSourceSystemFormGroup();
+    this.activeRowSrcSystem = -1;
+    this.highlightRowDataSrcSystem = '';
   }
 
   handleDeleteImpDetails(){
+    Swal.fire({
+      text: 'Do you want to delete data?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#266AB8',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    })
+  }
+
+  handleAddBussRule() {
+    this.highlightRowDataBussnRule ? (
+      this.dataSourceBussnRule.data[this.activeRowBussnRule] = this.BusinessRulesFormGroup.value,
+      this.dataSourceBussnRule.data = this.dataSourceBussnRule.data
+    ) : (
+      this.dataSourceBussnRule.data.push(this.BusinessRulesFormGroup.value),
+      this.dataSourceBussnRule.data = this.dataSourceBussnRule.data
+    )
+
+    this.UpdateDataBussnRule = '';
+    this.generateBusinessRulesFormGroup();
+    this.activeRowBussnRule = -1;
+    this.highlightRowDataBussnRule = '';
+  }
+
+  handleDeleteBussRule(){
+    Swal.fire({
+      text: 'Do you want to delete data?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#266AB8',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    })
+  }
+
+  handleAddAltTerm() {
+    this.highlightRowDataAltBusiness ? (
+      this.dataSourceAltBusiness.data[this.activeRowAltBusiness] = this.BusinessTermFormGroup.value,
+      this.dataSourceAltBusiness.data = this.dataSourceAltBusiness.data
+    ) : (
+      this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
+      this.dataSourceAltBusiness.data = this.dataSourceAltBusiness.data
+    )
+
+    this.UpdateDataAlternateTerm = '';
+    this.generateBusinessTermFormGroup();
+    this.activeRowAltBusiness = -1;
+    this.highlightRowDataAltBusiness = '';
+  }
+
+  handleDeleteAltTerm(){
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
