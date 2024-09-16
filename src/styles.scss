@@ -211,3 +211,7 @@ input:read-only {
   // border-bottom: 1px solid #D9D9D9;
   background: #E9F5FE;
 }
+
+button:disabled{
+  opacity: 0.8;
+}

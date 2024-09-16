@@ -11,8 +11,8 @@
         <div class="col-md-3 relative d-flex">
           <mat-form-field class="example-full-width field  col-11">
             <label for="fullName" class="font-medium text-black ">Project name</label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="projectName"
-              [matAutocomplete]="autoClient">
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              formControlName="projectName" [matAutocomplete]="autoClient">
             <mat-autocomplete #autoClient="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptionsClient | async " [value]="option.value">
                 {{option.value}}
@@ -35,7 +35,7 @@
         <div class="col-md-3 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO name</label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_name" [matAutocomplete]="autoObjName">
             <mat-autocomplete #autoObjName="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptionsObjName | async " [value]="option.value">
@@ -62,8 +62,8 @@
         <div class="col-md-3 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="dataDomain"
-              [matAutocomplete]="autoDomain">
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              formControlName="dataDomain" [matAutocomplete]="autoDomain">
             <mat-autocomplete #autoDomain="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptionsdataDomain | async " [value]="option.value">
                 {{option.value}}
@@ -79,7 +79,7 @@
         <div class="col-md-3 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Asset Type </label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_asset_type" [matAutocomplete]="autoasset_type">
             <mat-autocomplete #autoasset_type="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptionsautoasset_type | async " [value]="option.value">
@@ -96,7 +96,7 @@
         <div class="col-md-3 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Calssification </label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_sensitivity_classification"
               [matAutocomplete]="autosensitivity_classification">
             <mat-autocomplete #autosensitivity_classification="matAutocomplete">
@@ -115,7 +115,7 @@
           <mat-form-field class="example-full-width field col-11">
             <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Reason
             </label>
-            <input type="text" id="customerId" name="customerId" class="col-12" matInput
+            <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="business_object_sensitivity_reason" [matAutocomplete]="autosensitivity_reason">
             <mat-autocomplete #autosensitivity_reason="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptionssensitivity_reason| async " [value]="option.value">
@@ -131,7 +131,6 @@
     </div>
   </form>
 
-
   <div class="row border-b border-dashed border-gray-400">
     <div class="col-md-5 py-3 border-r border-dashed border-gray-400">
       <div class="row">
@@ -143,11 +142,11 @@
       <form [formGroup]="DataOwnerFormGroup">
         <div class="row">
           <div class="col-md-12 d-flex relative">
-          
+
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
-              <input (keyup)="keyUpOwner()" type="text" id="business_unit_owner" name="business_unit_owner" class="col-12" matInput
-                formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
+              <input (keyup)="keyUpOwner()" type="text" id="business_unit_owner" name="business_unit_owner"
+                class="col-12" matInput formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
               <mat-autocomplete #autounitOwner="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsunitOwner | async " [value]="option.value">
                   {{option.value}}
@@ -169,8 +168,8 @@
           <div class="col-md-12 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Business Function</label>
-              <input  (keyup)="keyUpOwner()" type="text" id="business_function" name="business_function" class="col-12" matInput
-                formControlName="business_function" [matAutocomplete]="autobussFunc">
+              <input (keyup)="keyUpOwner()" type="text" id="business_function" name="business_function" class="col-12"
+                matInput formControlName="business_function" [matAutocomplete]="autobussFunc">
               <mat-autocomplete #autobussFunc="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsbussFunc | async " [value]="option.value">
                   {{option.value}}
@@ -188,11 +187,11 @@
         </div>
 
         <div class="row align-items-center">
-          <div class="col-md-9 d-flex relative">
+          <div class="col-md-8 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
-              <input (keyup)="keyUpOwner()" type="text" id="role" name="role" class="col-12" matInput formControlName="role"
-                [matAutocomplete]="autorole">
+              <input (keyup)="keyUpOwner()" type="text" id="role" name="role" class="col-12" matInput
+                formControlName="role" [matAutocomplete]="autorole">
               <mat-autocomplete #autorole="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsrole | async " [value]="option.value">
                   {{option.value}}
@@ -209,9 +208,15 @@
             </button>
           </div>
 
-          <div class="col-md-3 text-end pt-4" >
+          <div class="col-md-2 text-end pt-4">
             <button (click)="handleAddOwner()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
-               {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
+              {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
+            </button>
+          </div>
+          <div class="col-md-1 text-end p-0 pt-4">
+            <button [disabled]="!highlightRowDataDtOwner" (click)="handleDeleteOwner()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
+              <i class="fa-regular fa-trash"></i>
             </button>
           </div>
         </div>
@@ -268,7 +273,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source System</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system" [matAutocomplete]="autosource_system">
               <mat-autocomplete #autosource_system="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssource_system | async " [value]="option.value">
@@ -289,7 +294,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source Sys. Country Code</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system_country_code" [matAutocomplete]="autosource_system_country_code">
               <mat-autocomplete #autosource_system_country_code="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssource_system_country_code | async "
@@ -313,7 +318,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Req Frequency of Refresh</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="req_frequency_of_refresh" [matAutocomplete]="autoreq_frequency_of_refresh">
               <mat-autocomplete #autoreq_frequency_of_refresh="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsreq_frequency_of_refresh | async "
@@ -335,8 +340,8 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Active (Y/N)</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="active"
-                [matAutocomplete]="autoActive">
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+                formControlName="active" [matAutocomplete]="autoActive">
               <mat-autocomplete #autoActive="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsActive | async " [value]="option.value">
                   {{option.value}}
@@ -358,7 +363,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Data Capture Mode</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="data_capture_mode" [matAutocomplete]="autodata_capture_mode">
               <mat-autocomplete #autodata_capture_mode="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsdata_capture_mode | async " [value]="option.value">
@@ -379,7 +384,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Sourcing Mode</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="sourcing_mode" [matAutocomplete]="autosourcing_mode">
               <mat-autocomplete #autosourcing_mode="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssourcing_mode | async " [value]="option.value">
@@ -402,7 +407,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Track History</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="track_history" [matAutocomplete]="autotrack_history">
               <mat-autocomplete #autotrack_history="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptiontrack_history | async " [value]="option.value">
@@ -422,7 +427,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">History Type</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="history_type" [matAutocomplete]="autohistory_type">
               <mat-autocomplete #autohistory_type="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionshistory_type | async " [value]="option.value">
@@ -444,7 +449,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Error Treatment</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="error_treatment" [matAutocomplete]="autoerror_treatment">
               <mat-autocomplete #autoerror_treatment="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionserror_treatment | async " [value]="option.value">
@@ -464,7 +469,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Exception Treatment</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="exception_treatment" [matAutocomplete]="autoexception_Treatment">
               <mat-autocomplete #autoexception_Treatment="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsexception_treatment | async " [value]="option.value">
@@ -478,6 +483,21 @@
             </mat-form-field>
             <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
+            </button>
+          </div>
+        </div>
+
+        <div class="row pb-2 justify-content-end">
+          <div class="col-md-2 text-end pt-3">
+            <button (click)="handleAddImpDetails()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+              {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
+            </button>
+          </div>
+
+          <div class="col-md-1 text-end p-0 pt-3">
+            <button [disabled]="!highlightRowDataDtOwner" (click)="handleDeleteImpDetails()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
+              <i class="fa-regular fa-trash"></i>
             </button>
           </div>
         </div>
@@ -541,8 +561,8 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="rule" class="font-medium text-black required-label">Rule</label>
-              <input type="text" id="rule" name="rule" class="col-12" matInput formControlName="rule"
-                [matAutocomplete]="autorule">
+              <input (keyup)="keyUpBusinessAlternateRule()" type="text" id="rule" name="rule" class="col-12" matInput
+                formControlName="rule" [matAutocomplete]="autorule">
               <mat-autocomplete #autorule="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsRule | async " [value]="option.value">
                   {{option.value}}
@@ -613,8 +633,8 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="business_term" class="font-medium text-black required-label">Business Term</label>
-              <input type="text" id="business_term" name="business_term" class="col-12" matInput
-                formControlName="business_term" [matAutocomplete]="autobusiness_term">
+              <input (keyup)="keyUpBusinessAlternateRule()" type="text" id="business_term" name="business_term"
+                class="col-12" matInput formControlName="business_term" [matAutocomplete]="autobusiness_term">
               <mat-autocomplete #autobusiness_term="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsbusiness_Term | async " [value]="option.value">
                   {{option.value}}

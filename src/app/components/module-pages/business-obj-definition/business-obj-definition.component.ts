@@ -10,6 +10,7 @@ import { formatDate } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-business-obj-definition',
@@ -81,7 +82,21 @@ export class BusinessObjDefinitionComponent {
 
     this.generateForm();
     this.generateDtOwnerForm();
+    this.generateBusinessRulesFormGroup();
+    this.generateSourceSystemFormGroup();
+    this.generateBusinessTermFormGroup();
+    this.generateCreatedTermFormGroup();
+    this.keyUpOwner();
+    this.keyUpBODefinition();
+    this.keyUpImpDetails();
+    this.keyUpBusinessAlternateRule();
+  }
 
+  ngOnInit() {
+
+  }
+
+  keyUpBODefinition() {
     this.filteredOptionsClient = this.FF['projectName'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
@@ -109,14 +124,6 @@ export class BusinessObjDefinitionComponent {
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
-
-    this.keyUpOwner();
-
-
-  }
-
-  ngOnInit() {
-
   }
 
   keyUpOwner() {
@@ -136,13 +143,116 @@ export class BusinessObjDefinitionComponent {
     );
   }
 
+  keyUpImpDetails() {
+    this.filteredOptionssource_system = this.SSF['source_system'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionssource_system_country_code = this.SSF['source_system_country_code'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsreq_frequency_of_refresh = this.SSF['req_frequency_of_refresh'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsActive = this.SSF['active'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsdata_capture_mode = this.SSF['data_capture_mode'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionssourcing_mode = this.SSF['sourcing_mode'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptiontrack_history = this.SSF['track_history'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionshistory_type = this.SSF['history_type'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionserror_treatment = this.SSF['error_treatment'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsexception_treatment = this.SSF['exception_treatment'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+  }
+
+  keyUpBusinessAlternateRule() {
+    this.filteredOptionsRule = this.BRF['rule'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+
+    this.filteredOptionsbusiness_Term = this.BTF['business_term'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
+  }
   //FORM CODES
+
+  generateBusinessRulesFormGroup() {
+    this.BusinessRulesFormGroup = this.fb.group({
+      id: 0,
+      ruleId: ['', [Validators.required]],
+      rule: ['', [Validators.required]],
+    })
+  }
 
   generateDtOwnerForm() {
     this.DataOwnerFormGroup = this.fb.group({
       business_unit_owner: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_unit_owner : '', [Validators.required]],
       business_function: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_function : '', [Validators.required]],
       role: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.role : '', [Validators.required]],
+    })
+  }
+
+  generateSourceSystemFormGroup() {
+    this.SourceSystemFormGroup = this.fb.group({
+      source_system: ['', [Validators.required]],
+      source_system_country_code: ['', [Validators.required]],
+      req_frequency_of_refresh: ['', [Validators.required]],
+      active: ['', [Validators.required]],
+      data_capture_mode: ['', [Validators.required]],
+      sourcing_mode: ['', [Validators.required]],
+      track_history: ['', [Validators.required]],
+      history_type: ['', [Validators.required]],
+      error_treatment: ['', [Validators.required]],
+      exception_treatment: ['', [Validators.required]],
+    })
+  }
+
+  generateBusinessTermFormGroup() {
+    this.BusinessTermFormGroup = this.fb.group({
+      id: 0,
+      business_term_id: ['', [Validators.required]],
+      business_term: ['', [Validators.required]],
+    })
+  }
+
+  generateCreatedTermFormGroup() {
+    this.CreatedTermFormGroup = this.fb.group({
+      id: 0,
+      created_updated_By: ['', [Validators.required]],
+      created_updated_ate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
+      remarks: ['', [Validators.required]],
     })
   }
 
@@ -162,38 +272,6 @@ export class BusinessObjDefinitionComponent {
       date_created: '',
       active: ''
     })
-
-    this.SourceSystemFormGroup = this.fb.group({
-      source_system: ['', [Validators.required]],
-      source_system_country_code: ['', [Validators.required]],
-      req_frequency_of_refresh: ['', [Validators.required]],
-      active: ['', [Validators.required]],
-      data_capture_mode: ['', [Validators.required]],
-      sourcing_mode: ['', [Validators.required]],
-      track_history: ['', [Validators.required]],
-      history_type: ['', [Validators.required]],
-      error_treatment: ['', [Validators.required]],
-      exception_treatment: ['', [Validators.required]],
-    })
-
-    this.BusinessRulesFormGroup = this.fb.group({
-      id: 0,
-      ruleId: ['', [Validators.required]],
-      rule: ['', [Validators.required]],
-    })
-
-    this.BusinessTermFormGroup = this.fb.group({
-      id: 0,
-      business_term_id: ['', [Validators.required]],
-      business_term: ['', [Validators.required]],
-    })
-
-    this.CreatedTermFormGroup = this.fb.group({
-      id: 0,
-      created_updated_By: ['', [Validators.required]],
-      created_updated_ate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
-      remarks: ['', [Validators.required]],
-    })
   }
 
   get FF(): { [key: string]: AbstractControl } {
@@ -210,6 +288,10 @@ export class BusinessObjDefinitionComponent {
 
   get BRF(): { [key: string]: AbstractControl } {
     return this.BusinessRulesFormGroup.controls;
+  }
+
+  get BTF(): { [key: string]: AbstractControl } {
+    return this.BusinessTermFormGroup.controls;
   }
 
   get CRF(): { [key: string]: AbstractControl } {
@@ -456,5 +538,52 @@ export class BusinessObjDefinitionComponent {
     this.generateDtOwnerForm();
     this.activeRowDtOwner = -1;
     this.highlightRowDataDtOwner = '';
+  }
+
+  handleDeleteOwner(){
+    Swal.fire({
+      text: 'Do you want to delete data?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#266AB8',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    })
+  }
+
+  handleAddImpDetails() {
+    this.highlightRowDataDtOwner ? (
+      this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
+      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+    ) : (
+      this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
+      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+    )
+
+    this.UpdateDataDtOwner = '';
+    this.generateDtOwnerForm();
+    this.activeRowDtOwner = -1;
+    this.highlightRowDataDtOwner = '';
+  }
+
+  handleDeleteImpDetails(){
+    Swal.fire({
+      text: 'Do you want to delete data?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#266AB8',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    })
   }
 }
