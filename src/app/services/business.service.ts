@@ -12,4 +12,15 @@ export class BusinessService {
     return this.http.post<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/bo_owner`, data);
   }
 
+  getBo_owner() {
+    return this.http.get<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/bo_owner`);
+  }
+
+  saveImpDetails(data: any) {
+    return this.http.post<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/bo_implementation`, data);
+  }
+
+  getImpDetails() {
+    return this.http.get<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/bo_implementation`);
+  }
 }

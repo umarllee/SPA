@@ -74,6 +74,29 @@ export class BusinessObjDefinitionComponent {
     },
   ];
 
+  countryCodes: any[] = [
+    {
+      key: 1,
+      value: '1'
+    },
+    {
+      key: 2,
+      value: '2'
+    },
+  ];
+  
+  actives: any[] = [
+    {
+      key: 1,
+      value: 'Yes'
+    },
+    {
+      key: 0,
+      value: 'No'
+    },
+  ];
+
+
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
@@ -93,7 +116,8 @@ export class BusinessObjDefinitionComponent {
   }
 
   ngOnInit() {
-
+    this.getTableDataOwner();
+    this.getTableImpDetails();
   }
 
   keyUpBODefinition() {
@@ -151,7 +175,7 @@ export class BusinessObjDefinitionComponent {
 
     this.filteredOptionssource_system_country_code = this.SSF['source_system_country_code'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.countryCodes) : this.countryCodes))
     );
 
     this.filteredOptionsreq_frequency_of_refresh = this.SSF['req_frequency_of_refresh'].valueChanges.pipe(
@@ -159,10 +183,10 @@ export class BusinessObjDefinitionComponent {
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    this.filteredOptionsActive = this.SSF['active'].valueChanges.pipe(
-      startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    );
+    // this.filteredOptionsActive = this.SSF['active'].valueChanges.pipe(
+    //   startWith(''),
+    //   map((client) => (client ? filterAutocomplete(client, this.actives) : this.actives))
+    // );
 
     this.filteredOptionsdata_capture_mode = this.SSF['data_capture_mode'].valueChanges.pipe(
       startWith(''),
@@ -211,7 +235,7 @@ export class BusinessObjDefinitionComponent {
   generateBusinessRulesFormGroup() {
     this.BusinessRulesFormGroup = this.fb.group({
       id: 0,
-      ruleId:  [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.ruleId : '', [Validators.required]],
+      ruleId: [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.ruleId : '', [Validators.required]],
       rule: [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.rule : '', [Validators.required]],
     })
   }
@@ -226,7 +250,7 @@ export class BusinessObjDefinitionComponent {
 
   generateSourceSystemFormGroup() {
     this.SourceSystemFormGroup = this.fb.group({
-      source_system:  [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.source_system : '', [Validators.required]],
+      source_system: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.source_system : '', [Validators.required]],
       source_system_country_code: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.source_system_country_code : '', [Validators.required]],
       req_frequency_of_refresh: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.req_frequency_of_refresh : '', [Validators.required]],
       active: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.active : '', [Validators.required]],
@@ -333,12 +357,7 @@ export class BusinessObjDefinitionComponent {
   handleSave() {
     if (this.DataOwnerFormGroup.valid) {
       this.isBOFormValid = true;
-      this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
-        next: res => {
-          swalSuccess("Saved successfully.")
-        },
-        error: err => console.log(err)
-      })
+
     }
 
     else {
@@ -347,28 +366,9 @@ export class BusinessObjDefinitionComponent {
   }
 
   //TABLE CODES
-  dataSourceDtOwner: MatTableDataSource<any> = new MatTableDataSource<any>([
-    {
-      business_unit_owner: 'owner',
-      business_function: 'business_function',
-      role: 'role',
-    }
-  ]);
+  dataSourceDtOwner: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-  dataSourceSrcSystem: MatTableDataSource<any> = new MatTableDataSource<any>([
-    {
-      name: 'test source sys',
-      surname: 'test code',
-      testRole: 'test refresh',
-      active: 'y',
-      capmode: 'tets',
-      srcmode: 'tessstt',
-      trackHistory: 'mockdata',
-      historyType: 'mockdata',
-      errTreatment: 'testdata',
-      exepTreatment: 'etstdata',
-    },
-  ]);
+  dataSourceSrcSystem: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   dataSourceBussnRule: MatTableDataSource<any> = new MatTableDataSource<any>([
     {
@@ -539,22 +539,30 @@ export class BusinessObjDefinitionComponent {
   @ViewChild('commonPagAltBusiness') commonPaginatorAltBusiness!: MatPaginator;
 
   //ADD DATA OWNER
+  isDataOwnerFormValid = true;
   handleAddOwner() {
-    this.highlightRowDataDtOwner ? (
-      this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
-      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
-    ) : (
-      this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
-      this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
-    )
+    if (this.DataOwnerFormGroup.valid) {
+      this.isDataOwnerFormValid = true;
+      this.highlightRowDataDtOwner ? (
+        this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
+        this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
 
-    this.UpdateDataDtOwner = '';
-    this.generateDtOwnerForm();
-    this.activeRowDtOwner = -1;
-    this.highlightRowDataDtOwner = '';
+      ) : (
+        this.saveDataOwner(),
+        this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
+        this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+      )
+
+      this.UpdateDataDtOwner = '';
+      this.generateDtOwnerForm();
+      this.activeRowDtOwner = -1;
+      this.highlightRowDataDtOwner = '';
+    }
+    else this.isDataOwnerFormValid = false
+
   }
 
-  handleDeleteOwner(){
+  handleDeleteOwner() {
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
@@ -565,27 +573,73 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
       }
     })
   }
 
-  handleAddImpDetails() {
-    this.highlightRowDataSrcSystem ? (
-      this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
-      this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
-    ) : (
-      this.dataSourceSrcSystem.data.push(this.SourceSystemFormGroup.value),
-      this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
-    )
-
-    this.UpdateDataSrsSystem = '';
-    this.generateSourceSystemFormGroup();
-    this.activeRowSrcSystem = -1;
-    this.highlightRowDataSrcSystem = '';
+  getTableDataOwner() {
+    this.businessService.getBo_owner().subscribe({
+      next: res => {
+        this.dataSourceDtOwner = new MatTableDataSource<any>(res.data);
+        this.dataSourceDtOwner.paginator = this.commonPaginator;
+      },
+      error: err => console.log(err)
+    })
   }
 
-  handleDeleteImpDetails(){
+  saveDataOwner() {
+    this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
+      next: res => {
+        swalSuccess("Saved successfully.");
+        this.getTableDataOwner();
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  isImpDetailsFormGroup = true;
+  handleAddImpDetails() {
+    if (this.SourceSystemFormGroup.valid) {
+      this.isImpDetailsFormGroup = true;
+      this.highlightRowDataSrcSystem ? (
+        this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
+        this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
+      ) : (
+        this.saveImpDetails(),
+        this.dataSourceSrcSystem.data.push(this.SourceSystemFormGroup.value),
+        this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
+      )
+
+      this.UpdateDataSrsSystem = '';
+      this.generateSourceSystemFormGroup();
+      this.activeRowSrcSystem = -1;
+      this.highlightRowDataSrcSystem = '';
+    }
+    else this.isImpDetailsFormGroup = false;
+  }
+
+  getTableImpDetails() {
+    this.businessService.getImpDetails().subscribe({
+      next: res => {
+        this.dataSourceSrcSystem = new MatTableDataSource<any>(res.data);
+        this.dataSourceSrcSystem.paginator = this.commonPaginatorSrcSystem;
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  saveImpDetails() {
+    this.businessService.saveImpDetails(this.SourceSystemFormGroup.value).subscribe({
+      next: res => {
+        swalSuccess("Saved successfully.");
+        this.getTableImpDetails();
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  handleDeleteImpDetails() {
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
@@ -596,7 +650,7 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
       }
     })
   }
@@ -616,7 +670,7 @@ export class BusinessObjDefinitionComponent {
     this.highlightRowDataBussnRule = '';
   }
 
-  handleDeleteBussRule(){
+  handleDeleteBussRule() {
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
@@ -627,7 +681,7 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
       }
     })
   }
@@ -647,7 +701,7 @@ export class BusinessObjDefinitionComponent {
     this.highlightRowDataAltBusiness = '';
   }
 
-  handleDeleteAltTerm(){
+  handleDeleteAltTerm() {
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
@@ -658,7 +712,7 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
       }
     })
   }

@@ -20,7 +20,8 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -44,7 +45,8 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -71,7 +73,8 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -88,7 +91,8 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -106,7 +110,8 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -123,7 +128,8 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -145,19 +151,20 @@
 
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
-              <input (keyup)="keyUpOwner()" type="text" id="business_unit_owner" name="business_unit_owner"
-                class="col-12" matInput formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
+              <input type="text" id="business_unit_owner" name="business_unit_owner" class="col-12" matInput
+                formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
               <mat-autocomplete #autounitOwner="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsunitOwner | async " [value]="option.value">
                   {{option.value}}
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['business_unit_owner'].errors?.['required'] && !isBOFormValid) || (OF['business_unit_owner'].invalid && !isFormValid)">
+                *ngIf="(OF['business_unit_owner'].errors?.['required'] && !isDataOwnerFormValid) || (OF['business_unit_owner'].invalid && !isDataOwnerFormValid)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
 
@@ -168,19 +175,20 @@
           <div class="col-md-12 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Business Function</label>
-              <input (keyup)="keyUpOwner()" type="text" id="business_function" name="business_function" class="col-12"
-                matInput formControlName="business_function" [matAutocomplete]="autobussFunc">
+              <input type="text" id="business_function" name="business_function" class="col-12" matInput
+                formControlName="business_function" [matAutocomplete]="autobussFunc">
               <mat-autocomplete #autobussFunc="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsbussFunc | async " [value]="option.value">
                   {{option.value}}
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['business_function'].errors?.['required'] && !isBOFormValid) || (OF['business_function'].invalid && !isFormValid)">
+                *ngIf="(OF['business_function'].errors?.['required'] && !isDataOwnerFormValid) || (OF['business_function'].invalid && !isDataOwnerFormValid)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -190,31 +198,33 @@
           <div class="col-md-9 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
-              <input (keyup)="keyUpOwner()" type="text" id="role" name="role" class="col-12" matInput
-                formControlName="role" [matAutocomplete]="autorole">
+              <input type="text" id="role" name="role" class="col-12" matInput formControlName="role"
+                [matAutocomplete]="autorole">
               <mat-autocomplete #autorole="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsrole | async " [value]="option.value">
                   {{option.value}}
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(OF['role'].errors?.['required'] && !isBOFormValid) || (OF['role'].invalid && !isFormValid)">
+                *ngIf="(OF['role'].errors?.['required'] && !isDataOwnerFormValid) || (OF['role'].invalid && !isDataOwnerFormValid)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
 
           <div class="col-md-2 text-end pt-4">
-            <button (click)="handleAddOwner()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+            <button type="button" (click)="handleAddOwner()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
               {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
             </button>
           </div>
           <div class="col-md-1 text-end p-0 pt-4">
-            <button [disabled]="!highlightRowDataDtOwner" (click)="handleDeleteOwner()"
+            <button type="button" [disabled]="!highlightRowDataDtOwner" (click)="handleDeleteOwner()"
               class="rounded font-semibold col-12 py-2 text-white bg-danger">
               <i class="fa-regular fa-trash"></i>
             </button>
@@ -273,7 +283,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source System</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system" [matAutocomplete]="autosource_system">
               <mat-autocomplete #autosource_system="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssource_system | async " [value]="option.value">
@@ -281,12 +291,13 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['source_system'].errors?.['required'] && !isBOFormValid) || (SSF['source_system'].invalid && !isFormValid)">
+                *ngIf="(SSF['source_system'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['source_system'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -294,7 +305,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Source Sys. Country Code</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system_country_code" [matAutocomplete]="autosource_system_country_code">
               <mat-autocomplete #autosource_system_country_code="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssource_system_country_code | async "
@@ -303,12 +314,13 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['source_system_country_code'].errors?.['required'] && !isBOFormValid) || (SSF['source_system_country_code'].invalid && !isFormValid)">
+                *ngIf="(SSF['source_system_country_code'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['source_system_country_code'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -318,7 +330,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Req Frequency of Refresh</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="req_frequency_of_refresh" [matAutocomplete]="autoreq_frequency_of_refresh">
               <mat-autocomplete #autoreq_frequency_of_refresh="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsreq_frequency_of_refresh | async "
@@ -327,20 +339,21 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['req_frequency_of_refresh'].errors?.['required'] && !isBOFormValid) || (SSF['req_frequency_of_refresh'].invalid && !isFormValid)">
+                *ngIf="(SSF['req_frequency_of_refresh'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['req_frequency_of_refresh'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
 
-          <div class="col-md-6 d-flex relative">
-            <mat-form-field class="example-full-width field col-11">
+          <div class="col-md-6">
+            <!-- <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Active (Y/N)</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="active" [matAutocomplete]="autoActive">
               <mat-autocomplete #autoActive="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsActive | async " [value]="option.value">
@@ -348,14 +361,27 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['active'].errors?.['required'] && !isBOFormValid) || (SSF['active'].invalid && !isFormValid)">
+                *ngIf="(SSF['active'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['active'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
-            </button>
+            </button> -->
+
+            <div class="field col-12">
+              <label for="active" class="font-medium text-black required-label">Active (Y/N)</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="active">
+                  <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small class="error_text"
+                *ngIf="(SSF['active'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['active'].invalid && !isImpDetailsFormGroup)">
+                *Required field
+              </small>
+            </div>
           </div>
         </div>
 
@@ -363,7 +389,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Data Capture Mode</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="data_capture_mode" [matAutocomplete]="autodata_capture_mode">
               <mat-autocomplete #autodata_capture_mode="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsdata_capture_mode | async " [value]="option.value">
@@ -371,12 +397,13 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['data_capture_mode'].errors?.['required'] && !isBOFormValid) || (SSF['data_capture_mode'].invalid && !isFormValid)">
+                *ngIf="(SSF['data_capture_mode'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['data_capture_mode'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -384,7 +411,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Sourcing Mode</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="sourcing_mode" [matAutocomplete]="autosourcing_mode">
               <mat-autocomplete #autosourcing_mode="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssourcing_mode | async " [value]="option.value">
@@ -392,11 +419,12 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['sourcing_mode'].errors?.['required'] && !isBOFormValid) || (SSF['sourcing_mode'].invalid && !isFormValid)">
+                *ngIf="(SSF['sourcing_mode'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['sourcing_mode'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -404,10 +432,10 @@
 
 
         <div class="row">
-          <div class="col-md-6 d-flex relative">
-            <mat-form-field class="example-full-width field col-11">
+          <div class="col-md-6">
+            <!-- <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Track History</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="track_history" [matAutocomplete]="autotrack_history">
               <mat-autocomplete #autotrack_history="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptiontrack_history | async " [value]="option.value">
@@ -415,19 +443,33 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['track_history'].errors?.['required'] && !isBOFormValid) || (SSF['track_history'].invalid && !isFormValid)">
+                *ngIf="(SSF['track_history'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['track_history'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
-            </button>
+            </button> -->
+
+            <div class="field col-12">
+              <label for="fullName" class="font-medium text-black required-label">Track History</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="track_history">
+                  <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <small class="error_text"
+                *ngIf="(SSF['track_history'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['track_history'].invalid && !isImpDetailsFormGroup)">
+                *Required field
+              </small>
+            </div>
           </div>
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">History Type</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="history_type" [matAutocomplete]="autohistory_type">
               <mat-autocomplete #autohistory_type="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionshistory_type | async " [value]="option.value">
@@ -435,11 +477,12 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['history_type'].errors?.['required'] && !isBOFormValid) || (SSF['history_type'].invalid && !isFormValid)">
+                *ngIf="(SSF['history_type'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['history_type'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -449,7 +492,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Error Treatment</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="error_treatment" [matAutocomplete]="autoerror_treatment">
               <mat-autocomplete #autoerror_treatment="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionserror_treatment | async " [value]="option.value">
@@ -457,11 +500,12 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['error_treatment'].errors?.['required'] && !isBOFormValid) || (SSF['error_treatment'].invalid && !isFormValid)">
+                *ngIf="(SSF['error_treatment'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['error_treatment'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -469,7 +513,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Exception Treatment</label>
-              <input (keyup)="keyUpImpDetails()" type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="exception_treatment" [matAutocomplete]="autoexception_Treatment">
               <mat-autocomplete #autoexception_Treatment="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsexception_treatment | async " [value]="option.value">
@@ -477,11 +521,12 @@
                 </mat-option>
               </mat-autocomplete>
               <small class="error_text"
-                *ngIf="(SSF['exception_treatment'].errors?.['required'] && !isBOFormValid) || (SSF['exception_treatment'].invalid && !isFormValid)">
+                *ngIf="(SSF['exception_treatment'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['exception_treatment'].invalid && !isImpDetailsFormGroup)">
                 *Required field
               </small>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -489,13 +534,14 @@
 
         <div class="row pb-2 pe-2 justify-content-end">
           <div class="col-md-2 text-end pt-3">
-            <button (click)="handleAddImpDetails()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+            <button type="button" (click)="handleAddImpDetails()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
               {{ highlightRowDataSrcSystem ? 'Save' : 'Add' }}
             </button>
           </div>
 
           <div class="col-md-1 text-end p-0 pt-3">
-            <button [disabled]="!highlightRowDataSrcSystem" (click)="handleDeleteImpDetails()"
+            <button type="button" [disabled]="!highlightRowDataSrcSystem" (click)="handleDeleteImpDetails()"
               class="rounded font-semibold col-12 py-2 text-white bg-danger">
               <i class="fa-regular fa-trash"></i>
             </button>
@@ -519,7 +565,7 @@
                 <span>
                   {{element[displayedColumnsSrcSystem.columns[j].replace(' ', '')]}}
                 </span>
-              </td> 
+              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumnsSrcSystem.columnsTranslates; sticky: true"></tr>
@@ -569,7 +615,8 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -578,13 +625,14 @@
 
         <div class="row pb-2 pe-2 justify-content-end">
           <div class="col-md-2 text-end pt-3">
-            <button (click)="handleAddBussRule()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+            <button type="button" (click)="handleAddBussRule()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
               {{ highlightRowDataSrcSystem ? 'Save' : 'Add' }}
             </button>
           </div>
 
           <div class="col-md-1 text-end p-0 pt-3">
-            <button [disabled]="!highlightRowDataSrcSystem" (click)="handleDeleteBussRule()"
+            <button type="button" [disabled]="!highlightRowDataSrcSystem" (click)="handleDeleteBussRule()"
               class="rounded font-semibold col-12 py-2 text-white bg-danger">
               <i class="fa-regular fa-trash"></i>
             </button>
@@ -657,7 +705,8 @@
               </mat-autocomplete>
             </mat-form-field>
 
-            <button (click)="addListValue()" class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue()"
+              class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
           </div>
@@ -666,13 +715,14 @@
 
         <div class="row pb-2 pe-2 justify-content-end">
           <div class="col-md-2 text-end pt-3">
-            <button (click)="handleAddAltTerm()" class="rounded font-semibold col-12 py-2 text-white bg-danger">
+            <button type="button" (click)="handleAddAltTerm()"
+              class="rounded font-semibold col-12 py-2 text-white bg-danger">
               {{ highlightRowDataAltBusiness ? 'Save' : 'Add' }}
             </button>
           </div>
 
           <div class="col-md-1 text-end p-0 pt-3">
-            <button [disabled]="!highlightRowDataAltBusiness" (click)="handleDeleteAltTerm()"
+            <button type="button" [disabled]="!highlightRowDataAltBusiness" (click)="handleDeleteAltTerm()"
               class="rounded font-semibold col-12 py-2 text-white bg-danger">
               <i class="fa-regular fa-trash"></i>
             </button>
@@ -738,7 +788,8 @@
               *Required field
             </small>
           </mat-form-field>
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
@@ -771,7 +822,8 @@
             </small>
           </mat-form-field>
 
-          <button (click)="addListValue()" class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
+          <button type="button" (click)="addListValue()"
+            class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
         </div>
