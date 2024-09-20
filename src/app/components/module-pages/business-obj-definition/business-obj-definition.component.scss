@@ -117,6 +117,10 @@
     min-width: 200px !important;
 }
 
+.srcSystem-table .mat-mdc-table .mat-mdc-header-cell:last-child {
+    min-width: 70px !important;
+}
+
 .add-btn {
     width: 25px;
     height: 25px;

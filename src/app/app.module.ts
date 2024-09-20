@@ -54,6 +54,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTreeModule } from '@angular/material/tree';
 import { BusinessObjDefinitionComponent } from './components/module-pages/business-obj-definition/business-obj-definition.component';
 import { ModulePagesModule } from './components/module-pages/module-pages.module';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -123,8 +125,11 @@ import { ModulePagesModule } from './components/module-pages/module-pages.module
     RouterModule,
     MatAutocompleteModule,
     ModulePagesModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
