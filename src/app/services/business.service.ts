@@ -41,10 +41,18 @@ export class BusinessService {
   }
 
   saveBusiness_term(data: any) {
-    return this.http.post<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/business_term`, data);
+    return this.http.post<any>(`https://umdproject-73xbvwzbb-umds-projects-76f3b139.vercel.app/api/business_term`, data);
   }
 
   getBusiness_term() {
-    return this.http.get<any>(`https://umdproject-nvv9jxc7a-umds-projects-76f3b139.vercel.app/api/business_term`);
+    return this.http.get<any>(`https://umdproject-73xbvwzbb-umds-projects-76f3b139.vercel.app/api/business_term`);
+  }
+
+  updateBusiness_term(id:number, data:any) {
+    return this.http.put<any>(`https://umdproject-73xbvwzbb-umds-projects-76f3b139.vercel.app/api/business_term/` + id, data);
+  }
+
+  deleteBusiness_term(id:number) {
+    return this.http.delete<any>(`https://umdproject-73xbvwzbb-umds-projects-76f3b139.vercel.app/api/business_term/` + id);
   }
 }

@@ -702,7 +702,7 @@
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="business_term" class="font-medium text-black required-label">Business Term</label>
-              <input (keyup)="keyUpBusinessAlternateRule()" type="text" id="business_term" name="business_term"
+              <input type="text" id="business_term" name="business_term"
                 class="col-12" matInput formControlName="business_term" [matAutocomplete]="autobusiness_term">
               <mat-autocomplete #autobusiness_term="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsbusiness_Term | async " [value]="option.value">
@@ -745,13 +745,6 @@
               {{ highlightRowDataAltBusiness ? 'Save' : 'Add' }}
             </button>
           </div>
-
-          <div class="col-md-1 text-end p-0 pt-3">
-            <button type="button" [disabled]="!highlightRowDataAltBusiness" (click)="handleDeleteAltTerm()"
-              class="rounded font-semibold col-12 py-2 text-white bg-danger">
-              <i class="fa-regular fa-trash"></i>
-            </button>
-          </div>
         </div>
       </form>
 
@@ -762,14 +755,21 @@
             <ng-container *ngFor="let column of displayedColumnsAltBusiness.columnsTranslates; let j = index"
               [matColumnDef]="column">
               <th mat-header-cell *matHeaderCellDef>
-                <div class="headerColumnNames">
+                <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
                   {{column}}
                 </div>
               </th>
 
               <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
-                <span>
+                <span *ngIf="column != '#'">
                   {{element[displayedColumnsAltBusiness.columns[j].replace(' ', '')]}}
+                </span>
+
+                <span *ngIf="column == '#'">
+                  <button type="button" (click)="handleDeleteAltTerm(element.id)"
+                    class="rounded font-semibold col-12 py-2 text-danger">
+                    <i class="fa-regular fa-trash"></i>
+                  </button>
                 </span>
               </td>
             </ng-container>

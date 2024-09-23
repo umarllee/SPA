@@ -525,8 +525,8 @@ export class BusinessObjDefinitionComponent {
   };
 
   displayedColumnsAltBusiness: any = {
-    columns: ['business_term_id', 'business_term', 'business_term_description'],
-    columnsTranslates: ['Business Term ID', 'Business Term', 'Business Term description']
+    columns: ['business_term_id', 'business_term', 'business_term_description', '#'],
+    columnsTranslates: ['Business Term ID', 'Business Term', 'Business Term description', '#']
   };
 
   pageEvent!: PageEvent;
@@ -728,12 +728,18 @@ export class BusinessObjDefinitionComponent {
   handleAddAltTerm() {
     if (this.BusinessTermFormGroup.valid) {
       this.highlightRowDataAltBusiness ? (
-        this.dataSourceAltBusiness.data[this.activeRowAltBusiness] = this.BusinessTermFormGroup.value,
-        this.dataSourceAltBusiness.data = this.dataSourceAltBusiness.data
+        this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Updated successfully!');
+            this.getTableBusinessTerm();
+          },
+          error: err => console.log(err)
+        }),
+        this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
       ) : (
         // this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
         this.saveAltTerm(),
-        this.dataSourceAltBusiness.data = this.dataSourceAltBusiness.data
+        this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
       )
 
       this.UpdateDataAlternateTerm = '';
@@ -765,7 +771,7 @@ export class BusinessObjDefinitionComponent {
     })
   }
 
-  handleDeleteAltTerm() {
+  handleDeleteAltTerm(id: number) {
     Swal.fire({
       text: 'Do you want to delete data?',
       icon: 'warning',
@@ -776,7 +782,17 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-
+        this.businessService.deleteBusiness_term(id).subscribe({
+          next: res => {
+            swalSuccess('Deleted successfully!');
+            this.getTableBusinessTerm();
+            this.UpdateDataAlternateTerm = '';
+            this.generateBusinessTermFormGroup();
+            this.activeRowAltBusiness = -1;
+            this.highlightRowDataAltBusiness = '';
+          },
+          error: err => console.log(err)
+        });
       }
     })
   }
