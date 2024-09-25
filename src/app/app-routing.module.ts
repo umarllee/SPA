@@ -27,7 +27,7 @@ import { HolidaycalendarPmiComponent } from './components/spa-pages/holidaycalen
 import { MetadataAttributesComponent } from './components/spa-pages/metadata-attributes/metadata-attributes.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: '', redirectTo: 'pages/business', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
   
   {
