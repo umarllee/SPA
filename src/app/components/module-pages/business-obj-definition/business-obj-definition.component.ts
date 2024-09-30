@@ -121,23 +121,24 @@ export class BusinessObjDefinitionComponent {
     this.getTableImpDetails();
     this.getTableBusinessTerm();
     this.getTableBusinessRule();
+    this.getTableBusinessObjectDefinition();
   }
 
   keyUpBODefinition() {
-    this.filteredOptionsClient = this.FF['projectName'].valueChanges.pipe(
-      startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    );
+    // this.filteredOptionsClient = this.FF['projectName'].valueChanges.pipe(
+    //   startWith(''),
+    //   map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    // );
 
     this.filteredOptionsObjName = this.FF['business_object_name'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    this.filteredOptionsdataDomain = this.FF['dataDomain'].valueChanges.pipe(
-      startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    );
+    // this.filteredOptionsdataDomain = this.FF['dataDomain'].valueChanges.pipe(
+    //   startWith(''),
+    //   map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    // );
 
     this.filteredOptionsautoasset_type = this.FF['business_object_asset_type'].valueChanges.pipe(
       startWith(''),
@@ -240,6 +241,7 @@ export class BusinessObjDefinitionComponent {
       id: 0,
       rule_id: [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.rule_id : '', [Validators.required]],
       rule: [this.UpdateDataBussnRule ? this.UpdateDataBussnRule.rule : '', [Validators.required]],
+      business_object_id: 0,
     })
   }
 
@@ -248,6 +250,7 @@ export class BusinessObjDefinitionComponent {
       business_unit_owner: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_unit_owner : '', [Validators.required]],
       business_function: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.business_function : '', [Validators.required]],
       role: [this.UpdateDataDtOwner ? this.UpdateDataDtOwner.role : '', [Validators.required]],
+      business_object_id: 0,
     })
   }
 
@@ -264,6 +267,7 @@ export class BusinessObjDefinitionComponent {
       history_type: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.history_type : '', [Validators.required]],
       error_treatment: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.error_treatment : '', [Validators.required]],
       exception_treatment: [this.UpdateDataSrsSystem ? this.UpdateDataSrsSystem.exception_treatment : '', [Validators.required]],
+      business_object_id: 0,
     })
   }
 
@@ -275,6 +279,7 @@ export class BusinessObjDefinitionComponent {
       business_term_id: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term_id : '', [Validators.required]],
       business_term: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term : '', [Validators.required]],
       business_term_description: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term_description : '', [Validators.required]],
+      business_object_id: 0,
     })
   }
 
@@ -290,18 +295,17 @@ export class BusinessObjDefinitionComponent {
   generateForm() {
     this.definitionFormGroup = this.fb.group({
       id: 0,
-
-      dataDomain: '',
-      projectName: '',
-      business_object_id: ['XXXBO-0001', [Validators.required]],
-      business_object_name: ['', [Validators.required]],
-      business_object_description: ['', [Validators.required]],
-      business_object_asset_type: ['', [Validators.required]],
-      business_object_sensitivity_classification: ['', [Validators.required]],
-      business_object_sensitivity_reason: ['', [Validators.required]],
-      version: '',
-      date_created: '',
-      active: ''
+      // dataDomain: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.dataDomain : '', [Validators.required]],
+      // projectName: '',
+      business_object_id: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_id : 'BO0002', [Validators.required]],
+      business_object_name: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_name : '', [Validators.required]],
+      business_object_description: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_description : '', [Validators.required]],
+      business_object_asset_type: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_asset_type : '', [Validators.required]],
+      business_object_sensitivity_classification: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_sensitivity_classification : '', [Validators.required]],
+      business_object_sensitivity_reason: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_sensitivity_reason : '', [Validators.required]],
+      version: 0,
+      date_created: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+      active: true,
     })
   }
 
@@ -362,19 +366,12 @@ export class BusinessObjDefinitionComponent {
 
   isBOFormValid = true;
   handleSave() {
-    if (this.DataOwnerFormGroup.valid) {
-      this.isBOFormValid = true;
-
-    }
-
-    else {
-      this.isBOFormValid = false;
-    }
+    this.handleSaveBusinessObjectDefinition();
   }
 
   //TABLE CODES
   dataSourceBusinessOwner: MatTableDataSource<any> = new MatTableDataSource<any>([]);
- 
+
   dataSourceDtOwner: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   dataSourceSrcSystem: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -382,13 +379,16 @@ export class BusinessObjDefinitionComponent {
   dataSourceBussnRule: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   dataSourceAltBusiness: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  dataSourceBusinessObjectDefinition: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
+  activeBusinessObjectDefinition: any = -1;
   activeBusinessOwner: any = -1;
   activeRowDtOwner: any = -1;
   activeRowSrcSystem: any = -1;
   activeRowBussnRule: any = -1;
   activeRowAltBusiness: any = -1;
 
+  highlightRowDataBusinessObjectDefinition: any;
   highlightRowDataBusinessOwner: any;
   highlightRowDataDtOwner: any;
   highlightRowDataSrcSystem: any;
@@ -411,6 +411,7 @@ export class BusinessObjDefinitionComponent {
   isActive = (tableIndex: number, index: number) => { return (tableIndex == 1 ? this.activeRowDtOwner : this.activeRowSrcSystem) === index };
   isActiveTerm = (tableIndex: number, index: number) => { return (tableIndex == 1 ? this.activeRowBussnRule : this.activeRowAltBusiness) === index };
 
+  UpdateDataBusinessObjectDefinition: any;
   UpdateDataBusinessOwner: any;
   UpdateDataDtOwner: any;
   UpdateDataSrsSystem: any;
@@ -496,6 +497,44 @@ export class BusinessObjDefinitionComponent {
     }
   }
 
+  isActiveBusinessObjectDefinition = (index: number) => { return this.activeBusinessObjectDefinition === index };
+  highlightBusinessObjectDefinition(index: number, id: number, row: any): void {
+    if (!this.isActiveBusinessObjectDefinition(index)) {
+      row != this.highlightRowDataBusinessObjectDefinition ? this.highlightRowDataBusinessObjectDefinition = row : this.highlightRowDataBusinessObjectDefinition = '';
+      this.activeBusinessObjectDefinition = index;
+      this.UpdateDataBusinessObjectDefinition = row;
+      this.generateForm();
+    }
+    else {
+      this.activeBusinessObjectDefinition = -1;
+      this.UpdateDataBusinessObjectDefinition = '';
+      this.generateForm();
+      this.highlightRowDataBusinessObjectDefinition = '';
+    }
+  }
+
+  displayedColumnBusinessObjectDefinition: any = {
+    columns: [
+      "id",
+      "business_object_id",
+      "business_object_name",
+      "business_object_description",
+      "business_object_asset_type",
+      "business_object_sensitivity_classification",
+      "business_object_sensitivity_reason",
+      '#',
+    ],
+    columnsTranslates: [
+      "id",
+      "BO ID",
+      "BO name",
+      "BO description",
+      "BO Asset Type",
+      "BO Sensitivity Calssification",
+      "BO Sensitivity Reason",
+      '#']
+  };
+
   displayedColumnBusinessOwner: any = {
     columns: [
       'business_unit_owner',
@@ -566,6 +605,7 @@ export class BusinessObjDefinitionComponent {
   @ViewChild('commonPagSrcSystem') commonPaginatorSrcSystem!: MatPaginator;
   @ViewChild('commonPagBussnRule') commonPaginatorBussnRule!: MatPaginator;
   @ViewChild('commonPagAltBusiness') commonPaginatorAltBusiness!: MatPaginator;
+  @ViewChild('commonPagBusinessObjectDefinition') commonPagBusinessObjectDefinition!: MatPaginator;
 
   //ADD DATA OWNER
   isDataOwnerFormValid = true;
@@ -635,6 +675,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   saveDataOwner() {
+    this.OF['business_object_id'].setValue(this.FF['business_object_id'].value);
     this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -683,6 +724,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   saveImpDetails() {
+    this.SSF['business_object_id'].setValue(this.FF['business_object_id'].value);
     this.businessService.saveImpDetails(this.SourceSystemFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -732,7 +774,7 @@ export class BusinessObjDefinitionComponent {
   handleAddBussRule() {
     if (this.BusinessRulesFormGroup.valid) {
       this.isValidBussRule = true;
-
+      this.BRF['business_object_id'].setValue(this.FF['business_object_id'].value);
       this.highlightRowDataBussnRule ? (
         this.businessService.updateBusinessRule(this.highlightRowDataBussnRule.id, this.BusinessRulesFormGroup.value).subscribe({
           next: res => {
@@ -744,7 +786,7 @@ export class BusinessObjDefinitionComponent {
         this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
       ) : (
         this.businessService.saveBusinessRule(this.BusinessRulesFormGroup.value).subscribe({
-          next: res =>{
+          next: res => {
             swalSuccess('Saved successfully');
             this.getTableBusinessRule();
           }
@@ -790,6 +832,8 @@ export class BusinessObjDefinitionComponent {
   isALtTermFormValid = true;
   handleAddAltTerm() {
     if (this.BusinessTermFormGroup.valid) {
+      this.BTF['business_object_id'].setValue(this.FF['business_object_id'].value);
+      this.isALtTermFormValid = true;
       this.highlightRowDataAltBusiness ? (
         this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
           next: res => {
@@ -859,4 +903,70 @@ export class BusinessObjDefinitionComponent {
       }
     })
   }
+
+
+  isBusinessObjectDefinitionFormValid = true;
+  handleSaveBusinessObjectDefinition() {
+    if (this.definitionFormGroup.valid) {
+      this.isBusinessObjectDefinitionFormValid = true;
+      this.highlightRowDataBusinessObjectDefinition ? (
+        // this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
+        //   next: res => {
+        //     swalSuccess('Updated successfully!');
+        //     this.getTableBusinessTerm();
+        //   },
+        //   error: err => console.log(err)
+        // }),
+        this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+      ) : (
+        // this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
+        this.saveBusinessObjectDefinition(),
+        this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+      )
+
+      this.UpdateDataBusinessObjectDefinition = '';
+      this.generateForm();
+      this.activeBusinessObjectDefinition = -1;
+      this.highlightRowDataBusinessObjectDefinition = '';
+    }
+    else this.isBusinessObjectDefinitionFormValid = false;
+  }
+
+  saveBusinessObjectDefinition() {
+    this.businessService.saveBo_owner(this.definitionFormGroup.value).subscribe({
+      next: res => {
+        swalSuccess("Saved successfully.");
+        this.getTableBusinessObjectDefinition();
+      },
+      error: err => console.log(err)
+    });
+  }
+
+  getTableBusinessObjectDefinition() {
+    this.businessService.getBo_owner().subscribe({
+      next: res => {
+        console.log(res)
+        this.dataSourceBusinessObjectDefinition = new MatTableDataSource<any>(res.data);
+        this.dataSourceBusinessObjectDefinition.paginator = this.commonPagBusinessObjectDefinition;
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  handleDeleteBusinessObjectDefinition(id: number) {
+    Swal.fire({
+      text: 'Do you want to delete data?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#266AB8',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+      }
+    })
+  }
+
 }
