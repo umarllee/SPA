@@ -30,8 +30,7 @@
           <div class="col-md-3">
             <div class="field">
               <label for="fullName" class="font-medium text-black required-label">BO id</label>
-              <input formControlName="business_object_id" autocomplete="off" type="text" id="Name"
-                name="Name" />
+              <input formControlName="business_object_id" autocomplete="off" type="text" id="Name" name="Name" />
             </div>
           </div>
 
@@ -166,10 +165,65 @@
               +
             </button>
           </div>
+
+          <div class="col-md-2 mt-4">
+            <div class="field">
+              <button (click)="handleSave()" class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
+                Save
+              </button>
+            </div>
+          </div>
         </div>
 
       </div>
     </form>
+
+
+    <div class="row mt-2 px-4">
+      <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
+        style="border-radius: 6px; max-height: 600px;">
+        <table mat-table [dataSource]="dataSourceBusinessObjectDefinition" id="report">
+          <ng-container *ngFor="let column of displayedColumnBusinessObjectDefinition.columnsTranslates; let j = index"
+            [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
+                {{column}}
+              </div>
+            </th>
+
+            <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+              <span *ngIf="column != '#'">
+                {{element[displayedColumnBusinessObjectDefinition.columns[j].replace(' ', '')]}}
+              </span>
+
+              <span *ngIf="column =='#'">
+                <button type="button" (click)="handleDeleteBusinessObjectDefinition(element.id)"
+                  class="rounded font-semibold col-12 py-2 text-danger ">
+                  <i class="fa-regular fa-trash"></i>
+                </button>
+              </span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnBusinessObjectDefinition.columnsTranslates; sticky: true">
+          </tr>
+          <tr *matNoDataRow>
+            <th colspan="9" class="text-center">
+              <span>No rows found</span>
+            </th>
+          </tr>
+          <tr mat-row
+            *matRowDef="let row;let i = index; columns: displayedColumnBusinessObjectDefinition.columnsTranslates;"
+            class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveBusinessObjectDefinition(i)}"
+            (dblclick)="highlightBusinessObjectDefinition(i, row.Id, row);">
+          </tr>
+        </table>
+      </div>
+
+      <mat-paginator class="mat-paginator-sticky" #commonPagBusinessObjectDefinition [pageSizeOptions]="[10, 15, 20]"
+        [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+      </mat-paginator>
+    </div>
   </div>
 
 
@@ -182,9 +236,26 @@
       </div>
 
       <form [formGroup]="DataOwnerFormGroup">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="field">
+              <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="business_object_id">
+                  <mat-option *ngFor="let item of businessObjIds" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+                <small class="error_text"
+                  *ngIf="(OF['business_object_id'].errors?.['required'] && !isDataOwnerFormValid) || (OF['business_object_id'].invalid && !isDataOwnerFormValid)">
+                  *Required field
+                </small>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-12 d-flex relative">
-
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
               <input type="text" id="business_unit_owner" name="business_unit_owner" class="col-12" matInput
@@ -231,7 +302,7 @@
           </div>
         </div>
 
-        <div class="row align-items-center pe-2">
+        <div class="row pe-2">
           <div class="col-md-10 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Role</label>
@@ -256,7 +327,7 @@
 
           <div class="col-md-2 text-end pe-1 pt-4 ">
             <button type="button" (click)="handleAddOwner()"
-              class="rounded font-semibold col-12 py-2 text-white bg-danger">
+              class="rounded font-semibold col-12 py-2 text-white bg-danger mt-2">
               {{ highlightRowDataDtOwner ? 'Save' : 'Add' }}
             </button>
           </div>
@@ -319,6 +390,24 @@
       </div>
 
       <form [formGroup]="SourceSystemFormGroup">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="field">
+              <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="business_object_id">
+                  <mat-option *ngFor="let item of businessObjIds" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+                <small class="error_text"
+                  *ngIf="(SSF['business_object_id'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['business_object_id'].invalid && !isImpDetailsFormGroup)">
+                  *Required field
+                </small>
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
@@ -416,11 +505,12 @@
                 <mat-select formControlName="active">
                   <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
                 </mat-select>
+                <small class="error_text"
+                  *ngIf="(SSF['active'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['active'].invalid && !isImpDetailsFormGroup)">
+                  *Required field
+                </small>
               </mat-form-field>
-              <small class="error_text"
-                *ngIf="(SSF['active'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['active'].invalid && !isImpDetailsFormGroup)">
-                *Required field
-              </small>
+
             </div>
           </div>
         </div>
@@ -498,11 +588,12 @@
                 <mat-select formControlName="track_history">
                   <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
                 </mat-select>
+                <small class="error_text"
+                  *ngIf="(SSF['track_history'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['track_history'].invalid && !isImpDetailsFormGroup)">
+                  *Required field
+                </small>
               </mat-form-field>
-              <small class="error_text"
-                *ngIf="(SSF['track_history'].errors?.['required'] && !isImpDetailsFormGroup) || (SSF['track_history'].invalid && !isImpDetailsFormGroup)">
-                *Required field
-              </small>
+
             </div>
           </div>
 
@@ -629,7 +720,7 @@
 
   </div>
 
-  <div class="row border-b border-dashed border-gray-400">
+  <div class="row ">
     <div class="col-md-6 py-3 border-gray-400 border-r border-dashed">
       <div class="row p-0">
         <h2 class="text-xl font-extrabold">
@@ -638,7 +729,25 @@
       </div>
 
       <form [formGroup]="BusinessRulesFormGroup">
-        <div class="row align-items-center pe-1">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="field">
+              <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="business_object_id">
+                  <mat-option *ngFor="let item of businessObjIds" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+                <small class="error_text"
+                  *ngIf="(BRF['business_object_id'].errors?.['required'] && !isValidBussRule) || (BRF['business_object_id'].invalid && !isValidBussRule)">
+                  *Required field
+                </small>
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row pe-1">
           <div class="col-md-6 field mt-2">
             <label for="rule_id" class="font-medium text-black required-label">Rule ID</label>
             <input type="text" formControlName="rule_id" name="rule_id" id="rule_id">
@@ -733,7 +842,25 @@
       </div>
 
       <form [formGroup]="BusinessTermFormGroup">
-        <div class="row align-items-center pe-1">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="field">
+              <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
+              <mat-form-field class="col-12">
+                <mat-select formControlName="business_object_id">
+                  <mat-option *ngFor="let item of businessObjIds" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+                <small class="error_text"
+                  *ngIf="(BTF['business_object_id'].errors?.['required'] && !isALtTermFormValid) || (BTF['business_object_id'].invalid && !isALtTermFormValid)">
+                  *Required field
+                </small>
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row pe-1">
           <div class="col-md-6 field mt-2">
             <label for="business_term_id" class="font-medium text-black required-label">Business Term ID</label>
             <input type="text" formControlName="business_term_id" name="business_term_id" id="business_term_id">
@@ -839,7 +966,7 @@
     </div>
   </div>
 
-  <div class="row py-3">
+  <!-- <div class="row py-3">
     <form [formGroup]="CreatedTermFormGroup">
       <div class="row">
         <div class="col-md-4 d-flex relative">
@@ -898,61 +1025,6 @@
         </div>
       </div>
     </form>
-  </div>
+  </div> -->
 
-  <div class="row justify-content-end mt-4">
-    <div class="col-md-2 ">
-      <div class="field">
-        <button (click)="handleSave()" class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
-          Save
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-2 px-4">
-  <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
-    style="border-radius: 6px; max-height: 600px;">
-    <table mat-table [dataSource]="dataSourceBusinessObjectDefinition" id="report">
-      <ng-container *ngFor="let column of displayedColumnBusinessObjectDefinition.columnsTranslates; let j = index"
-        [matColumnDef]="column">
-        <th mat-header-cell *matHeaderCellDef>
-          <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
-            {{column}}
-          </div>
-        </th>
-
-        <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
-          <span *ngIf="column != '#'">
-            {{element[displayedColumnBusinessObjectDefinition.columns[j].replace(' ', '')]}}
-          </span>
-
-          <span *ngIf="column =='#'">
-            <button type="button" (click)="handleDeleteBusinessObjectDefinition(element.id)"
-              class="rounded font-semibold col-12 py-2 text-danger ">
-              <i class="fa-regular fa-trash"></i>
-            </button>
-          </span>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumnBusinessObjectDefinition.columnsTranslates; sticky: true">
-      </tr>
-      <tr *matNoDataRow>
-        <th colspan="9" class="text-center">
-          <span>No rows found</span>
-        </th>
-      </tr>
-      <tr mat-row
-        *matRowDef="let row;let i = index; columns: displayedColumnBusinessObjectDefinition.columnsTranslates;"
-        class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveBusinessObjectDefinition(i)}"
-        (dblclick)="highlightBusinessObjectDefinition(i, row.Id, row);">
-      </tr>
-    </table>
-  </div>
-
-  <mat-paginator class="mat-paginator-sticky" #commonPagBusinessObjectDefinition [pageSizeOptions]="[10, 15, 20]"
-    [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
-  </mat-paginator>
 </div>
