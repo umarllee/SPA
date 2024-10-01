@@ -57,18 +57,18 @@ export class BusinessService {
   }
 
   saveBusinessRule(data: any) {
-    return this.http.post<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/bo_rules`, data);
+    return this.http.post<any>(`https://umdproject-oz3i6nk4k-umds-projects-76f3b139.vercel.app/api/bo_rules`, data);
   }
 
   getBusinessRule() {
-    return this.http.get<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/bo_rules`);
+    return this.http.get<any>(`https://umdproject-oz3i6nk4k-umds-projects-76f3b139.vercel.app/api/bo_rules`);
   }
 
   updateBusinessRule(id:number, data:any) {
-    return this.http.put<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/bo_rules/` + id, data);
+    return this.http.put<any>(`https://umdproject-oz3i6nk4k-umds-projects-76f3b139.vercel.app/api/bo_rules/` + id, data);
   }
 
   deleteBusinessRule(id:number) {
-    return this.http.delete<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/bo_rules/` + id);
+    return this.http.delete<any>(`https://umdproject-oz3i6nk4k-umds-projects-76f3b139.vercel.app/api/bo_rules/` + id);
   }
 }
