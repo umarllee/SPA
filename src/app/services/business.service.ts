@@ -8,6 +8,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class BusinessService {
   constructor(private http: HttpClient, private router: Router,) { }
 
+  saveBusinessObjectDefinition(data: any) {
+    return this.http.post<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/business_object`, data);
+  }
+
+  deleteBusinessObjectDefinition(id: number) {
+    return this.http.delete<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/business_object/` + id);
+  }
+
+  updateBusinessObjectDefinition(id: number, data: any) {
+    return this.http.put<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/business_object/` + id, data);
+  }
+
+  getBusinessObjectDefinition() {
+    return this.http.get<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/business_object`);
+  }
+
   saveBo_owner(data: any) {
     return this.http.post<any>(`https://umdproject-fqlb4gj8t-umds-projects-76f3b139.vercel.app/api/bo_owner`, data);
   }
