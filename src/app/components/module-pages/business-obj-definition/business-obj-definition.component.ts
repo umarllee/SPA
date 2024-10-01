@@ -127,20 +127,20 @@ export class BusinessObjDefinitionComponent {
   }
 
   keyUpBODefinition() {
-    // this.filteredOptionsClient = this.FF['projectName'].valueChanges.pipe(
-    //   startWith(''),
-    //   map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    // );
+    this.filteredOptionsClient = this.FF['project_name'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
 
     this.filteredOptionsObjName = this.FF['business_object_name'].valueChanges.pipe(
       startWith(''),
       map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
     );
 
-    // this.filteredOptionsdataDomain = this.FF['dataDomain'].valueChanges.pipe(
-    //   startWith(''),
-    //   map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    // );
+    this.filteredOptionsdataDomain = this.FF['scope_of_data_domain'].valueChanges.pipe(
+      startWith(''),
+      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+    );
 
     this.filteredOptionsautoasset_type = this.FF['business_object_asset_type'].valueChanges.pipe(
       startWith(''),
@@ -297,8 +297,8 @@ export class BusinessObjDefinitionComponent {
   generateForm() {
     this.definitionFormGroup = this.fb.group({
       id: 0,
-      // dataDomain: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.dataDomain : '', [Validators.required]],
-      // projectName: '',
+      scope_of_data_domain: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.scope_of_data_domain : '', [Validators.required]],
+      project_name: '',
       business_object_id: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_id : 'BO0002', [Validators.required]],
       business_object_name: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_name : '', [Validators.required]],
       business_object_description: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_description : '', [Validators.required]],

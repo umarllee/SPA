@@ -9,11 +9,11 @@
 
       <div class="">
         <div class="row">
-          <!-- <div class="col-md-3 relative d-flex">
+          <div class="col-md-3 relative d-flex">
             <mat-form-field class="example-full-width field  col-11">
               <label for="fullName" class="font-medium text-black ">Project name</label>
               <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
-                formControlName="projectName" [matAutocomplete]="autoClient">
+                formControlName="project_name" [matAutocomplete]="autoClient">
               <mat-autocomplete #autoClient="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsClient | async " [value]="option.value">
                   {{option.value}}
@@ -25,7 +25,7 @@
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
-          </div> -->
+          </div>
 
           <div class="col-md-3">
             <div class="field">
@@ -57,10 +57,10 @@
             </button>
           </div>
 
-          <!-- <div class="col-md-3 d-flex relative">
+          <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="dataDomain"
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="scope_of_data_domain"
                 [matAutocomplete]="autoDomain">
               <mat-autocomplete #autoDomain="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsdataDomain | async " [value]="option.value">
@@ -69,7 +69,7 @@
               </mat-autocomplete>
 
               <small class="error_text"
-                *ngIf="(FF['dataDomain'].errors?.['required'] && !isBusinessObjectDefinitionFormValid) || (FF['dataDomain'].invalid && !isBusinessObjectDefinitionFormValid)">
+                *ngIf="(FF['scope_of_data_domain'].errors?.['required'] && !isBusinessObjectDefinitionFormValid) || (FF['scope_of_data_domain'].invalid && !isBusinessObjectDefinitionFormValid)">
                 *Required field
               </small>
             </mat-form-field>
@@ -78,7 +78,7 @@
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
-          </div> -->
+          </div>
 
           <div class="col-md-6">
             <div class="field">
@@ -92,9 +92,6 @@
             </div>
           </div>
 
-        </div>
-
-        <div class="row">
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Asset Type </label>
@@ -143,6 +140,10 @@
             </button>
           </div>
 
+        </div>
+
+        <div class="row">
+        
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Reason
