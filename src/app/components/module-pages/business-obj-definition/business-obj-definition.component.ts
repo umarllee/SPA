@@ -122,7 +122,7 @@ export class BusinessObjDefinitionComponent {
     this.getTableBusinessTerm();
     this.getTableBusinessRule();
     this.getTableBusinessObjectDefinition();
-    
+
 
   }
 
@@ -676,7 +676,6 @@ export class BusinessObjDefinitionComponent {
 
   saveDataOwner() {
     // this.OF['business_object_id'].setValue(this.FF['business_object_id'].value);
-    console.log(this.DataOwnerFormGroup.value)
     this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -944,10 +943,11 @@ export class BusinessObjDefinitionComponent {
   }
 
   getTableBusinessObjectDefinition() {
+    this.businessObjIds = [];
     this.businessService.getBusinessObjectDefinition().subscribe({
       next: res => {
-        res.data.map((dt:any) =>{
-          this.businessObjIds.push({key: dt.business_object_id, value: dt.business_object_id})
+        res.data.map((dt: any) => {
+          this.businessObjIds.push({ key: dt.business_object_id, value: dt.business_object_id })
         })
         this.dataSourceBusinessObjectDefinition = new MatTableDataSource<any>(res.data);
         this.dataSourceBusinessObjectDefinition.paginator = this.commonPagBusinessObjectDefinition;
