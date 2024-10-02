@@ -967,7 +967,13 @@ export class BusinessObjDefinitionComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-
+        this.businessService.deleteBusinessObjectDefinition(id).subscribe({
+          next: res => {
+            swalSuccess("Saved successfully.");
+            this.getTableBusinessObjectDefinition();
+          },
+          error: err => console.log(err)
+        });
       }
     })
   }
