@@ -668,7 +668,6 @@ export class BusinessObjDefinitionComponent {
 
   saveDataOwner() {
     // this.OF['business_object_id'].setValue(this.FF['business_object_id'].value);
-    console.log(this.DataOwnerFormGroup.value)
     this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -960,6 +959,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   getTableBusinessObjectDefinition() {
+    this.businessObjIds = [];
     this.businessService.getBusinessObjectDefinition().subscribe({
       next: res => {
         this.dataSourceBusinessObjectDefinition = new MatTableDataSource<any>(res.data);
