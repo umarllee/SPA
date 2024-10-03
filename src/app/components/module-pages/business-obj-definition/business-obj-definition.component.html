@@ -60,8 +60,8 @@
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="scope_of_data_domain"
-                [matAutocomplete]="autoDomain">
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                formControlName="scope_of_data_domain" [matAutocomplete]="autoDomain">
               <mat-autocomplete #autoDomain="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsdataDomain | async " [value]="option.value">
                   {{option.value}}
@@ -143,7 +143,7 @@
         </div>
 
         <div class="row">
-        
+
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Reason
@@ -166,65 +166,10 @@
               +
             </button>
           </div>
-
-          <div class="col-md-2 mt-4">
-            <div class="field">
-              <button (click)="handleSave()" class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
-                Save
-              </button>
-            </div>
-          </div>
         </div>
-
       </div>
     </form>
 
-
-    <div class="row mt-2 px-4">
-      <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
-        style="border-radius: 6px; max-height: 600px;">
-        <table mat-table [dataSource]="dataSourceBusinessObjectDefinition" id="report">
-          <ng-container *ngFor="let column of displayedColumnBusinessObjectDefinition.columnsTranslates; let j = index"
-            [matColumnDef]="column">
-            <th mat-header-cell *matHeaderCellDef>
-              <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
-                {{column}}
-              </div>
-            </th>
-
-            <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
-              <span *ngIf="column != '#'">
-                {{element[displayedColumnBusinessObjectDefinition.columns[j].replace(' ', '')]}}
-              </span>
-
-              <span *ngIf="column =='#'">
-                <button type="button" (click)="handleDeleteBusinessObjectDefinition(element.id)"
-                  class="rounded font-semibold col-12 py-2 text-danger ">
-                  <i class="fa-regular fa-trash"></i>
-                </button>
-              </span>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumnBusinessObjectDefinition.columnsTranslates; sticky: true">
-          </tr>
-          <tr *matNoDataRow>
-            <th colspan="9" class="text-center">
-              <span>No rows found</span>
-            </th>
-          </tr>
-          <tr mat-row
-            *matRowDef="let row;let i = index; columns: displayedColumnBusinessObjectDefinition.columnsTranslates;"
-            class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveBusinessObjectDefinition(i)}"
-            (dblclick)="highlightBusinessObjectDefinition(i, row.Id, row);">
-          </tr>
-        </table>
-      </div>
-
-      <mat-paginator class="mat-paginator-sticky" #commonPagBusinessObjectDefinition [pageSizeOptions]="[10, 15, 20]"
-        [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
-      </mat-paginator>
-    </div>
   </div>
 
 
@@ -238,7 +183,7 @@
 
       <form [formGroup]="DataOwnerFormGroup">
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="field">
               <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
@@ -253,7 +198,7 @@
               </mat-form-field>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
           <div class="col-md-12 d-flex relative">
@@ -391,7 +336,7 @@
       </div>
 
       <form [formGroup]="SourceSystemFormGroup">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="field">
               <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
@@ -407,7 +352,7 @@
 
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
           <div class="col-md-6 d-flex relative">
@@ -730,7 +675,7 @@
       </div>
 
       <form [formGroup]="BusinessRulesFormGroup">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="field">
               <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
@@ -746,7 +691,7 @@
 
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
@@ -843,7 +788,7 @@
       </div>
 
       <form [formGroup]="BusinessTermFormGroup">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="field">
               <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
@@ -859,7 +804,7 @@
 
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
@@ -967,7 +912,7 @@
     </div>
   </div>
 
-  <!-- <div class="row py-3">
+  <div class="row py-3 border-gray-400 border-dashed border-t">
     <form [formGroup]="CreatedTermFormGroup">
       <div class="row">
         <div class="col-md-4 d-flex relative">
@@ -1026,6 +971,64 @@
         </div>
       </div>
     </form>
-  </div> -->
+  </div>
 
+  <div class="row py-3 justify-content-end">
+    <div class="col-md-2">
+      <div class="field">
+        <button (click)="handleSave()" class="col-12 font-medium bg-danger text-white py-2 rounded-lg">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ps-3">
+  <div class="row mt-2 px-4 ">
+    <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
+      style="border-radius: 6px; max-height: 600px;">
+      <table mat-table [dataSource]="dataSourceBusinessObjectDefinition" id="report">
+        <ng-container *ngFor="let column of displayedColumnBusinessObjectDefinition.columnsTranslates; let j = index"
+          [matColumnDef]="column">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
+              {{column}}
+            </div>
+          </th>
+
+          <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
+            <span *ngIf="column != '#'">
+              {{element[displayedColumnBusinessObjectDefinition.columns[j].replace(' ', '')]}}
+            </span>
+
+            <span *ngIf="column =='#'">
+              <button type="button" (click)="handleDeleteBusinessObjectDefinition(element.id)"
+                class="rounded font-semibold col-12 py-2 text-danger ">
+                <i class="fa-regular fa-trash"></i>
+              </button>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnBusinessObjectDefinition.columnsTranslates; sticky: true">
+        </tr>
+        <tr *matNoDataRow>
+          <th colspan="9" class="text-center">
+            <span>No rows found</span>
+          </th>
+        </tr>
+        <tr mat-row
+          *matRowDef="let row;let i = index; columns: displayedColumnBusinessObjectDefinition.columnsTranslates;"
+          class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveBusinessObjectDefinition(i)}"
+          (dblclick)="highlightBusinessObjectDefinition(i, row.Id, row);">
+        </tr>
+      </table>
+    </div>
+
+    <mat-paginator class="mat-paginator-sticky" #commonPagBusinessObjectDefinition [pageSizeOptions]="[10, 15, 20]"
+      [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+    </mat-paginator>
+  </div>
 </div>
