@@ -12,8 +12,8 @@
           <div class="col-md-3 relative d-flex">
             <mat-form-field class="example-full-width field  col-11">
               <label for="fullName" class="font-medium text-black ">Project name</label>
-              <input (keyup)="keyUpBODefinition()" type="text" id="customerId" name="customerId" class="col-12" matInput
-                formControlName="project_name" [matAutocomplete]="autoClient">
+              <input type="text" id="customerId" name="customerId"
+                class="col-12" matInput formControlName="project_name" [matAutocomplete]="autoClient">
               <mat-autocomplete #autoClient="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsClient | async " [value]="option.value">
                   {{option.value}}
@@ -21,7 +21,7 @@
               </mat-autocomplete>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -30,14 +30,15 @@
           <div class="col-md-3">
             <div class="field">
               <label for="fullName" class="font-medium text-black required-label">BO id</label>
-              <input formControlName="business_object_id" autocomplete="off" type="text" id="Name" name="Name" />
+              <input readonly formControlName="business_object_id" autocomplete="off" type="text" id="Name"
+                name="Name" />
             </div>
           </div>
 
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO name</label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input onkeypress='return event.charCode != 45' type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_object_name" [matAutocomplete]="autoObjName">
               <mat-autocomplete #autoObjName="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsObjName | async " [value]="option.value">
@@ -51,7 +52,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -74,7 +75,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -95,7 +96,7 @@
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Asset Type </label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input maxlength="10" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_object_asset_type" [matAutocomplete]="autoasset_type">
               <mat-autocomplete #autoasset_type="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsautoasset_type | async " [value]="option.value">
@@ -109,7 +110,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -118,7 +119,7 @@
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Calssification </label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input maxlength="20" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_object_sensitivity_classification"
                 [matAutocomplete]="autosensitivity_classification">
               <mat-autocomplete #autosensitivity_classification="matAutocomplete">
@@ -134,7 +135,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -148,7 +149,7 @@
             <mat-form-field class="example-full-width field col-11">
               <label for="fullName" class="font-medium text-black required-label">BO Sensitivity Reason
               </label>
-              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+              <input maxlength="20" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_object_sensitivity_reason" [matAutocomplete]="autosensitivity_reason">
               <mat-autocomplete #autosensitivity_reason="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionssensitivity_reason| async " [value]="option.value">
@@ -161,7 +162,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -186,7 +187,7 @@
         <!-- <div class="row">
           <div class="col-md-12">
             <div class="field">
-              <label for="business_object_id" class="font-medium text-black required-label ">BO ID</label>
+              <label for="busineszs_object_id" class="font-medium text-black required-label ">BO ID</label>
               <mat-form-field class="col-12">
                 <mat-select formControlName="business_object_id">
                   <mat-option *ngFor="let item of businessObjIds" [value]="item.key">{{item.value}}</mat-option>
@@ -216,7 +217,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -241,7 +242,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -265,7 +266,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-3 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -371,7 +372,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -394,7 +395,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -419,7 +420,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -441,7 +442,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
+            <button type="button" (click)="addListValue('business_object_asset_type')" class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button> -->
 
@@ -478,7 +479,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -499,7 +500,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -523,7 +524,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button> -->
@@ -558,7 +559,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -581,7 +582,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -602,7 +603,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-1 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -715,7 +716,7 @@
                 *Required field
               </small>
             </mat-form-field>
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -832,7 +833,7 @@
               </small>
             </mat-form-field>
 
-            <button type="button" (click)="addListValue()"
+            <button type="button" (click)="addListValue('business_object_asset_type')"
               class="bg-danger h-fit absolute right-2 bottom-0 top-4 my-auto add-btn ">
               +
             </button>
@@ -930,7 +931,7 @@
               *Required field
             </small>
           </mat-form-field>
-          <button type="button" (click)="addListValue()"
+          <button type="button" (click)="addListValue('business_object_asset_type')"
             class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
             +
           </button>
@@ -964,7 +965,7 @@
             </small>
           </mat-form-field>
 
-          <button type="button" (click)="addListValue()"
+          <button type="button" (click)="addListValue('business_object_asset_type')"
             class="bg-danger h-fit absolute right-4 bottom-0 top-4 my-auto add-btn ">
             +
           </button>

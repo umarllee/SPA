@@ -56,6 +56,7 @@ import { BusinessObjDefinitionComponent } from './components/module-pages/busine
 import { ModulePagesModule } from './components/module-pages/module-pages.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RouterModule,
     MatAutocompleteModule,
     ModulePagesModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

@@ -5,12 +5,13 @@ import { NewItemComponent } from './new-item/new-item.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { filterAutocomplete } from 'src/app/utils/autocomplete';
 import { BusinessService } from 'src/app/services/business.service';
-import { swalSuccess } from 'src/app/utils/alert';
+import { swalError, swalInfo, swalSuccess } from 'src/app/utils/alert';
 import { formatDate } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
+import { ComboboxService } from 'src/app/services/combobox.service';
 
 @Component({
   selector: 'app-business-obj-definition',
@@ -59,6 +60,7 @@ export class BusinessObjDefinitionComponent {
 
   UpdateData: any;
   isFormValid = true;
+
   clients: any[] = [
     {
       key: 1,
@@ -73,6 +75,16 @@ export class BusinessObjDefinitionComponent {
       value: 'Meta'
     },
   ];
+
+  boNames: any[] = [];
+  assetsTypes: any[] = [];
+  projectNames: any[] = [];
+  scopeDataDomains: any[] = [];
+  boAssestsTypes: any[] = [];
+  sensitivityClassifications: any[] = [];
+  sensitivityReasons: any[] = [];
+
+  initialBOD_ID = 0;
 
   countryCodes: any[] = [
     {
@@ -102,7 +114,12 @@ export class BusinessObjDefinitionComponent {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private businessService: BusinessService,
+    private comboboxService: ComboboxService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
+
+    this.getComboboxData();
+
     this.generateForm();
     this.generateDtOwnerForm();
     this.generateBusinessRulesFormGroup();
@@ -114,43 +131,68 @@ export class BusinessObjDefinitionComponent {
     this.keyUpBODefinition();
     this.keyUpImpDetails();
     this.keyUpBusinessAlternateRule();
+
+    this.getTableDataOwner();
+    this.getTableImpDetails();
+    this.getTableBusinessTerm();
+    this.getTableBusinessRule();
+    this.getTableBusinessObjectDefinition(1);
   }
 
   ngOnInit() {
-    // this.getTableDataOwner();
-    // this.getTableImpDetails();
-    // this.getTableBusinessTerm();
-    // this.getTableBusinessRule();
-    this.getTableBusinessObjectDefinition();
+  }
+
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
+
+  ngAfterViewInit() {
+    console.log(this.dataSourceBusinessObjectDefinition.data.length)
+  }
+
+  validBOName(event: any) {
+    console.log(event)
+    if (event.keyCode == 45) return;
+  }
+
+  getComboboxData() {
+    // this.comboboxService.getAsset_type().subscribe({
+    //   next: res => {
+    //     res.data.map((dt: any) => this.assetsTypes.push({ value: dt.asset_type_code }))
+    //   },
+    //   error: err => console.log(err)
+    // })
   }
 
   keyUpBODefinition() {
     this.filteredOptionsClient = this.FF['project_name'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.projectNames) : this.projectNames))
     );
 
     this.filteredOptionsObjName = this.FF['business_object_name'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.boNames) : this.boNames))
     );
 
     this.filteredOptionsdataDomain = this.FF['scope_of_data_domain'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.scopeDataDomains) : this.scopeDataDomains))
     );
 
     this.filteredOptionsautoasset_type = this.FF['business_object_asset_type'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.assetsTypes) : this.assetsTypes))
     );
+
     this.filteredOptionssensitivity_classification = this.FF['business_object_sensitivity_classification'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.sensitivityClassifications) : this.sensitivityClassifications))
     );
     this.filteredOptionssensitivity_reason = this.FF['business_object_sensitivity_reason'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.sensitivityReasons) : this.sensitivityReasons))
     );
   }
 
@@ -296,9 +338,9 @@ export class BusinessObjDefinitionComponent {
     console.log(this.UpdateDataBusinessObjectDefinition)
     this.definitionFormGroup = this.fb.group({
       id: 0,
-      scope_of_data_domain: [this.UpdateDataBusinessObjectDefinition?.scope_of_data_domain || '', [Validators.required]],
+      scope_of_data_domain: [this.UpdateDataBusinessObjectDefinition?.scope_of_data_domain || ''],
       project_name: this.UpdateDataBusinessObjectDefinition?.project_name || '',
-      business_object_id: [this.UpdateDataBusinessObjectDefinition?.business_object_id || 'BO0002', [Validators.required]],
+      business_object_id: [this.UpdateDataBusinessObjectDefinition?.business_object_id || '', [Validators.required]],
       business_object_name: [this.UpdateDataBusinessObjectDefinition?.business_object_name || '', [Validators.required]],
       business_object_description: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_description : '', [Validators.required]],
       business_object_asset_type: [this.UpdateDataBusinessObjectDefinition ? this.UpdateDataBusinessObjectDefinition.business_object_asset_type : '', [Validators.required]],
@@ -346,7 +388,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   item_dialogRef?: MatDialogRef<NewItemComponent>;
-  addListValue() {
+  addListValue(name: string) {
     this.item_dialogRef = this.dialog.open(NewItemComponent,
       {
         // disableClose: true,
@@ -355,7 +397,7 @@ export class BusinessObjDefinitionComponent {
         height: 'auto',
         autoFocus: false,
         data: {
-
+          inputName: 'business_object_asset_type'
         }
       })
 
@@ -610,15 +652,33 @@ export class BusinessObjDefinitionComponent {
   //ADD DATA OWNER
   isDataOwnerFormValid = true;
   handleAddOwner() {
+    console.log(this.DataOwnerFormGroup.value)
     if (this.DataOwnerFormGroup.valid) {
       this.isDataOwnerFormValid = true;
+
       this.highlightRowDataDtOwner ? (
-        this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
-        this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+        this.businessService.updateBo_owner(this.highlightRowDataDtOwner.id, this.DataOwnerFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Updated successfully!');
+            this.getTableDataOwner();
+          },
+          error: err => console.log(err)
+        }),
+        this.dataSourceDtOwner.paginator = this.commonPaginator
+
       ) : (
-        this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
-        this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+        this.saveDataOwner(),
+        // this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
+        this.dataSourceDtOwner.paginator = this.commonPaginator
       )
+
+      // this.highlightRowDataDtOwner ? (
+      //   this.dataSourceDtOwner.data[this.activeRowDtOwner] = this.DataOwnerFormGroup.value,
+      //   this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+      // ) : (
+      //   this.dataSourceDtOwner.data.push(this.DataOwnerFormGroup.value),
+      //   this.dataSourceDtOwner.data = this.dataSourceDtOwner.data
+      // )
 
       this.UpdateDataDtOwner = '';
       this.generateDtOwnerForm();
@@ -667,117 +727,42 @@ export class BusinessObjDefinitionComponent {
   }
 
   saveDataOwner() {
-    // this.OF['business_object_id'].setValue(this.FF['business_object_id'].value);
+    this.OF['business_object_id'].setValue(this.initialBOD_ID);
     this.businessService.saveBo_owner(this.DataOwnerFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
         this.getTableDataOwner();
       },
-      error: err => console.log(err)
+      error: err => swalError(err.error.message)
     })
   }
 
   isImpDetailsFormGroup = true;
   handleAddImpDetails() {
-
-    let model = {
-      "id": 0,
-      "business_object_id": '',
-      "business_object_name": '',
-      "business_object_description": '',
-      "business_object_asset_type": '',
-      "business_object_sensitivity_classification": '',
-      "business_object_sensitivity_reason": '',
-      "version": '',
-      "date_created": '',
-      "active": '',
-      "project_name": '',
-      "scope_of_data_domain": '',
-      "dataOwners": [
-        {
-          "business_unit_owner": '',
-          "business_function": '',
-          "role": '',
-          "id": 0,
-          "business_object_id": ''
-        },
-        {
-          "business_unit_owner": '',
-          "business_function": '',
-          "role": '',
-          "id": 1,
-          "business_object_id": ''
-        }
-      ],
-      "implementationDetails": [
-        {
-          "id": 0,
-          "source_system": '',
-          "source_system_country_code": '',
-          "req_frequency_of_refresh": '',
-          "active": '',
-          "data_capture_mode": '',
-          "sourcing_mode": '',
-          "track_history": '',
-          "history_type": '',
-          "error_treatment": '',
-          "exception_treatment": '',
-          "business_object_id": ''
-        },
-        {
-          "id": 0,
-          "source_system": '',
-          "source_system_country_code": '',
-          "req_frequency_of_refresh": '',
-          "active": '',
-          "data_capture_mode": '',
-          "sourcing_mode": '',
-          "track_history": '',
-          "history_type": '',
-          "error_treatment": '',
-          "exception_treatment": '',
-          "business_object_id": ''
-        }
-      ],
-      "businessTerm": [
-        {
-          "id": 0,
-          "business_term_id": '',
-          "business_term": '',
-          "business_term_description": '',
-          "version": '',
-          "date_created": '',
-          "active": '',
-          "business_object_id": ''
-        },
-      ]
-
-    }
-
     if (this.SourceSystemFormGroup.valid) {
       this.isImpDetailsFormGroup = true;
-      // this.highlightRowDataSrcSystem ? (
-      //   // this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
-      //   this.businessService.updateImpDetails(this.highlightRowDataSrcSystem.id, this.DataOwnerFormGroup.value).subscribe({
-      //     next: res => {
-      //       swalSuccess('Updated successfully!');
-      //       this.getTableImpDetails();
-      //     },
-      //     error: err => console.log(err)
-      //   }),
-      //   this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
-      // ) : (
-      //   this.saveImpDetails(),
-      //   this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
-      // )
-
       this.highlightRowDataSrcSystem ? (
-        this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
+        // this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
+        this.businessService.updateImpDetails(this.highlightRowDataSrcSystem.id, this.DataOwnerFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Updated successfully!');
+            this.getTableImpDetails();
+          },
+          error: err => console.log(err)
+        }),
         this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
       ) : (
-        this.dataSourceSrcSystem.data.push(this.SourceSystemFormGroup.value),
+        this.saveImpDetails(),
         this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
       )
+
+      // this.highlightRowDataSrcSystem ? (
+      //   this.dataSourceSrcSystem.data[this.activeRowSrcSystem] = this.SourceSystemFormGroup.value,
+      //   this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
+      // ) : (
+      //   this.dataSourceSrcSystem.data.push(this.SourceSystemFormGroup.value),
+      //   this.dataSourceSrcSystem.data = this.dataSourceSrcSystem.data
+      // )
 
       this.UpdateDataSrsSystem = '';
       this.generateSourceSystemFormGroup();
@@ -799,7 +784,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   saveImpDetails() {
-    // this.SSF['business_object_id'].setValue(this.FF['business_object_id'].value);
+    this.SSF['business_object_id'].setValue(this.initialBOD_ID);
     this.businessService.saveImpDetails(this.SourceSystemFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -849,33 +834,27 @@ export class BusinessObjDefinitionComponent {
   handleAddBussRule() {
     if (this.BusinessRulesFormGroup.valid) {
       this.isValidBussRule = true;
-      // this.BRF['business_object_id'].setValue(this.FF['business_object_id'].value);
-      // this.highlightRowDataBussnRule ? (
-      //   this.businessService.updateBusinessRule(this.highlightRowDataBussnRule.id, this.BusinessRulesFormGroup.value).subscribe({
-      //     next: res => {
-      //       swalSuccess('Saved successfully');
-      //       this.getTableBusinessRule();
-      //     },
-      //     error: err => console.log(err)
-      //   }),
-      //   this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
-      // ) : (
-      //   this.businessService.saveBusinessRule(this.BusinessRulesFormGroup.value).subscribe({
-      //     next: res => {
-      //       swalSuccess('Saved successfully');
-      //       this.getTableBusinessRule();
-      //     }
-      //   }),
-      //   this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
-      // )
-
       this.highlightRowDataBussnRule ? (
-        this.dataSourceBussnRule.data[this.activeRowBussnRule] = this.BusinessRulesFormGroup.value,
+        this.businessService.updateBusinessRule(this.highlightRowDataBussnRule.id, this.BusinessRulesFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Saved successfully');
+            this.getTableBusinessRule();
+          },
+          error: err => console.log(err)
+        }),
         this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
       ) : (
-        this.dataSourceBussnRule.data.push(this.BusinessRulesFormGroup.value),
+        this.saveBusinessRule(),
         this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
       )
+
+      // this.highlightRowDataBussnRule ? (
+      //   this.dataSourceBussnRule.data[this.activeRowBussnRule] = this.BusinessRulesFormGroup.value,
+      //   this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
+      // ) : (
+      //   this.dataSourceBussnRule.data.push(this.BusinessRulesFormGroup.value),
+      //   this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule
+      // )
 
       this.UpdateDataBussnRule = '';
       this.generateBusinessRulesFormGroup();
@@ -884,6 +863,16 @@ export class BusinessObjDefinitionComponent {
       this.keyUpBusinessAlternateRule();
     }
     else this.isValidBussRule = false
+  }
+
+  saveBusinessRule() {
+    this.BRF['business_object_id'].setValue(this.initialBOD_ID);
+    this.businessService.saveBusinessRule(this.BusinessRulesFormGroup.value).subscribe({
+      next: res => {
+        swalSuccess('Saved successfully');
+        this.getTableBusinessRule();
+      }
+    })
   }
 
   handleDeleteBussRule(id: number) {
@@ -915,31 +904,28 @@ export class BusinessObjDefinitionComponent {
   isALtTermFormValid = true;
   handleAddAltTerm() {
     if (this.BusinessTermFormGroup.valid) {
-      // this.BTF['business_object_id'].setValue(this.FF['business_object_id'].value);
       this.isALtTermFormValid = true;
-      // this.highlightRowDataAltBusiness ? (
-      //   this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
-      //     next: res => {
-      //       swalSuccess('Updated successfully!');
-      //       this.getTableBusinessTerm();
-      //     },
-      //     error: err => console.log(err)
-      //   }),
-      //   this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
-      // ) : (
-      //   // this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
-      //   this.saveAltTerm(),
-      //   this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
-      // )
-
-
       this.highlightRowDataAltBusiness ? (
-        this.dataSourceAltBusiness.data[this.activeRowAltBusiness] = this.BusinessTermFormGroup.value,
+        this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Updated successfully!');
+            this.getTableBusinessTerm();
+          },
+          error: err => console.log(err)
+        }),
         this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
       ) : (
-        this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
+        // this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
+        this.saveAltTerm(),
         this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
       )
+      // this.highlightRowDataAltBusiness ? (
+      //   this.dataSourceAltBusiness.data[this.activeRowAltBusiness] = this.BusinessTermFormGroup.value,
+      //   this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+      // ) : (
+      //   this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
+      //   this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+      // )
 
       this.UpdateDataAlternateTerm = '';
       this.generateBusinessTermFormGroup();
@@ -951,6 +937,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   saveAltTerm() {
+    this.BTF['business_object_id'].setValue(this.initialBOD_ID);
     this.businessService.saveBusiness_term(this.BusinessTermFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
@@ -1001,24 +988,27 @@ export class BusinessObjDefinitionComponent {
     if (this.definitionFormGroup.valid) {
       this.isBusinessObjectDefinitionFormValid = true;
       this.highlightRowDataBusinessObjectDefinition ? (
-        // this.businessService.updateBusiness_term(this.highlightRowDataAltBusiness.id, this.BusinessTermFormGroup.value).subscribe({
-        //   next: res => {
-        //     swalSuccess('Updated successfully!');
-        //     this.getTableBusinessTerm();
-        //   },
-        //   error: err => console.log(err)
-        // }),
+        this.businessService.updateBusinessObjectDefinition(this.highlightRowDataBusinessObjectDefinition.id, this.definitionFormGroup.value).subscribe({
+          next: res => {
+            swalSuccess('Updated successfully!');
+            this.getTableBusinessObjectDefinition(0);
+          },
+          error: err => console.log(err)
+        }),
         this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
       ) : (
         // this.dataSourceAltBusiness.data.push(this.BusinessTermFormGroup.value),
-        this.saveBusinessObjectDefinition(),
-        this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+
+        this.FF['business_object_name'].value != this.FF['business_object_description'].value ?
+          (
+            this.saveBusinessObjectDefinition(),
+            this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness
+          )
+          : swalInfo("BO name and BO description can't be the same!")
+
       )
 
-      this.UpdateDataBusinessObjectDefinition = '';
-      this.generateForm();
-      this.activeBusinessObjectDefinition = -1;
-      this.highlightRowDataBusinessObjectDefinition = '';
+      this.keyUpBODefinition();
     }
     else this.isBusinessObjectDefinitionFormValid = false;
   }
@@ -1027,18 +1017,44 @@ export class BusinessObjDefinitionComponent {
     this.businessService.saveBusinessObjectDefinition(this.definitionFormGroup.value).subscribe({
       next: res => {
         swalSuccess("Saved successfully.");
-        this.getTableBusinessObjectDefinition();
+        this.getTableBusinessObjectDefinition(0);
       },
-      error: err => console.log(err)
+      error: err => console.log(err),
+      complete: () => {
+        this.initialBOD_ID = this.FF['business_object_id'].value;
+        this.UpdateDataBusinessObjectDefinition = '';
+        this.generateForm();
+        this.activeBusinessObjectDefinition = -1;
+        this.highlightRowDataBusinessObjectDefinition = '';
+      }
     });
   }
 
-  getTableBusinessObjectDefinition() {
+  getTableBusinessObjectDefinition(index: number) {
     this.businessObjIds = [];
     this.businessService.getBusinessObjectDefinition().subscribe({
       next: res => {
         this.dataSourceBusinessObjectDefinition = new MatTableDataSource<any>(res.data);
         this.dataSourceBusinessObjectDefinition.paginator = this.commonPagBusinessObjectDefinition;
+        res.data.map((dt: any) => {
+          this.boNames.push({ value: dt.business_object_name })
+          this.projectNames.push({ value: dt.project_name })
+          this.scopeDataDomains.push({ value: dt.scope_of_data_domain })
+          this.assetsTypes.push({ value: dt.business_object_asset_type })
+          this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification })
+          this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason })
+        })
+
+
+        if (index == 1) { // only work ngOnInit and Refresh page
+          let BOD_ID = String(Number(this.dataSourceBusinessObjectDefinition.data[this.dataSourceBusinessObjectDefinition.data.length - 1]?.business_object_id.substring(3)) + 1);
+          let BOD_last_value = this.dataSourceBusinessObjectDefinition.data.length ? (BOD_ID.length == 1 ? 'BOD000' : (BOD_ID.length == 2 ? 'BOD00' : (BOD_ID.length == 3 ? 'BOD00' : 'BOD0'))) + BOD_ID : "BOD0001";
+
+          this.FF['business_object_id'].setValue(BOD_last_value)
+          this.initialBOD_ID = this.FF['business_object_id'].value;
+        } else {
+          this.FF['business_object_id'].setValue(this.initialBOD_ID)
+        }
       },
       error: err => console.log(err)
     })
@@ -1058,7 +1074,7 @@ export class BusinessObjDefinitionComponent {
         this.businessService.deleteBusinessObjectDefinition(id).subscribe({
           next: res => {
             swalSuccess("Saved successfully.");
-            this.getTableBusinessObjectDefinition();
+            this.getTableBusinessObjectDefinition(0);
           },
           error: err => console.log(err)
         });
