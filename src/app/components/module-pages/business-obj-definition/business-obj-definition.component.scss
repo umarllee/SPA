@@ -113,6 +113,10 @@
     border: none !important;
 }
 
+::ng-deep .mdc-tooltip__surface {
+min-width: 350px !important;
+  }
+
 .srcSystem-table .mat-mdc-table .mat-mdc-header-cell {
     min-width: 200px !important;
 }
