@@ -697,7 +697,7 @@
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
             <label matTooltip="Unique identifier for Business Objects, should be sequentially generated value which increments itself for each new business rule." for="rule_id" class="font-medium text-black required-label">Rule ID</label>
-            <input type="text" formControlName="rule_id" name="rule_id" id="rule_id">
+            <input readonly type="text" formControlName="rule_id" name="rule_id" id="rule_id">
           </div>
 
           <div class="col-md-6 d-flex relative">
@@ -810,7 +810,7 @@
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
             <label for="business_term_id" class="font-medium text-black required-label">Business Term ID</label>
-            <input type="text" formControlName="business_term_id" name="business_term_id" id="business_term_id">
+            <input readonly type="text" formControlName="business_term_id" name="business_term_id" id="business_term_id">
             <small class="error_text"
               *ngIf="(BTF['business_term_id'].errors?.['required'] && !isALtTermFormValid) || (BTF['business_term_id'].invalid && !isALtTermFormValid)">
               *Required field

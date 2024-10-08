@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, ViewChild } from '@angular/core';
 import { FormGroup, Validators, AbstractControl, FormBuilder } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import { last, map, Observable, startWith } from 'rxjs';
 import { NewItemComponent } from './new-item/new-item.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { filterAutocomplete } from 'src/app/utils/autocomplete';
@@ -132,11 +132,8 @@ export class BusinessObjDefinitionComponent {
     this.keyUpImpDetails();
     this.keyUpBusinessAlternateRule();
 
-    this.getTableDataOwner();
-    this.getTableImpDetails();
-    this.getTableBusinessTerm();
-    this.getTableBusinessRule();
     this.getTableBusinessObjectDefinition(1);
+
   }
 
   ngOnInit() {
@@ -145,10 +142,6 @@ export class BusinessObjDefinitionComponent {
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
-  }
-
-  ngAfterViewInit() {
-    console.log(this.dataSourceBusinessObjectDefinition.data.length)
   }
 
   validBOName(event: any) {
@@ -322,7 +315,9 @@ export class BusinessObjDefinitionComponent {
       business_term: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term : '', [Validators.required]],
       business_term_description: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_term_description : '', [Validators.required]],
       business_object_id: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_object_id : ''],
+      business_termcol: [this.UpdateDataAlternateTerm ? this.UpdateDataAlternateTerm.business_termcol : ''],
     })
+    
   }
 
   generateCreatedTermFormGroup() {
@@ -335,7 +330,6 @@ export class BusinessObjDefinitionComponent {
   }
 
   generateForm() {
-    console.log(this.UpdateDataBusinessObjectDefinition)
     this.definitionFormGroup = this.fb.group({
       id: 0,
       scope_of_data_domain: [this.UpdateDataBusinessObjectDefinition?.scope_of_data_domain || ''],
@@ -521,6 +515,7 @@ export class BusinessObjDefinitionComponent {
         this.generateBusinessRulesFormGroup();
         this.activeRowBussnRule = -1;
         this.highlightRowDataBussnRule = '';
+        this.getTableBusinessRule();
       }
     }
 
@@ -554,6 +549,7 @@ export class BusinessObjDefinitionComponent {
       this.UpdateDataBusinessObjectDefinition = '';
       this.generateForm();
       this.highlightRowDataBusinessObjectDefinition = '';
+      this.getTableBusinessObjectDefinition(1);
     }
   }
 
@@ -825,6 +821,13 @@ export class BusinessObjDefinitionComponent {
       next: res => {
         this.dataSourceBussnRule = new MatTableDataSource<any>(res.data);
         this.dataSourceBussnRule.paginator = this.commonPaginatorBussnRule;
+
+        let rule_id = String(Number(this.dataSourceBussnRule.data[this.dataSourceBussnRule.data.length - 1]?.rule_id.substring(9)) + 1);
+
+        let last_rule_id = (rule_id.length == 1 ? this.FF['business_object_id'].value + 'BR000' : (rule_id.length == 2 ? this.FF['business_object_id'].value + 'BR00' : (rule_id.length == 3 ? this.FF['business_object_id'].value + 'BR0' : ''))) + rule_id
+        let BOD_last_value = this.dataSourceBussnRule.data.length ? last_rule_id : this.FF['business_object_id'].value + 'BR' + "0001";
+
+        this.BRF['rule_id'].setValue(BOD_last_value)
       },
       error: err => console.log(err)
     })
@@ -952,6 +955,13 @@ export class BusinessObjDefinitionComponent {
       next: res => {
         this.dataSourceAltBusiness = new MatTableDataSource<any>(res.data);
         this.dataSourceAltBusiness.paginator = this.commonPaginatorAltBusiness;
+
+        let business_id = String(Number(this.dataSourceAltBusiness.data[this.dataSourceAltBusiness.data.length - 1]?.business_term_id.substring(9)) + 1);
+
+        let last_business_id = (business_id.length == 1 ? this.FF['business_object_id'].value + 'BR000' : (business_id.length == 2 ? this.FF['business_object_id'].value + 'BR00' : (business_id.length == 3 ? this.FF['business_object_id'].value + 'BR0' : ''))) + business_id;
+        let BOD_last_value = this.dataSourceAltBusiness.data.length ? last_business_id : this.FF['business_object_id'].value + 'BR' + "0001";
+
+        this.BTF['business_term_id'].setValue(BOD_last_value)
       },
       error: err => console.log(err)
     })
@@ -1052,6 +1062,11 @@ export class BusinessObjDefinitionComponent {
 
           this.FF['business_object_id'].setValue(BOD_last_value)
           this.initialBOD_ID = this.FF['business_object_id'].value;
+
+          this.getTableDataOwner();
+          this.getTableImpDetails();
+          this.getTableBusinessTerm();
+          this.getTableBusinessRule();
         } else {
           this.FF['business_object_id'].setValue(this.initialBOD_ID)
         }
