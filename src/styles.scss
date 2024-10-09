@@ -201,7 +201,7 @@ input:read-only {
 
 .dialogHeader {
   position: sticky !important;
-  padding: 20px 15px;
+  padding: 15px;
   color: #000;
   display: flex;
   width: 100%;
@@ -216,3 +216,13 @@ input:read-only {
 button:disabled{
   opacity: 0.8;
 }
+
+
+.bar {
+  margin-top: 5px;
+  background: linear-gradient(to right, rgba(200, 227, 238, 0), #e1193e);
+  height: 3px;
+  width: 88%;
+  float: right;
+}
+

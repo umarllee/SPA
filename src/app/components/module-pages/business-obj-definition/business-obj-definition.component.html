@@ -1,19 +1,32 @@
+<div class="row gap-y-2 shadow-md relative align-items-center h-16">
+  <div class="col-md-2 py-2">
+    <img role="button" class="col-9 logo-header" routerLink="../../landing" src="../../../../assets/Metadata.jpeg" alt="">
+  </div>
+</div>
+
 <div class="p-3 ">
   <div class="border-b border-dashed border-gray-400">
     <form [formGroup]="definitionFormGroup" class="py-3 px-3">
-      <div class="row">
-        <h2 class="text-xl font-extrabold">
+      <div class="d-flex justify-content-between mb-2">
+        <h2 class="text-xl font-extrabold inline-block">
           Business Object Definition
         </h2>
+
+        <div class="font-medium">
+          <button class=" pb-1 px-1 text-danger" (click)="showGrid()">
+            <i class="me-1 fa-regular fa-table-cells"></i> Show grid
+          </button>
+        </div>
       </div>
 
       <div class="">
         <div class="row">
           <div class="col-md-3 relative d-flex">
             <mat-form-field class="example-full-width field  col-11">
-              <label matTooltip="Name of the Project" for="fullName" class="font-medium text-black ">Project name</label>
-              <input type="text" id="customerId" name="customerId"
-                class="col-12" matInput formControlName="project_name" [matAutocomplete]="autoClient">
+              <label matTooltip="Name of the Project" for="fullName" class="font-medium text-black ">Project
+                name</label>
+              <input type="text" id="customerId" name="customerId" class="col-12" matInput
+                formControlName="project_name" [matAutocomplete]="autoClient">
               <mat-autocomplete #autoClient="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsClient | async " [value]="option.value">
                   {{option.value}}
@@ -29,7 +42,9 @@
 
           <div class="col-md-3">
             <div class="field">
-              <label matTooltip="Unique identifier for Business Objects, should be sequentially generated value which increments itself for each new business objects. Prefix with BOD" for="fullName" class="font-medium text-black required-label">BO id</label>
+              <label
+                matTooltip="Unique identifier for Business Objects, should be sequentially generated value which increments itself for each new business objects. Prefix with BOD"
+                for="fullName" class="font-medium text-black required-label">BO id</label>
               <input readonly formControlName="business_object_id" autocomplete="off" type="text" id="Name"
                 name="Name" />
             </div>
@@ -37,9 +52,10 @@
 
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Business Object Name , how an object/entity is addressed ib business terms." for="fullName" class="font-medium text-black required-label">BO name</label>
-              <input onkeypress='return event.charCode != 45' type="text" id="customerId" name="customerId" class="col-12" matInput
-                formControlName="business_object_name" [matAutocomplete]="autoObjName">
+              <label matTooltip="Business Object Name , how an object/entity is addressed ib business terms."
+                for="fullName" class="font-medium text-black required-label">BO name</label>
+              <input onkeypress='return event.charCode != 45' type="text" id="customerId" name="customerId"
+                class="col-12" matInput formControlName="business_object_name" [matAutocomplete]="autoObjName">
               <mat-autocomplete #autoObjName="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptionsObjName | async " [value]="option.value">
                   {{option.value}}
@@ -60,7 +76,9 @@
 
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="The granularity of dimensions by which the data is captured within the business object /entity. For example balances are captured by country, by product, by GL Account by Customer Owner." for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
+              <label
+                matTooltip="The granularity of dimensions by which the data is captured within the business object /entity. For example balances are captured by country, by product, by GL Account by Customer Owner."
+                for="fullName" class="font-medium text-black required-label">Scope of Data Domain</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="scope_of_data_domain" [matAutocomplete]="autoDomain">
               <mat-autocomplete #autoDomain="matAutocomplete">
@@ -83,7 +101,8 @@
 
           <div class="col-md-6">
             <div class="field">
-              <label matTooltip="Brief description about the object" for="fullName" class="font-medium text-black required-label">BO description</label>
+              <label matTooltip="Brief description about the object" for="fullName"
+                class="font-medium text-black required-label">BO description</label>
               <textarea name="Description" formControlName="business_object_description" id="Description"></textarea>
 
               <small class="error_text"
@@ -118,7 +137,8 @@
 
           <div class="col-md-3 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="" for="fullName" class="font-medium text-black required-label">BO Sensitivity Calssification </label>
+              <label matTooltip="" for="fullName" class="font-medium text-black required-label">BO Sensitivity
+                Calssification </label>
               <input maxlength="20" type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="business_object_sensitivity_classification"
                 [matAutocomplete]="autosensitivity_classification">
@@ -204,7 +224,8 @@
         <div class="row">
           <div class="col-md-12 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Owner of the Business Unit which defines the object" for="fullName" class="font-medium text-black required-label ">Business Unit Owner</label>
+              <label matTooltip="Owner of the Business Unit which defines the object" for="fullName"
+                class="font-medium text-black required-label ">Business Unit Owner</label>
               <input type="text" id="business_unit_owner" name="business_unit_owner" class="col-12" matInput
                 formControlName="business_unit_owner" [matAutocomplete]="autounitOwner">
               <mat-autocomplete #autounitOwner="matAutocomplete">
@@ -228,7 +249,8 @@
         <div class="row">
           <div class="col-md-12 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Functional Unit of Business Owner" for="fullName" class="font-medium text-black required-label">Business Function</label>
+              <label matTooltip="Functional Unit of Business Owner" for="fullName"
+                class="font-medium text-black required-label">Business Function</label>
               <input type="text" id="business_function" name="business_function" class="col-12" matInput
                 formControlName="business_function" [matAutocomplete]="autobussFunc">
               <mat-autocomplete #autobussFunc="matAutocomplete">
@@ -358,7 +380,8 @@
         <div class="row">
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Source System from where the business term is coming from." for="fullName" class="font-medium text-black required-label ">Source System</label>
+              <label matTooltip="Source System from where the business term is coming from." for="fullName"
+                class="font-medium text-black required-label ">Source System</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system" [matAutocomplete]="autosource_system">
               <mat-autocomplete #autosource_system="matAutocomplete">
@@ -380,7 +403,8 @@
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Code of the countries from which the data " for="fullName" class="font-medium text-black required-label ">Source Sys. Country Code</label>
+              <label matTooltip="Code of the countries from which the data " for="fullName"
+                class="font-medium text-black required-label ">Source Sys. Country Code</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="source_system_country_code" [matAutocomplete]="autosource_system_country_code">
               <mat-autocomplete #autosource_system_country_code="matAutocomplete">
@@ -405,7 +429,8 @@
         <div class="row">
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Frequency at which the data is required to be refreshed." for="fullName" class="font-medium text-black required-label">Req Frequency of Refresh</label>
+              <label matTooltip="Frequency at which the data is required to be refreshed." for="fullName"
+                class="font-medium text-black required-label">Req Frequency of Refresh</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="req_frequency_of_refresh" [matAutocomplete]="autoreq_frequency_of_refresh">
               <mat-autocomplete #autoreq_frequency_of_refresh="matAutocomplete">
@@ -447,7 +472,9 @@
             </button> -->
 
             <div class="field col-12">
-              <label matTooltip="Flag to indicate whether the Object is active or not. If the Object is currently being used or will be used, it will be 'Y'. If this Object is no longer valid it would be 'N'." for="active" class="font-medium text-black required-label">Active (Y/N)</label>
+              <label
+                matTooltip="Flag to indicate whether the Object is active or not. If the Object is currently being used or will be used, it will be 'Y'. If this Object is no longer valid it would be 'N'."
+                for="active" class="font-medium text-black required-label">Active (Y/N)</label>
               <mat-form-field class="col-12">
                 <mat-select formControlName="active">
                   <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
@@ -465,7 +492,9 @@
         <div class="row">
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="The view of the data as required by business user. For example end of day snapshot for balances , incremental transactions for income etc." for="fullName" class="font-medium text-black required-label">Data Capture Mode</label>
+              <label
+                matTooltip="The view of the data as required by business user. For example end of day snapshot for balances , incremental transactions for income etc."
+                for="fullName" class="font-medium text-black required-label">Data Capture Mode</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="data_capture_mode" [matAutocomplete]="autodata_capture_mode">
               <mat-autocomplete #autodata_capture_mode="matAutocomplete">
@@ -487,7 +516,8 @@
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="How the records are sourced, Manual,System generated etc./Not for business" for="fullName" class="font-medium text-black required-label">Sourcing Mode</label>
+              <label matTooltip="How the records are sourced, Manual,System generated etc./Not for business"
+                for="fullName" class="font-medium text-black required-label">Sourcing Mode</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="sourcing_mode" [matAutocomplete]="autosourcing_mode">
               <mat-autocomplete #autosourcing_mode="matAutocomplete">
@@ -530,7 +560,8 @@
             </button> -->
 
             <div class="field col-12">
-              <label matTooltip="Flag to identify if History data should be maintained into the system." for="fullName" class="font-medium text-black required-label">Track History</label>
+              <label matTooltip="Flag to identify if History data should be maintained into the system." for="fullName"
+                class="font-medium text-black required-label">Track History</label>
               <mat-form-field class="col-12">
                 <mat-select formControlName="track_history">
                   <mat-option *ngFor="let item of actives" [value]="item.key">{{item.value}}</mat-option>
@@ -546,7 +577,9 @@
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Type of history tracking . How do you maintain history daily balances for each period? Beyond which it will become monthly balance? What events trigger a change for a record to be updated example in customer record what would cause an update of the record and a history record to be created?" for="fullName" class="font-medium text-black required-label">History Type</label>
+              <label
+                matTooltip="Type of history tracking . How do you maintain history daily balances for each period? Beyond which it will become monthly balance? What events trigger a change for a record to be updated example in customer record what would cause an update of the record and a history record to be created?"
+                for="fullName" class="font-medium text-black required-label">History Type</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="history_type" [matAutocomplete]="autohistory_type">
               <mat-autocomplete #autohistory_type="matAutocomplete">
@@ -569,7 +602,9 @@
         <div class="row">
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Details about how to handle any error in the data processing for the particular object. Should an entire file be rejected in the event of some records with errors or just the records with errors?" for="fullName" class="font-medium text-black required-label">Error Treatment</label>
+              <label
+                matTooltip="Details about how to handle any error in the data processing for the particular object. Should an entire file be rejected in the event of some records with errors or just the records with errors?"
+                for="fullName" class="font-medium text-black required-label">Error Treatment</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="error_treatment" [matAutocomplete]="autoerror_treatment">
               <mat-autocomplete #autoerror_treatment="matAutocomplete">
@@ -590,7 +625,8 @@
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Detailed description about how to handle any exception in data if it comes." for="fullName" class="font-medium text-black required-label">Exception Treatment</label>
+              <label matTooltip="Detailed description about how to handle any exception in data if it comes."
+                for="fullName" class="font-medium text-black required-label">Exception Treatment</label>
               <input type="text" id="customerId" name="customerId" class="col-12" matInput
                 formControlName="exception_treatment" [matAutocomplete]="autoexception_Treatment">
               <mat-autocomplete #autoexception_Treatment="matAutocomplete">
@@ -696,13 +732,16 @@
 
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
-            <label matTooltip="Unique identifier for Business Objects, should be sequentially generated value which increments itself for each new business rule." for="rule_id" class="font-medium text-black required-label">Rule ID</label>
+            <label
+              matTooltip="Unique identifier for Business Objects, should be sequentially generated value which increments itself for each new business rule."
+              for="rule_id" class="font-medium text-black required-label">Rule ID</label>
             <input readonly type="text" formControlName="rule_id" name="rule_id" id="rule_id">
           </div>
 
           <div class="col-md-6 d-flex relative">
             <mat-form-field class="example-full-width field col-11">
-              <label matTooltip="Detailed description about the rules that need to be validated for the attribute." for="rule" class="font-medium text-black required-label">Rule</label>
+              <label matTooltip="Detailed description about the rules that need to be validated for the attribute."
+                for="rule" class="font-medium text-black required-label">Rule</label>
               <input type="text" id="rule" name="rule" class="col-12" matInput formControlName="rule"
                 [matAutocomplete]="autorule">
               <mat-autocomplete #autorule="matAutocomplete">
@@ -810,7 +849,8 @@
         <div class="row pe-1">
           <div class="col-md-6 field mt-2">
             <label for="business_term_id" class="font-medium text-black required-label">Business Term ID</label>
-            <input readonly type="text" formControlName="business_term_id" name="business_term_id" id="business_term_id">
+            <input readonly type="text" formControlName="business_term_id" name="business_term_id"
+              id="business_term_id">
             <small class="error_text"
               *ngIf="(BTF['business_term_id'].errors?.['required'] && !isALtTermFormValid) || (BTF['business_term_id'].invalid && !isALtTermFormValid)">
               *Required field
@@ -918,7 +958,8 @@
       <div class="row">
         <div class="col-md-4 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
-            <label matTooltip="Name of the person who created/updated the record." for="fullName" class="font-medium text-black required-label">Created/Updated By</label>
+            <label matTooltip="Name of the person who created/updated the record." for="fullName"
+              class="font-medium text-black required-label">Created/Updated By</label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput
               formControlName="created_updated_By" [matAutocomplete]="autocreated_updated_By">
             <mat-autocomplete #autocreated_updated_By="matAutocomplete">
@@ -939,7 +980,8 @@
 
         <div class="col-md-4">
           <div class="field">
-            <label matTooltip="Date on which the record was created/updated." for="fullName" class="font-medium text-black required-label">Created/Updated Date</label>
+            <label matTooltip="Date on which the record was created/updated." for="fullName"
+              class="font-medium text-black required-label">Created/Updated Date</label>
             <input type="date" id="customerId" name="customerId" class="col-12" formControlName="created_updated_ate">
           </div>
 
@@ -951,7 +993,8 @@
 
         <div class="col-md-4 d-flex relative">
           <mat-form-field class="example-full-width field col-11">
-            <label matTooltip="Any additional information." for="fullName" class="font-medium text-black required-label">Remarks</label>
+            <label matTooltip="Any additional information." for="fullName"
+              class="font-medium text-black required-label">Remarks</label>
             <input type="text" id="customerId" name="customerId" class="col-12" matInput formControlName="remarks"
               [matAutocomplete]="autoremarks">
             <mat-autocomplete #autoremarks="matAutocomplete">
@@ -984,52 +1027,4 @@
     </div>
   </div>
 
-</div>
-
-<div class="ps-3">
-  <div class="row mt-2 px-4 ">
-    <div class="overflow-auto line-container operation-wait-con maxHeight-table tabCont border smallRow p-0"
-      style="border-radius: 6px; max-height: 600px;">
-      <table mat-table [dataSource]="dataSourceBusinessObjectDefinition" id="report">
-        <ng-container *ngFor="let column of displayedColumnBusinessObjectDefinition.columnsTranslates; let j = index"
-          [matColumnDef]="column">
-          <th mat-header-cell *matHeaderCellDef>
-            <div class="headerColumnNames" [ngClass]="{'justify-content-center': column == '#'}">
-              {{column}}
-            </div>
-          </th>
-
-          <td mat-cell *matCellDef="let element; let rowIndex = index" class="hower-td">
-            <span *ngIf="column != '#'">
-              {{element[displayedColumnBusinessObjectDefinition.columns[j].replace(' ', '')]}}
-            </span>
-
-            <span *ngIf="column =='#'">
-              <button type="button" (click)="handleDeleteBusinessObjectDefinition(element.id)"
-                class="rounded font-semibold col-12 py-2 text-danger ">
-                <i class="fa-regular fa-trash"></i>
-              </button>
-            </span>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumnBusinessObjectDefinition.columnsTranslates; sticky: true">
-        </tr>
-        <tr *matNoDataRow>
-          <th colspan="9" class="text-center">
-            <span>No rows found</span>
-          </th>
-        </tr>
-        <tr mat-row
-          *matRowDef="let row;let i = index; columns: displayedColumnBusinessObjectDefinition.columnsTranslates;"
-          class="route" [attr.data-index]="i" [ngClass]="{'selected-all': isActiveBusinessObjectDefinition(i)}"
-          (dblclick)="highlightBusinessObjectDefinition(i, row.Id, row);">
-        </tr>
-      </table>
-    </div>
-
-    <mat-paginator class="mat-paginator-sticky" #commonPagBusinessObjectDefinition [pageSizeOptions]="[10, 15, 20]"
-      [length]="lengthDtOwner" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
-    </mat-paginator>
-  </div>
 </div>
