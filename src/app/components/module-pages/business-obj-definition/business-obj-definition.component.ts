@@ -96,6 +96,7 @@ export class BusinessObjDefinitionComponent {
   boAssestsTypes: any[] = [];
   sensitivityClassifications: any[] = [];
   sensitivityReasons: any[] = [];
+  dataOwners: any[] = [];
 
   initialBOD_ID = 0;
 
@@ -163,12 +164,33 @@ export class BusinessObjDefinitionComponent {
   }
 
   getComboboxData() {
-    // this.comboboxService.getAsset_type().subscribe({
-    //   next: res => {
-    //     res.data.map((dt: any) => this.assetsTypes.push({ value: dt.asset_type_code }))
-    //   },
-    //   error: err => console.log(err)
-    // })
+    this.comboboxService.getAsset_type().subscribe({
+      next: res => {
+        res.data.map((dt: any) => this.assetsTypes.push({ value: dt.asset_type_code }))
+      },
+      error: err => console.log(err)
+    });
+
+    this.comboboxService.getData_owner_roles().subscribe({
+      next: res => {
+        res.data.map((dt: any) => this.dataOwners.push({ value: dt.data_owner_roles }))
+      },
+      error: err => console.log(err)
+    });
+
+    this.comboboxService.getSensitivity_classification().subscribe({
+      next: res => {
+        res.data.map((dt: any) => this.sensitivityClassifications.push({ value: dt.sensitivity_classification }))
+      },
+      error: err => console.log(err)
+    });
+    
+    this.comboboxService.getSensitivity_reason_code().subscribe({
+      next: res => {
+        res.data.map((dt: any) => this.sensitivityReasons.push({ value: dt.sensitivity_reason_code }))
+      },
+      error: err => console.log(err)
+    });
   }
 
   keyUpBODefinition() {
@@ -1036,9 +1058,9 @@ export class BusinessObjDefinitionComponent {
           // this.boNames.push({ value: dt.business_object_name })
           this.projectNames.push({ value: dt.project_name });
           this.scopeDataDomains.push({ value: dt.scope_of_data_domain });
-          this.assetsTypes.push({ value: dt.business_object_asset_type });
-          this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification });
-          this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason });
+          // this.assetsTypes.push({ value: dt.business_object_asset_type });
+          // this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification });
+          // this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason });
         })
 
         if (index == 1) { // only work ngOnInit and Refresh page
