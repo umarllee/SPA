@@ -62,6 +62,18 @@ export class BusinessObjDefinitionComponent {
   UpdateData: any;
   isFormValid = true;
 
+  treatmentTypes: any[] = [
+    {
+      key: 0,
+      value: 'Stop'
+    },
+    {
+      key: 1,
+      value: 'Continue'
+    },
+
+  ];
+
   clients: any[] = [
     {
       key: 1,
@@ -250,12 +262,12 @@ export class BusinessObjDefinitionComponent {
 
     this.filteredOptionserror_treatment = this.SSF['error_treatment'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.treatmentTypes) : this.treatmentTypes))
     );
 
     this.filteredOptionsexception_treatment = this.SSF['exception_treatment'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.treatmentTypes) : this.treatmentTypes))
     );
   }
 
@@ -926,6 +938,10 @@ export class BusinessObjDefinitionComponent {
         let BOD_last_value = this.dataSourceAltBusiness.data.length ? last_business_id : this.FF['business_object_id'].value + 'BR' + "0001";
 
         this.BTF['business_term_id'].setValue(BOD_last_value)
+
+        res.data.map((dt: any) => {
+          this.boNames.push({ value: dt.business_term })
+        })
       },
       error: err => console.log(err)
     })
@@ -1017,12 +1033,12 @@ export class BusinessObjDefinitionComponent {
       next: res => {
 
         res.data.map((dt: any) => {
-          this.boNames.push({ value: dt.business_object_name })
-          this.projectNames.push({ value: dt.project_name })
-          this.scopeDataDomains.push({ value: dt.scope_of_data_domain })
-          this.assetsTypes.push({ value: dt.business_object_asset_type })
-          this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification })
-          this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason })
+          // this.boNames.push({ value: dt.business_object_name })
+          this.projectNames.push({ value: dt.project_name });
+          this.scopeDataDomains.push({ value: dt.scope_of_data_domain });
+          this.assetsTypes.push({ value: dt.business_object_asset_type });
+          this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification });
+          this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason });
         })
 
         if (index == 1) { // only work ngOnInit and Refresh page
@@ -1043,8 +1059,6 @@ export class BusinessObjDefinitionComponent {
       error: err => console.log(err)
     })
   }
-
- 
 
   showGrid() {
     this.viewGrid_dialogRef = this.dialog.open(ViewGridComponent,
