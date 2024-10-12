@@ -26,7 +26,16 @@ export class ComboboxService {
   getSensitivity_reason_code() {
     return this.http.get<any>(this.api + `/sensitivity_reason_code`);
   }
+ 
   getData_owner_roles() {
     return this.http.get<any>(this.api + `/data_owner_roles`);
+  }
+  
+  getSource_systems() {
+    return this.http.get<any>(`https://umdproject-jts6kjq65-umds-projects-76f3b139.vercel.app/api/source_systems`);
+  }
+
+  getCountry_codes() {
+    return this.http.get<any>(`https://umdproject-jts6kjq65-umds-projects-76f3b139.vercel.app/api/country_codes`);
   }
 }

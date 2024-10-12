@@ -97,19 +97,15 @@ export class BusinessObjDefinitionComponent {
   sensitivityClassifications: any[] = [];
   sensitivityReasons: any[] = [];
   dataOwners: any[] = [];
+  refreshFrequency: any[] = [];
+  dataCaptureModes: any[] = [];
+  sourcingModes: any[] = [];
+  historyTypes: any[] = [];
+  sourceSystems: any[] = [];
 
   initialBOD_ID = 0;
 
-  countryCodes: any[] = [
-    {
-      key: 1,
-      value: '1'
-    },
-    {
-      key: 2,
-      value: '2'
-    },
-  ];
+  countryCodes: any[] = [];
 
   actives: any[] = [
     {
@@ -164,33 +160,151 @@ export class BusinessObjDefinitionComponent {
   }
 
   getComboboxData() {
-    this.comboboxService.getAsset_type().subscribe({
+    this.comboboxService.getCountry_codes().subscribe({
       next: res => {
-        res.data.map((dt: any) => this.assetsTypes.push({ value: dt.asset_type_code }))
+        res.data.map((dt: any) => this.countryCodes.push({value: dt.Country_Codes }))
       },
       error: err => console.log(err)
     });
 
-    this.comboboxService.getData_owner_roles().subscribe({
+    this.comboboxService.getSource_systems().subscribe({
       next: res => {
-        res.data.map((dt: any) => this.dataOwners.push({ value: dt.data_owner_roles }))
+        res.data.map((dt: any) => this.sourceSystems.push({value: dt.Source_System_Code }))
       },
       error: err => console.log(err)
     });
 
-    this.comboboxService.getSensitivity_classification().subscribe({
-      next: res => {
-        res.data.map((dt: any) => this.sensitivityClassifications.push({ value: dt.sensitivity_classification }))
+    this.assetsTypes = [
+      {
+        key: 'Master',
+        value: 'Master',
       },
-      error: err => console.log(err)
-    });
-    
-    this.comboboxService.getSensitivity_reason_code().subscribe({
-      next: res => {
-        res.data.map((dt: any) => this.sensitivityReasons.push({ value: dt.sensitivity_reason_code }))
+      {
+        key: 'Reference',
+        value: 'Reference',
       },
-      error: err => console.log(err)
-    });
+      {
+        key: 'Event',
+        value: 'Event',
+      },
+      {
+        key: 'Config',
+        value: 'Config',
+      },
+    ]
+
+    // this.comboboxService.getData_owner_roles().subscribe({
+    //   next: res => {
+    //     res.data.map((dt: any) => this.dataOwners.push({ value: dt.data_owner_roles }))
+    //   },
+    //   error: err => console.log(err)
+    // });
+
+    this.dataOwners = [
+      {
+        key: 'Data Owner',
+        value: 'Data Owner'
+      },
+      {
+        key: 'Custodian',
+        value: 'Custodian'
+      },
+      {
+        key: 'Champion',
+        value: 'Champion'
+      },
+
+    ]
+    // this.comboboxService.getSensitivity_classification().subscribe({
+    //   next: res => {
+    //     res.data.map((dt: any) => this.sensitivityClassifications.push({ value: dt.sensitivity_classification }))
+    //   },
+    //   error: err => console.log(err)
+    // });
+
+    this.sensitivityClassifications = [
+      {
+        key: 'Secret',
+        value: 'Secret'
+      },
+      {
+        key: 'Confidential',
+        value: 'Confidential'
+      },
+      {
+        key: 'Public & Private',
+        value: 'Public & Private'
+      },
+    ]
+
+    // this.comboboxService.getSensitivity_reason_code().subscribe({
+    //   next: res => {
+    //     res.data.map((dt: any) => this.sensitivityReasons.push({ value: dt.sensitivity_reason_code }))
+    //   },
+    //   error: err => console.log(err)
+    // });
+    this.sensitivityReasons = [
+      {
+        key: 'PII',
+        value: 'PII'
+      },
+      {
+        key: 'Competitive',
+        value: 'Competitive'
+      }
+    ]
+
+    this.refreshFrequency = [
+      {
+        key: 'Daily',
+        value: 'Daily'
+      },
+      {
+        key: 'Weekly',
+        value: 'Weekly'
+      },
+      {
+        key: 'Monthy',
+        value: 'Monthy'
+      }
+    ]
+
+    this.dataCaptureModes = [
+      {
+        key: 'Manual',
+        value: 'Manual'
+      },
+      {
+        key: 'Digital',
+        value: 'Digital'
+      },
+    ]
+
+    this.sourcingModes = [
+      {
+        key: 'Batch',
+        value: 'Batch'
+      },
+      {
+        key: 'Realtime',
+        value: 'Realtime'
+      },
+      {
+        key: 'NRT',
+        value: 'NRT'
+      }
+    ]
+
+    this.historyTypes = [
+      {
+        key: 'SnapShot',
+        value: 'SnapShot'
+      },
+      {
+        key: 'Incremental',
+        value: 'Incremental'
+      },
+    ]
   }
 
   keyUpBODefinition() {
@@ -224,27 +338,30 @@ export class BusinessObjDefinitionComponent {
     );
   }
 
+  businessUnitOwners: any[] = [];
+  businessFunctions: any[] = [];
+
   keyUpOwner() {
     this.filteredOptionsunitOwner = this.OF['business_unit_owner'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.businessUnitOwners) : this.businessUnitOwners))
     );
 
     this.filteredOptionsbussFunc = this.OF['business_function'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.businessFunctions) : this.businessFunctions))
     );
 
     this.filteredOptionsrole = this.OF['role'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.dataOwners) : this.dataOwners))
     );
   }
 
   keyUpImpDetails() {
     this.filteredOptionssource_system = this.SSF['source_system'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.sourceSystems) : this.sourceSystems))
     );
 
     this.filteredOptionssource_system_country_code = this.SSF['source_system_country_code'].valueChanges.pipe(
@@ -254,7 +371,7 @@ export class BusinessObjDefinitionComponent {
 
     this.filteredOptionsreq_frequency_of_refresh = this.SSF['req_frequency_of_refresh'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.refreshFrequency) : this.refreshFrequency))
     );
 
     // this.filteredOptionsActive = this.SSF['active'].valueChanges.pipe(
@@ -264,22 +381,17 @@ export class BusinessObjDefinitionComponent {
 
     this.filteredOptionsdata_capture_mode = this.SSF['data_capture_mode'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.dataCaptureModes) : this.dataCaptureModes))
     );
 
     this.filteredOptionssourcing_mode = this.SSF['sourcing_mode'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
-    );
-
-    this.filteredOptiontrack_history = this.SSF['track_history'].valueChanges.pipe(
-      startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.sourcingModes) : this.sourcingModes))
     );
 
     this.filteredOptionshistory_type = this.SSF['history_type'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.historyTypes) : this.historyTypes))
     );
 
     this.filteredOptionserror_treatment = this.SSF['error_treatment'].valueChanges.pipe(
@@ -296,12 +408,12 @@ export class BusinessObjDefinitionComponent {
   keyUpBusinessAlternateRule() {
     this.filteredOptionsRule = this.BRF['rule'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.businessRules) : this.businessRules))
     );
 
     this.filteredOptionsbusiness_Term = this.BTF['business_term'].valueChanges.pipe(
       startWith(''),
-      map((client) => (client ? filterAutocomplete(client, this.clients) : this.clients))
+      map((client) => (client ? filterAutocomplete(client, this.businessTerms) : this.businessTerms))
     );
   }
   //FORM CODES
@@ -714,6 +826,11 @@ export class BusinessObjDefinitionComponent {
     this.businessService.getBo_owner().subscribe({
       next: res => {
         this.dataSourceDtOwner = new MatTableDataSource<any>(res.data);
+
+        res.data.map((dt: any) => {
+          this.businessUnitOwners.push({ value: dt.business_unit_owner });
+          this.businessFunctions.push({ value: dt.business_function });
+        })
         this.dataSourceDtOwner.paginator = this.commonPaginator;
       },
       error: err => console.log(err)
@@ -825,7 +942,11 @@ export class BusinessObjDefinitionComponent {
         let last_rule_id = (rule_id.length == 1 ? this.FF['business_object_id'].value + 'BR000' : (rule_id.length == 2 ? this.FF['business_object_id'].value + 'BR00' : (rule_id.length == 3 ? this.FF['business_object_id'].value + 'BR0' : ''))) + rule_id
         let BOD_last_value = this.dataSourceBussnRule.data.length ? last_rule_id : this.FF['business_object_id'].value + 'BR' + "0001";
 
-        this.BRF['rule_id'].setValue(BOD_last_value)
+        this.BRF['rule_id'].setValue(BOD_last_value);
+       
+        res.data.map((dt:any) =>{
+          this.businessRules.push({value: dt.rule});
+        })
       },
       error: err => console.log(err)
     })
@@ -948,6 +1069,9 @@ export class BusinessObjDefinitionComponent {
     });
   }
 
+  businessRules: any[] = [];
+  businessTerms: any[] = [];
+
   getTableBusinessTerm() {
     this.businessService.getBusiness_term().subscribe({
       next: res => {
@@ -962,8 +1086,9 @@ export class BusinessObjDefinitionComponent {
         this.BTF['business_term_id'].setValue(BOD_last_value)
 
         res.data.map((dt: any) => {
-          this.boNames.push({ value: dt.business_term })
-        })
+          this.boNames.push({ value: dt.business_term });
+          this.businessTerms.push({value: dt.business_term});
+        });
       },
       error: err => console.log(err)
     })
@@ -1063,10 +1188,10 @@ export class BusinessObjDefinitionComponent {
           // this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason });
         })
 
+       
         if (index == 1) { // only work ngOnInit and Refresh page
           let BOD_ID = String(Number(res.data[res.data.length - 1]?.business_object_id.substring(3)) + 1);
           let BOD_last_value = res.data.length ? (BOD_ID.length == 1 ? 'BOD000' : (BOD_ID.length == 2 ? 'BOD00' : (BOD_ID.length == 3 ? 'BOD00' : 'BOD0'))) + BOD_ID : "BOD0001";
-
           this.FF['business_object_id'].setValue(BOD_last_value)
           this.initialBOD_ID = this.FF['business_object_id'].value;
         } else {
@@ -1092,17 +1217,11 @@ export class BusinessObjDefinitionComponent {
         autoFocus: false,
       })
 
-    // this.viewGrid_dialogRef.afterClosed().subscribe({
-    //   next: res => {
-    //     this.getTableData();
-    //     this.activeRow = -1;
-    //     this.selectedId = 0;
-    //     this.highlightRowData = '';
-    //     this.isHighlight = false;
-    //     this.selectionRows.clear();
-    //     this.selectedRows = [];
-    //   }
-    // })
+    this.viewGrid_dialogRef.afterClosed().subscribe({
+      next: res => {
+         this.getTableBusinessObjectDefinition(1);
+      }
+    })
   }
 
 }
