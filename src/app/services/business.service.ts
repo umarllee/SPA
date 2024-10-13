@@ -75,7 +75,7 @@ export class BusinessService {
   saveBusinessRule(data: any) {
     return this.http.post<any>(this.api + `/bo_rules`, data);
   }
-
+ 
   getBusinessRule() {
     return this.http.get<any>(this.api + `/bo_rules`);
   }

@@ -119,8 +119,7 @@ input:read-only {
 
 .field {
   position: relative;
-  margin: 7px 0;
-  // padding: 0 10px;
+  margin: 5px 0;
   
   input,
   select,
@@ -129,7 +128,7 @@ input:read-only {
   .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
     width: 100%;
     line-height: 40px;
-    height: 40px;
+    height: 35px;
     padding: 0 5px;
     box-sizing: border-box;
     font-size: 15px;
@@ -151,7 +150,7 @@ input:read-only {
 
   textarea {
     width: 100%;
-    height: 40px;
+    height: 35px;
     padding: 5px;
     box-sizing: border-box;
     font-size: 15px;

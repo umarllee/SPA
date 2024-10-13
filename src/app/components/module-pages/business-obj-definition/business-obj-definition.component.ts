@@ -160,16 +160,55 @@ export class BusinessObjDefinitionComponent {
   }
 
   getComboboxData() {
+    this.businessService.getBusinessRule().subscribe({
+      next: res => {
+        res.data.map((dt: any) => {
+          this.businessRules.push({ value: dt.rule });
+        })
+      },
+      error: err => console.log(err)
+    })
+
+    this.businessService.getBusiness_term().subscribe({
+      next: res => {
+        res.data.map((dt: any) => {
+          this.boNames.push({ value: dt.business_term });
+          this.businessTerms.push({ value: dt.business_term });
+        });
+      },
+      error: err => console.log(err)
+    })
+
+    this.businessService.getBo_owner().subscribe({
+      next: res => {
+        res.data.map((dt: any) => {
+          this.businessUnitOwners.push({ value: dt.business_unit_owner });
+          this.businessFunctions.push({ value: dt.business_function });
+        })
+      },
+      error: err => console.log(err)
+    })
+
+    this.businessService.getBusinessObjectDefinition().subscribe({
+      next: res => {
+        res.data.map((dt: any) => {
+          this.projectNames.push({ value: dt.project_name });
+          this.scopeDataDomains.push({ value: dt.scope_of_data_domain });
+        })
+      },
+      error: err => console.log(err)
+    })
+
     this.comboboxService.getCountry_codes().subscribe({
       next: res => {
-        res.data.map((dt: any) => this.countryCodes.push({value: dt.Country_Codes }))
+        res.data.map((dt: any) => this.countryCodes.push({ value: dt.Country_Codes }))
       },
       error: err => console.log(err)
     });
 
     this.comboboxService.getSource_systems().subscribe({
       next: res => {
-        res.data.map((dt: any) => this.sourceSystems.push({value: dt.Source_System_Code }))
+        res.data.map((dt: any) => this.sourceSystems.push({ value: dt.Source_System_Code }))
       },
       error: err => console.log(err)
     });
@@ -826,11 +865,6 @@ export class BusinessObjDefinitionComponent {
     this.businessService.getBo_owner().subscribe({
       next: res => {
         this.dataSourceDtOwner = new MatTableDataSource<any>(res.data);
-
-        res.data.map((dt: any) => {
-          this.businessUnitOwners.push({ value: dt.business_unit_owner });
-          this.businessFunctions.push({ value: dt.business_function });
-        })
         this.dataSourceDtOwner.paginator = this.commonPaginator;
       },
       error: err => console.log(err)
@@ -943,9 +977,9 @@ export class BusinessObjDefinitionComponent {
         let BOD_last_value = this.dataSourceBussnRule.data.length ? last_rule_id : this.FF['business_object_id'].value + 'BR' + "0001";
 
         this.BRF['rule_id'].setValue(BOD_last_value);
-       
-        res.data.map((dt:any) =>{
-          this.businessRules.push({value: dt.rule});
+
+        res.data.map((dt: any) => {
+          this.businessRules.push({ value: dt.rule });
         })
       },
       error: err => console.log(err)
@@ -1087,7 +1121,7 @@ export class BusinessObjDefinitionComponent {
 
         res.data.map((dt: any) => {
           this.boNames.push({ value: dt.business_term });
-          this.businessTerms.push({value: dt.business_term});
+          this.businessTerms.push({ value: dt.business_term });
         });
       },
       error: err => console.log(err)
@@ -1178,17 +1212,11 @@ export class BusinessObjDefinitionComponent {
     this.businessObjIds = [];
     this.businessService.getBusinessObjectDefinition().subscribe({
       next: res => {
-
         res.data.map((dt: any) => {
-          // this.boNames.push({ value: dt.business_object_name })
           this.projectNames.push({ value: dt.project_name });
           this.scopeDataDomains.push({ value: dt.scope_of_data_domain });
-          // this.assetsTypes.push({ value: dt.business_object_asset_type });
-          // this.sensitivityClassifications.push({ value: dt.business_object_sensitivity_classification });
-          // this.sensitivityReasons.push({ value: dt.business_object_sensitivity_reason });
         })
 
-       
         if (index == 1) { // only work ngOnInit and Refresh page
           let BOD_ID = String(Number(res.data[res.data.length - 1]?.business_object_id.substring(3)) + 1);
           let BOD_last_value = res.data.length ? (BOD_ID.length == 1 ? 'BOD000' : (BOD_ID.length == 2 ? 'BOD00' : (BOD_ID.length == 3 ? 'BOD00' : 'BOD0'))) + BOD_ID : "BOD0001";
@@ -1197,11 +1225,6 @@ export class BusinessObjDefinitionComponent {
         } else {
           this.FF['business_object_id'].setValue(this.initialBOD_ID)
         }
-
-        this.getTableDataOwner();
-        this.getTableImpDetails();
-        this.getTableBusinessTerm();
-        this.getTableBusinessRule();
       },
       error: err => console.log(err)
     })
@@ -1219,7 +1242,7 @@ export class BusinessObjDefinitionComponent {
 
     this.viewGrid_dialogRef.afterClosed().subscribe({
       next: res => {
-         this.getTableBusinessObjectDefinition(1);
+        this.getTableBusinessObjectDefinition(1);
       }
     })
   }
