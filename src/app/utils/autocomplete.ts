@@ -1,7 +1,5 @@
 export function filterAutocomplete(value: string, arrayofElements: any[]): any[] {
-  const filterValue = value.toLowerCase();
-  console.log(value)
-  console.log(arrayofElements)
+  const filterValue = value.toLowerCase(); 
   return arrayofElements.filter((state) =>
     state.value?.toLowerCase().startsWith(filterValue) 
   );

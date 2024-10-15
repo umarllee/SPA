@@ -8,7 +8,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 export class TablesService {
   constructor(private http: HttpClient, private router: Router,) { }
-
+ 
   getBadgeData() {
     return this.http.get<any>(`https://umdproject-ojt2n3i2l-umds-projects-76f3b139.vercel.app/api/badge`);
   }
