@@ -1300,7 +1300,7 @@ export class BusinessObjDefinitionComponent {
 
     this.viewGrid_dialogRef.afterClosed().subscribe({
       next: res => {
-        this.getTableBusinessObjectDefinition(1);
+        // this.getTableBusinessObjectDefinition(1);
         this.getComboboxData();
       }
     })
