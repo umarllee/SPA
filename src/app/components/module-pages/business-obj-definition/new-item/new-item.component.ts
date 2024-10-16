@@ -27,9 +27,11 @@ export class NewItemComponent {
     this.generateForm();
   }
 
-
   handleSave(){
-    
+    let model={
+      [this.data.inputName]: this.formGroup.value.name
+    }
+   console.log(model)
   }
 
   onCloseDialog() {

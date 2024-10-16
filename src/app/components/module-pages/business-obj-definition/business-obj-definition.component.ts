@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { ComboboxService } from 'src/app/services/combobox.service';
 import { ViewGridComponent } from './view-grid/view-grid.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { NewBONameComponent } from './new-bo-name/new-bo-name.component';
 
 @Component({
   selector: 'app-business-obj-definition',
@@ -601,6 +602,7 @@ export class BusinessObjDefinitionComponent {
   }
 
   item_dialogRef?: MatDialogRef<NewItemComponent>;
+  boName_dialogRef?: MatDialogRef<NewBONameComponent>;
   viewGrid_dialogRef?: MatDialogRef<ViewGridComponent>;
 
   addListValue(name: string) {
@@ -612,14 +614,35 @@ export class BusinessObjDefinitionComponent {
         height: 'auto',
         autoFocus: false,
         data: {
-          inputName: 'business_object_asset_type'
+          inputName:  name
         }
       })
 
-    // this.item_dialogRef.afterClosed().subscribe({
-    //   next: res => {
-    //   }
-    // })
+    this.item_dialogRef.afterClosed().subscribe({
+      next: res => {
+        this.getComboboxData();
+      }
+    })
+  }
+
+  addBONameList() {
+    this.boName_dialogRef = this.dialog.open(NewBONameComponent,
+      {
+        // disableClose: true,
+        hasBackdrop: true,
+        width: '45%',
+        height: 'auto',
+        autoFocus: false,
+        data: {
+          bo_id: this.FF['business_object_id'].value
+        }
+      })
+
+    this.boName_dialogRef.afterClosed().subscribe({
+      next: res => {
+        this.getComboboxData()
+      }
+    })
   }
 
   isBOFormValid = true;

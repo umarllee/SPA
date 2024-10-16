@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { ViewGridComponent } from './business-obj-definition/view-grid/view-grid.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NewBONameComponent } from './business-obj-definition/new-bo-name/new-bo-name.component';
 
 
 
 @NgModule({
   declarations: [
     ModulePagesComponent,
-    ViewGridComponent
+    ViewGridComponent,
+    // NewBONameComponent
   ],
   imports: [
     CommonModule,

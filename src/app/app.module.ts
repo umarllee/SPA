@@ -58,6 +58,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ViewGridComponent } from './components/module-pages/business-obj-definition/view-grid/view-grid.component';
+import { NewBONameComponent } from './components/module-pages/business-obj-definition/new-bo-name/new-bo-name.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { ViewGridComponent } from './components/module-pages/business-obj-defini
     LandingComponent,
     NewItemComponent,
     BusinessObjDefinitionComponent,
+    NewBONameComponent
   ],
   imports: [
     BrowserModule,
